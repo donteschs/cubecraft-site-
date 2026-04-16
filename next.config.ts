@@ -1,7 +1,6 @@
 export default {
   experimental: {
     ppr: true,
-    inlineCss: true,
     useCache: true,
   },
   images: {
@@ -11,6 +10,10 @@ export default {
         protocol: "https",
         hostname: "cdn.shopify.com",
         pathname: "/s/files/**",
+      },
+      {
+        protocol: "https",
+        hostname: "res.cloudinary.com",
       },
     ],
   },

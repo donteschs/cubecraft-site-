@@ -1,3 +1,5 @@
+export const dynamic = "force-dynamic";
+
 import { GridTileImage } from "components/grid/tile";
 import Footer from "components/layout/footer";
 import { Gallery } from "components/product/gallery";

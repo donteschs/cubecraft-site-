@@ -1,0 +1,38 @@
+import type { Metadata } from "next";
+import { getProduct } from "lib/shopify";
+import { ProductUI } from "./product-ui";
+
+export const metadata: Metadata = {
+  title: "Cubes Magnétiques CubeCraft — Pack 64, 128 & 256 pièces",
+  description:
+    "Commandez les cubes magnétiques CubeCraft. 64, 128 ou 256 pièces. Certifié CE & EN 71, aimants N52. Offre de lancement -30%. Livraison gratuite, garantie 30 jours.",
+  openGraph: {
+    title: "Cubes Magnétiques CubeCraft — Le Minecraft qu'ils peuvent toucher",
+    description: "Pack 64 à 39,90 € (au lieu de 59,90 €). Certifié CE, N52. Expédié sous 24h.",
+    type: "website",
+  },
+};
+
+export default async function CommanderPage() {
+  const [p64, p128, p256] = await Promise.all([
+    getProduct("cubecraft-64-pieces"),
+    getProduct("cubecraft-128-pieces"),
+    getProduct("cubecraft-pack-famille-256-pieces"),
+  ]);
+
+  // Shopify variant GIDs — used by addItemAndCheckout server action
+  const variantIds: Record<string, string | undefined> = {
+    "64":  p64?.variants[0]?.id,
+    "128": p128?.variants[0]?.id,
+    "256": p256?.variants[0]?.id,
+  };
+
+  // Fallback URLs in case a variant ID is missing
+  const checkoutUrls: Record<string, string> = {
+    "64":  "https://luxwatch-8683.myshopify.com/products/cubecraft-64-pieces",
+    "128": "https://luxwatch-8683.myshopify.com/products/cubecraft-128-pieces",
+    "256": "https://luxwatch-8683.myshopify.com/products/cubecraft-pack-famille-256-pieces",
+  };
+
+  return <ProductUI variantIds={variantIds} checkoutUrls={checkoutUrls} />;
+}

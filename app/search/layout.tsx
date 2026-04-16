@@ -1,3 +1,5 @@
+export const dynamic = "force-dynamic";
+
 import Footer from "components/layout/footer";
 import Collections from "components/layout/search/collections";
 import FilterList from "components/layout/search/filter";

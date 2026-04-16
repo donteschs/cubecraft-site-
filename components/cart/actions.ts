@@ -104,3 +104,18 @@ export async function createCartAndSetCookie() {
   let cart = await createCart();
   (await cookies()).set("cartId", cart.id!);
 }
+
+export async function addItemAndCheckout(variantId: string) {
+  // Create cart if none exists
+  let cartId = (await cookies()).get("cartId")?.value;
+  if (!cartId) {
+    const newCart = await createCart();
+    (await cookies()).set("cartId", newCart.id!);
+  }
+  // Add item to cart
+  await addToCart([{ merchandiseId: variantId, quantity: 1 }]);
+  updateTag(TAGS.cart);
+  // Redirect to Shopify checkout
+  const cart = await getCart();
+  redirect(cart!.checkoutUrl);
+}
