@@ -1,22 +1,29 @@
 "use client";
 
 import { useChat } from "@ai-sdk/react";
+import { DefaultChatTransport } from "ai";
 import { useState, useEffect, useRef } from "react";
 
 export function ChatWidget() {
   const [open, setOpen] = useState(false);
+  const [input, setInput] = useState("");
   const bottomRef = useRef<HTMLDivElement>(null);
 
-  const { messages, input, handleInputChange, handleSubmit, status } = useChat({
-    api: "/api/chat",
-    initialMessages: [
-      {
-        id: "welcome",
-        role: "assistant",
-        content: "Bonjour ! 👋 Je suis CubeBot. Quel pack vous intéresse, ou avez-vous une question sur CubeCraft ?",
-      },
-    ],
+  const { messages: chatMessages, sendMessage, status } = useChat({
+    transport: new DefaultChatTransport({ api: "/api/chat" }),
   });
+
+  const welcomeMsg = { id: "welcome", role: "assistant", content: "Bonjour ! 👋 Je suis CubeBot. Quel pack vous intéresse, ou avez-vous une question sur CubeCraft ?" };
+  const messages = [welcomeMsg, ...chatMessages] as Array<{ id: string; role: string; content: string }>;
+
+  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => setInput(e.target.value);
+
+  const handleSubmit = (e: React.FormEvent) => {
+    e.preventDefault();
+    if (!input.trim()) return;
+    sendMessage({ text: input });
+    setInput("");
+  };
 
   useEffect(() => {
     bottomRef.current?.scrollIntoView({ behavior: "smooth" });
@@ -60,7 +67,7 @@ export function ChatWidget() {
           {/* Messages */}
           <div className="flex-1 overflow-y-auto px-4 py-3 space-y-3">
             {messages.map((m) => (
-              <div key={m.id} className={`flex ${m.role === "user" ? "justify-end" : "justify-start"}`}>
+              <div key={m.id} className={`flex ${(m.role as string) === "user" ? "justify-end" : "justify-start"}`}>
                 {m.role === "assistant" && (
                   <div className="w-6 h-6 rounded-md bg-creeper-light/40 flex items-center justify-center flex-shrink-0 mr-2 mt-0.5">
                     <svg className="w-3.5 h-3.5 text-creeper-dark" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={2}>
