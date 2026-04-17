@@ -24,7 +24,19 @@ type TikTokPayload = {
 
 export function trackTikTokEvent(event: string, payload?: TikTokPayload) {
   if (typeof window === "undefined" || !window.ttq) return;
-  window.ttq.track(event, payload as Record<string, unknown>);
+  const eventId = `${event}-${Date.now()}`;
+  // Client-side pixel
+  window.ttq.track(event, { ...(payload as Record<string, unknown>), event_id: eventId });
+  // Server-side Events API (fire-and-forget)
+  fetch("/api/tiktok", {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify({
+      event,
+      event_id: eventId,
+      properties: { ...payload, url: window.location.href },
+    }),
+  }).catch(() => {});
 }
 
 export function buildTikTokProductPayload(
