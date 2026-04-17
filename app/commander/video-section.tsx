@@ -1,5 +1,6 @@
 "use client";
 
+import { trackPinterestEvent } from "lib/pinterest";
 import Link from "next/link";
 import { useEffect, useRef, useState } from "react";
 
@@ -28,6 +29,7 @@ function ReelCard({ reel, priority = false }: { reel: typeof REELS[0]; priority?
   const [muted, setMuted]     = useState(true);
   const [playing, setPlaying] = useState(false);
   const [loaded, setLoaded]   = useState(false);
+  const trackedRef = useRef(false);
 
   /* autoplay / pause on viewport visibility */
   useEffect(() => {
@@ -92,7 +94,13 @@ function ReelCard({ reel, priority = false }: { reel: typeof REELS[0]; priority?
           preload={priority ? "auto" : "metadata"}
           className="w-full h-full object-cover"
           onLoadedData={() => setLoaded(true)}
-          onPlay={() => setPlaying(true)}
+          onPlay={() => {
+            setPlaying(true);
+            if (!trackedRef.current) {
+              trackedRef.current = true;
+              trackPinterestEvent("watchvideo", { video_title: reel.label });
+            }
+          }}
           onPause={() => setPlaying(false)}
         />
 

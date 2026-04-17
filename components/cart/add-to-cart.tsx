@@ -3,9 +3,11 @@
 import { PlusIcon } from "@heroicons/react/24/outline";
 import clsx from "clsx";
 import { addItem } from "components/cart/actions";
+import { buildProductMetaPayload, trackMetaEvent } from "lib/meta-pixel";
+import { buildPinterestProductPayload, trackPinterestEvent } from "lib/pinterest";
 import { Product, ProductVariant } from "lib/shopify/types";
 import { useSearchParams } from "next/navigation";
-import { useActionState } from "react";
+import { useActionState, useEffect, useRef } from "react";
 import { useCart } from "./cart-context";
 
 function SubmitButton({
@@ -62,6 +64,7 @@ export function AddToCart({ product }: { product: Product }) {
   const { addCartItem } = useCart();
   const searchParams = useSearchParams();
   const [message, formAction] = useActionState(addItem, null);
+  const trackedViewRef = useRef<string | null>(null);
 
   const variant = variants.find((variant: ProductVariant) =>
     variant.selectedOptions.every(
@@ -75,9 +78,29 @@ export function AddToCart({ product }: { product: Product }) {
     (variant) => variant.id === selectedVariantId,
   )!;
 
+  useEffect(() => {
+    if (!selectedVariantId || trackedViewRef.current === selectedVariantId) {
+      return;
+    }
+
+    trackMetaEvent(
+      "ViewContent",
+      buildProductMetaPayload(product, finalVariant),
+    );
+    trackedViewRef.current = selectedVariantId;
+  }, [finalVariant, product, selectedVariantId]);
+
   return (
     <form
       action={async () => {
+        trackMetaEvent(
+          "AddToCart",
+          buildProductMetaPayload(product, finalVariant),
+        );
+        trackPinterestEvent(
+          "addtocart",
+          buildPinterestProductPayload(product, finalVariant),
+        );
         addCartItem(finalVariant, product);
         addItemAction();
       }}

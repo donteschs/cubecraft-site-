@@ -6,6 +6,8 @@ import { ShoppingCartIcon, XMarkIcon } from "@heroicons/react/24/outline";
 import LoadingDots from "components/loading-dots";
 import Price from "components/price";
 import { DEFAULT_OPTION } from "lib/constants";
+import { buildCartMetaPayload, trackMetaEvent } from "lib/meta-pixel";
+import { buildPinterestCartPayload, trackPinterestEvent } from "lib/pinterest";
 import { createUrl } from "lib/utils";
 import Image from "next/image";
 import Link from "next/link";
@@ -215,7 +217,23 @@ export default function CartModal() {
                       />
                     </div>
                   </div>
-                  <form action={redirectToCheckout}>
+                  <form
+                    action={redirectToCheckout}
+                    onSubmit={() => {
+                      if (!cart || cart.lines.length === 0) {
+                        return;
+                      }
+
+                      trackMetaEvent(
+                        "InitiateCheckout",
+                        buildCartMetaPayload(cart),
+                      );
+                      trackPinterestEvent(
+                        "checkout",
+                        buildPinterestCartPayload(cart),
+                      );
+                    }}
+                  >
                     <CheckoutButton />
                   </form>
                 </div>
