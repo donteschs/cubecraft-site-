@@ -10,10 +10,6 @@ declare global {
   }
 }
 
-function uid() {
-  return `${Date.now()}-${Math.random().toString(36).slice(2, 8)}`;
-}
-
 export function trackPinterestEvent(
   eventName: string,
   parameters?: Record<string, unknown>,
@@ -21,7 +17,7 @@ export function trackPinterestEvent(
   if (typeof window === "undefined" || typeof window.pintrk !== "function") {
     return;
   }
-  window.pintrk("track", eventName, { event_id: uid(), ...parameters });
+  window.pintrk("track", eventName, parameters);
 }
 
 export function buildPinterestProductPayload(
