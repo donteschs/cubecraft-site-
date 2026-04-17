@@ -5,6 +5,7 @@ import clsx from "clsx";
 import { addItem } from "components/cart/actions";
 import { buildProductMetaPayload, trackMetaEvent } from "lib/meta-pixel";
 import { buildPinterestProductPayload, trackPinterestEvent } from "lib/pinterest";
+import { buildTikTokProductPayload, trackTikTokEvent } from "lib/tiktok";
 import { Product, ProductVariant } from "lib/shopify/types";
 import { useSearchParams } from "next/navigation";
 import { useActionState, useEffect, useRef } from "react";
@@ -87,6 +88,7 @@ export function AddToCart({ product }: { product: Product }) {
       "ViewContent",
       buildProductMetaPayload(product, finalVariant),
     );
+    trackTikTokEvent("ViewContent", buildTikTokProductPayload(product, finalVariant));
     trackedViewRef.current = selectedVariantId;
   }, [finalVariant, product, selectedVariantId]);
 
@@ -101,6 +103,7 @@ export function AddToCart({ product }: { product: Product }) {
           "addtocart",
           buildPinterestProductPayload(product, finalVariant),
         );
+        trackTikTokEvent("AddToCart", buildTikTokProductPayload(product, finalVariant));
         addCartItem(finalVariant, product);
         addItemAction();
       }}

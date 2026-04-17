@@ -8,6 +8,7 @@ import Price from "components/price";
 import { DEFAULT_OPTION } from "lib/constants";
 import { buildCartMetaPayload, trackMetaEvent } from "lib/meta-pixel";
 import { buildPinterestCartPayload, trackPinterestEvent } from "lib/pinterest";
+import { buildTikTokCartPayload, trackTikTokEvent } from "lib/tiktok";
 import { createUrl } from "lib/utils";
 import Image from "next/image";
 import Link from "next/link";
@@ -232,6 +233,7 @@ export default function CartModal() {
                         "checkout",
                         buildPinterestCartPayload(cart),
                       );
+                      trackTikTokEvent("InitiateCheckout", buildTikTokCartPayload(cart));
                     }}
                   >
                     <CheckoutButton />
