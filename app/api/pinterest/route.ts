@@ -23,13 +23,15 @@ export async function POST(req: NextRequest) {
       req.headers.get("x-real-ip") ||
       undefined;
 
-    const userData: Record<string, string | undefined> = {
+    const userData: Record<string, unknown> = {
       client_ip_address: ip,
       client_user_agent: req.headers.get("user-agent") || undefined,
     };
 
     if (user_data.em) {
-      userData["em"] = sha256(user_data.em);
+      const hashed = sha256(user_data.em);
+      userData["em"] = [hashed];
+      userData["hashed_maids"] = [hashed];
     }
 
     const payload = {
@@ -39,7 +41,7 @@ export async function POST(req: NextRequest) {
           action_source: "web",
           event_time: Math.floor(Date.now() / 1000),
           event_id: event_id ?? `${event_name}-${Date.now()}`,
-          event_source_url: user_data.url ?? undefined,
+          event_source_url: user_data.url ?? "https://cubecrafte.com/",
           user_data: userData,
           custom_data,
         },
