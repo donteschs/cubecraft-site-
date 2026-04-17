@@ -68,6 +68,7 @@ export const metadata = {
     "cadeau enfant",
   ],
   robots: { follow: true, index: true },
+  other: { "p:domain_verify": "efd0f24559d4799c43986cc9992ecad1" },
   openGraph: {
     type: "website",
     locale: "fr_FR",
