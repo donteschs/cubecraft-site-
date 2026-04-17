@@ -2,8 +2,8 @@ import { createHash } from "crypto";
 import { NextRequest, NextResponse } from "next/server";
 
 const TOKEN = process.env.PINTEREST_ACCESS_TOKEN!;
-const TAG_ID = "2612400588771";
-const API_URL = `https://api.pinterest.com/v5/ad_accounts/${TAG_ID}/events`;
+const AD_ACCOUNT_ID = "549770272622";
+const API_URL = `https://api.pinterest.com/v5/ad_accounts/${AD_ACCOUNT_ID}/events`;
 
 function sha256(value: string) {
   return createHash("sha256").update(value.trim().toLowerCase()).digest("hex");
