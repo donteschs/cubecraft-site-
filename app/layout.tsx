@@ -134,7 +134,7 @@ export default async function RootLayout({
               t=document.createElement("script");t.async=!0,t.src=e;var
               r=document.getElementsByTagName("script")[0];
               r.parentNode.insertBefore(t,r)}}("https://s.pinimg.com/ct/core.js");
-            pintrk('load', '2612400588771');
+            pintrk('load', '2612400588771', {em: ''});
             pintrk('page');
           `}
         </Script>
@@ -144,7 +144,7 @@ export default async function RootLayout({
             height="1"
             width="1"
             style={{ display: "none" }}
-            src="https://ct.pinterest.com/v3/?event=init&tid=2612400588771&noscript=1"
+            src="https://ct.pinterest.com/v3/?event=init&tid=2612400588771&pd[em]=&noscript=1"
           />
         </noscript>
         <CartProvider cartPromise={cart}>
