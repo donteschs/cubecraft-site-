@@ -17,7 +17,20 @@ export function trackPinterestEvent(
   if (typeof window === "undefined" || typeof window.pintrk !== "function") {
     return;
   }
-  window.pintrk("track", eventName, parameters);
+  const eventId = `${eventName}-${Date.now()}`;
+  // Client-side pixel
+  window.pintrk("track", eventName, { event_id: eventId, ...parameters });
+  // Server-side Conversions API (fire-and-forget)
+  fetch("/api/pinterest", {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify({
+      event_name: eventName,
+      event_id: eventId,
+      user_data: { url: window.location.href },
+      custom_data: parameters,
+    }),
+  }).catch(() => {});
 }
 
 export function buildPinterestProductPayload(
