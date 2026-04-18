@@ -5,7 +5,7 @@ const steps = [
   {
     num: "01",
     title: "Ouvrez la boîte",
-    desc: "64 cubes magnétiques aux couleurs vives, prêts à l'emploi. Pas de montage, pas de notice compliquée.",
+    desc: "100 cubes magnétiques aux couleurs vives, prêts à l'emploi. Pas de montage, pas de notice compliquée.",
     img: "/images/Whisk_0f4f789c58d8d62974e423a8f570af63dr.png",
     alt: "Boîte cadeau CubeCraft",
   },
@@ -26,7 +26,7 @@ const steps = [
 ];
 
 const boxContents = [
-  { qty: "64", label: "cubes magnétiques", sub: "8 couleurs premium" },
+  { qty: "100", label: "cubes magnétiques", sub: "8 couleurs premium" },
   { qty: "1",  label: "pochette de rangement", sub: "en tissu résistant" },
   { qty: "20", label: "modèles d'inspiration", sub: "pour bien démarrer" },
   { qty: "1",  label: "accès communauté", sub: "CubeCraft en ligne" },

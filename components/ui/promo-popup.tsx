@@ -9,25 +9,25 @@ const STORAGE_KEY = "cubecraft_popup_seen_v2";
 
 const PACKS = [
   {
-    id: "64",
+    id: "100",
     label: "Pack Découverte",
-    pieces: "64 pièces",
+    pieces: "100 pièces",
     old: "59,90 €",
     price: "39,90 €",
     badge: null,
   },
   {
-    id: "128",
+    id: "200",
     label: "Pack Créateur",
-    pieces: "128 pièces",
+    pieces: "200 pièces",
     old: "99,90 €",
     price: "69,90 €",
     badge: "⭐ Le + populaire",
   },
   {
-    id: "256",
+    id: "400",
     label: "Pack Famille",
-    pieces: "256 pièces",
+    pieces: "400 pièces",
     old: "179,90 €",
     price: "119,90 €",
     badge: "💎 Meilleure valeur",
@@ -40,7 +40,7 @@ export function PromoPopup({
   variantIds: Record<string, string | undefined>;
 }) {
   const [visible, setVisible] = useState(false);
-  const [selected, setSelected] = useState<"64" | "128" | "256">("128");
+  const [selected, setSelected] = useState<"100" | "200" | "400">("200");
   const [isPending, startTransition] = useTransition();
 
   useEffect(() => {
