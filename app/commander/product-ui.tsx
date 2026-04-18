@@ -634,23 +634,33 @@ export function ProductUI({
                   <button type="button" onClick={() => setCartVisible(false)} className="text-pierre/30 hover:text-pierre transition-colors cursor-pointer"><IconX /></button>
                 </div>
                 {/* Ligne produit principal */}
-                <div className="flex items-center justify-between gap-2 bg-white rounded-xl px-3 py-2.5 border border-gray-100">
+                <div className="flex items-center gap-2 bg-white rounded-xl px-3 py-2.5 border border-gray-100">
                   <div className="flex-1 min-w-0">
                     <div className="font-rubik font-bold text-pierre text-sm">CubeCraft {variant.label}</div>
-                    <div className="text-pierre/50 text-xs font-inter">× {quantity}</div>
+                    <div className="flex items-center gap-2 mt-1">
+                      <button type="button" onClick={() => setQuantity(q => Math.max(1, q - 1))} className="w-6 h-6 rounded border border-gray-200 flex items-center justify-center text-pierre hover:bg-gray-100 cursor-pointer text-sm font-bold">−</button>
+                      <span className="font-rubik font-black text-pierre text-sm w-4 text-center">{quantity}</span>
+                      <button type="button" onClick={() => setQuantity(q => q + 1)} className="w-6 h-6 rounded border border-gray-200 flex items-center justify-center text-pierre hover:bg-gray-100 cursor-pointer text-sm font-bold">+</button>
+                    </div>
                   </div>
                   <span className="font-rubik font-black text-creeper-dark text-sm whitespace-nowrap">
                     {(variant.launchPrice * quantity).toFixed(2).replace(".", ",")} €
                   </span>
+                  <button type="button" onClick={() => setCartVisible(false)} className="text-pierre/30 hover:text-red-400 transition-colors cursor-pointer ml-1" title="Supprimer">
+                    <IconX />
+                  </button>
                 </div>
                 {/* Ligne upsell si cochée */}
                 {upsellChecked && (
-                  <div className="flex items-center justify-between gap-2 bg-white rounded-xl px-3 py-2.5 border border-gray-100">
+                  <div className="flex items-center gap-2 bg-white rounded-xl px-3 py-2.5 border border-gray-100">
                     <div className="flex-1 min-w-0">
                       <div className="font-rubik font-bold text-pierre text-sm">Jeu Magnétique</div>
                       <div className="text-pierre/50 text-xs font-inter">× 1</div>
                     </div>
                     <span className="font-rubik font-black text-creeper-dark text-sm">14,90 €</span>
+                    <button type="button" onClick={() => setUpsellChecked(false)} className="text-pierre/30 hover:text-red-400 transition-colors cursor-pointer ml-1" title="Supprimer">
+                      <IconX />
+                    </button>
                   </div>
                 )}
                 {/* Total */}
