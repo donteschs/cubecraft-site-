@@ -1,4 +1,4 @@
-import os, sys, json, urllib.request, urllib.error, datetime, random
+import os, sys, json, urllib.request, urllib.error, urllib.parse, datetime, random
 
 CLIENT_ID = os.environ.get("GOOGLE_CLIENT_ID", "")
 CLIENT_SECRET = os.environ.get("GOOGLE_CLIENT_SECRET", "")
@@ -10,7 +10,7 @@ if not all([CLIENT_ID, CLIENT_SECRET, REFRESH_TOKEN, LOCATION_ID]):
     sys.exit(1)
 
 # Step 1: Get access token
-token_payload = json.dumps({
+token_payload = urllib.parse.urlencode({
     "client_id": CLIENT_ID,
     "client_secret": CLIENT_SECRET,
     "refresh_token": REFRESH_TOKEN,
@@ -20,7 +20,7 @@ token_payload = json.dumps({
 token_req = urllib.request.Request(
     "https://oauth2.googleapis.com/token",
     data=token_payload,
-    headers={"Content-Type": "application/json"}
+    headers={"Content-Type": "application/x-www-form-urlencoded"}
 )
 
 try:
