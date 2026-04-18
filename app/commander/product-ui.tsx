@@ -498,7 +498,7 @@ export function ProductUI({
           </div>
 
           {/* Buy box */}
-          <div className="flex flex-col gap-5">
+          <div className="flex flex-col gap-5 min-w-0 overflow-hidden">
             <div>
               <span className="font-pixel text-[8px] text-creeper tracking-widest uppercase">
                 MINECRAFT IRL · 2026
@@ -724,15 +724,15 @@ export function ProductUI({
 
             {/* Trust badges — défilement animé */}
             <div
-              className="overflow-hidden rounded-2xl"
+              className="w-full overflow-hidden rounded-2xl"
               style={{
-                maskImage: "linear-gradient(to right, transparent 0%, black 10%, black 90%, transparent 100%)",
-                WebkitMaskImage: "linear-gradient(to right, transparent 0%, black 10%, black 90%, transparent 100%)",
+                maskImage: "linear-gradient(to right, transparent 0%, black 12%, black 88%, transparent 100%)",
+                WebkitMaskImage: "linear-gradient(to right, transparent 0%, black 12%, black 88%, transparent 100%)",
               }}
             >
               <div
-                className="flex gap-2 w-max"
-                style={{ animation: "marquee 22s linear infinite" }}
+                className="flex gap-2"
+                style={{ width: "max-content", animation: "marquee 22s linear infinite" }}
                 onMouseEnter={e => (e.currentTarget as HTMLDivElement).style.animationPlayState = "paused"}
                 onMouseLeave={e => (e.currentTarget as HTMLDivElement).style.animationPlayState = "running"}
               >
@@ -740,7 +740,8 @@ export function ProductUI({
                   <div
                     key={i}
                     aria-hidden={i >= TRUST_BADGES.length}
-                    className="flex items-center gap-2 bg-white border border-gray-100 rounded-full px-3 py-2 shadow-sm whitespace-nowrap flex-shrink-0"
+                    className="flex items-center gap-2 bg-white border border-gray-100 rounded-full px-3 py-2 shadow-sm flex-shrink-0"
+                    style={{ whiteSpace: "nowrap" }}
                   >
                     <span className="text-creeper flex-shrink-0">{b.icon}</span>
                     <div>
