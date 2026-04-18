@@ -1,9 +1,12 @@
 import os, sys, json, urllib.request, urllib.error, urllib.parse, datetime, random
 
-CLIENT_ID = os.environ.get("GOOGLE_CLIENT_ID", "")
-CLIENT_SECRET = os.environ.get("GOOGLE_CLIENT_SECRET", "")
-REFRESH_TOKEN = os.environ.get("GOOGLE_REFRESH_TOKEN", "")
-LOCATION_ID = os.environ.get("GOOGLE_LOCATION_ID", "")
+CLIENT_ID = os.environ.get("GOOGLE_CLIENT_ID", "").strip()
+CLIENT_SECRET = os.environ.get("GOOGLE_CLIENT_SECRET", "").strip()
+REFRESH_TOKEN = os.environ.get("GOOGLE_REFRESH_TOKEN", "").strip()
+LOCATION_ID = os.environ.get("GOOGLE_LOCATION_ID", "").strip()
+
+print("CLIENT_ID length: " + str(len(CLIENT_ID)))
+print("REFRESH_TOKEN length: " + str(len(REFRESH_TOKEN)))
 
 if not all([CLIENT_ID, CLIENT_SECRET, REFRESH_TOKEN, LOCATION_ID]):
     print("ERROR: Missing required environment variables")
