@@ -105,14 +105,13 @@ export async function createCartAndSetCookie() {
   (await cookies()).set("cartId", cart.id!);
 }
 
-export async function addItemAndCheckout(variantId: string, extraVariantId?: string) {
-  // Create cart if none exists
+export async function addItemAndCheckout(variantId: string, quantity = 1, extraVariantId?: string) {
   let cartId = (await cookies()).get("cartId")?.value;
   if (!cartId) {
     const newCart = await createCart();
     (await cookies()).set("cartId", newCart.id!);
   }
-  const items = [{ merchandiseId: variantId, quantity: 1 }];
+  const items: { merchandiseId: string; quantity: number }[] = [{ merchandiseId: variantId, quantity }];
   if (extraVariantId) items.push({ merchandiseId: extraVariantId, quantity: 1 });
   const cart = await addToCart(items);
   updateTag(TAGS.cart);

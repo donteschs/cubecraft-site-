@@ -339,6 +339,8 @@ export function ProductUI({
   const [openFaq, setOpenFaq] = useState<number | null>(null);
   const [isPending, startTransition] = useTransition();
   const [upsellChecked, setUpsellChecked] = useState(false);
+  const [quantity, setQuantity] = useState(1);
+  const [cartVisible, setCartVisible] = useState(false);
   const trackedViewRef = useRef<string | null>(null);
 
   const variant = VARIANTS[activeVariant]!;
@@ -393,7 +395,7 @@ export function ProductUI({
     const variantId = variantIds[variant.id];
     if (variantId) {
       startTransition(async () => {
-        await addItemAndCheckout(variantId, upsellChecked && upsellVariantId ? upsellVariantId : undefined);
+        await addItemAndCheckout(variantId, quantity, upsellChecked && upsellVariantId ? upsellVariantId : undefined);
       });
     } else {
       const url = checkoutUrls[variant.id];
@@ -595,38 +597,91 @@ export function ProductUI({
               </span>
             </div>
 
-            {/* CTA */}
+            {/* Quantity selector */}
+            <div className="flex items-center gap-4">
+              <span className="font-rubik font-bold text-pierre text-sm">Quantité</span>
+              <div className="flex items-center border border-gray-200 rounded-xl overflow-hidden">
+                <button
+                  type="button"
+                  onClick={() => setQuantity(q => Math.max(1, q - 1))}
+                  className="w-10 h-10 flex items-center justify-center text-pierre hover:bg-gray-100 transition-colors font-bold text-lg cursor-pointer"
+                >−</button>
+                <span className="w-10 text-center font-rubik font-black text-pierre">{quantity}</span>
+                <button
+                  type="button"
+                  onClick={() => setQuantity(q => q + 1)}
+                  className="w-10 h-10 flex items-center justify-center text-pierre hover:bg-gray-100 transition-colors font-bold text-lg cursor-pointer"
+                >+</button>
+              </div>
+            </div>
+
+            {/* CTA — Ajouter au panier */}
             <button
-              onClick={handleOrder}
-              disabled={isPending}
-              className={`w-full rounded-xl py-4 sm:py-5 font-rubik font-black text-lg sm:text-xl text-white shadow-xl transition-all duration-200 cursor-pointer focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-creeper focus-visible:ring-offset-2 ${isPending ? "bg-creeper-dark" : "btn-shimmer animate-pulse-green hover:scale-[1.02] active:scale-100 shadow-creeper/30"}`}
-              aria-live="polite"
+              type="button"
+              onClick={() => setCartVisible(true)}
+              className="w-full rounded-xl py-4 sm:py-5 font-rubik font-black text-lg sm:text-xl text-white shadow-xl transition-all duration-200 cursor-pointer btn-shimmer animate-pulse-green hover:scale-[1.02] active:scale-100 shadow-creeper/30 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-creeper focus-visible:ring-offset-2"
             >
-              {isPending ? (
-                <span className="flex items-center justify-center gap-2">
-                  <svg
-                    className="w-5 h-5 animate-spin"
-                    viewBox="0 0 24 24"
-                    fill="none"
-                    stroke="currentColor"
-                    strokeWidth={2}
-                  >
-                    <path
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                      d="M12 3v3m0 12v3M3 12h3m12 0h3"
-                    />
-                  </svg>
-                  Redirection vers le paiement…
-                </span>
-              ) : (
-                <span className="flex items-center justify-center gap-2">
-                  Commander — {variant.launchPrice.toFixed(2).replace(".", ",")}{" "}
-                  €
-                  <IconArrow />
-                </span>
-              )}
+              <span className="flex items-center justify-center gap-2">
+                🛒 Ajouter au panier — {(variant.launchPrice * quantity).toFixed(2).replace(".", ",")} €
+              </span>
             </button>
+
+            {/* Mini panier */}
+            {cartVisible && (
+              <div className="rounded-2xl border-2 border-creeper bg-creeper-light/10 p-4 flex flex-col gap-3">
+                <div className="font-rubik font-black text-pierre text-sm flex items-center justify-between">
+                  <span>🛒 Mon panier</span>
+                  <button type="button" onClick={() => setCartVisible(false)} className="text-pierre/30 hover:text-pierre transition-colors cursor-pointer"><IconX /></button>
+                </div>
+                {/* Ligne produit principal */}
+                <div className="flex items-center justify-between gap-2 bg-white rounded-xl px-3 py-2.5 border border-gray-100">
+                  <div className="flex-1 min-w-0">
+                    <div className="font-rubik font-bold text-pierre text-sm">CubeCraft {variant.label}</div>
+                    <div className="text-pierre/50 text-xs font-inter">× {quantity}</div>
+                  </div>
+                  <span className="font-rubik font-black text-creeper-dark text-sm whitespace-nowrap">
+                    {(variant.launchPrice * quantity).toFixed(2).replace(".", ",")} €
+                  </span>
+                </div>
+                {/* Ligne upsell si cochée */}
+                {upsellChecked && (
+                  <div className="flex items-center justify-between gap-2 bg-white rounded-xl px-3 py-2.5 border border-gray-100">
+                    <div className="flex-1 min-w-0">
+                      <div className="font-rubik font-bold text-pierre text-sm">Jeu Magnétique</div>
+                      <div className="text-pierre/50 text-xs font-inter">× 1</div>
+                    </div>
+                    <span className="font-rubik font-black text-creeper-dark text-sm">14,90 €</span>
+                  </div>
+                )}
+                {/* Total */}
+                <div className="flex items-center justify-between pt-1 border-t border-creeper/20">
+                  <span className="font-rubik font-bold text-pierre text-sm">Total</span>
+                  <span className="font-rubik font-black text-creeper-dark text-lg">
+                    {(variant.launchPrice * quantity + (upsellChecked ? 14.9 : 0)).toFixed(2).replace(".", ",")} €
+                  </span>
+                </div>
+                {/* Bouton valider */}
+                <button
+                  onClick={handleOrder}
+                  disabled={isPending}
+                  className={`w-full rounded-xl py-4 font-rubik font-black text-base text-white shadow-lg transition-all duration-200 cursor-pointer focus-visible:outline-none ${isPending ? "bg-creeper-dark" : "bg-creeper hover:bg-creeper-dark hover:scale-[1.01] active:scale-100"}`}
+                >
+                  {isPending ? (
+                    <span className="flex items-center justify-center gap-2">
+                      <svg className="w-4 h-4 animate-spin" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={2}>
+                        <path strokeLinecap="round" strokeLinejoin="round" d="M12 3v3m0 12v3M3 12h3m12 0h3" />
+                      </svg>
+                      Redirection…
+                    </span>
+                  ) : (
+                    <span className="flex items-center justify-center gap-2">
+                      ✓ Valider mon panier <IconArrow />
+                    </span>
+                  )}
+                </button>
+                <p className="text-center text-pierre/40 text-[10px] font-inter">🔒 Paiement sécurisé · Livraison gratuite</p>
+              </div>
+            )}
 
             {/* Upsell — Jeu Magnétique */}
             <button
