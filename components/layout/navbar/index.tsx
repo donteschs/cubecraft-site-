@@ -11,6 +11,7 @@ const NAV_LINKS = [
   { label: "Témoignages", href: "/#testimonials" },
   { label: "Tarifs", href: "/#pricing" },
   { label: "FAQ", href: "/#faq" },
+  { label: "Blog", href: "/blog" },
 ];
 
 export function Navbar() {
