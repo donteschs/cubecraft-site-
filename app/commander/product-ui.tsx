@@ -336,6 +336,7 @@ export function ProductUI({
   const [openAccordion, setOpenAccordion] = useState<number | null>(0);
   const [openFaq, setOpenFaq] = useState<number | null>(null);
   const [isPending, startTransition] = useTransition();
+  const [upsellChecked, setUpsellChecked] = useState(false);
   const trackedViewRef = useRef<string | null>(null);
 
   const variant = VARIANTS[activeVariant]!;
@@ -625,6 +626,35 @@ export function ProductUI({
                   <IconArrow />
                 </span>
               )}
+            </button>
+
+            {/* Upsell — Jeu Magnétique */}
+            <button
+              type="button"
+              onClick={() => setUpsellChecked(!upsellChecked)}
+              className={`w-full text-left rounded-2xl border-2 p-4 transition-all duration-200 cursor-pointer ${upsellChecked ? "border-creeper bg-creeper-light/20 shadow-md shadow-creeper/10" : "border-gray-200 bg-white hover:border-creeper/40"}`}
+            >
+              <div className="flex items-center gap-3">
+                <div className={`w-5 h-5 rounded-md border-2 flex items-center justify-center flex-shrink-0 transition-all duration-150 ${upsellChecked ? "bg-creeper border-creeper" : "border-gray-300"}`}>
+                  {upsellChecked && (
+                    <svg className="w-3 h-3 text-white" viewBox="0 0 12 12" fill="currentColor">
+                      <path fillRule="evenodd" d="M10.28 2.28a.75.75 0 010 1.06l-5.5 5.5a.75.75 0 01-1.06 0l-2.5-2.5a.75.75 0 111.06-1.06L4.25 7.19l4.97-4.97a.75.75 0 011.06.06z" />
+                    </svg>
+                  )}
+                </div>
+                <div className="flex-1 min-w-0">
+                  <div className="flex items-center gap-2 flex-wrap">
+                    <span className="font-rubik font-black text-pierre text-sm">Ajouter le Jeu Magnétique</span>
+                    <span className="bg-or text-dark text-[9px] font-rubik font-black px-1.5 py-0.5 rounded-full">-25%</span>
+                  </div>
+                  <p className="text-pierre/50 text-xs font-inter mt-0.5">Jeu de stratégie — pierres aimantées · Famille &amp; enfants dès 6 ans</p>
+                  <div className="flex items-center gap-2 mt-1">
+                    <span className="font-rubik font-black text-creeper-dark text-base">14,90 €</span>
+                    <span className="text-pierre/40 line-through text-sm font-inter">19,90 €</span>
+                    <span className="text-pierre/40 text-xs font-inter">· livré avec ta commande</span>
+                  </div>
+                </div>
+              </div>
             </button>
 
             {/* Trust badges 3×2 */}
