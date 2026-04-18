@@ -80,7 +80,9 @@ export function ChatWidget() {
                     ? "bg-creeper text-white rounded-br-sm"
                     : "bg-gray-100 text-pierre rounded-bl-sm"
                 }`}>
-                  {m.content}
+                  {Array.isArray((m as any).parts) && (m as any).parts.some((p: any) => p.type === "text")
+                    ? (m as any).parts.filter((p: any) => p.type === "text").map((p: any) => p.text).join("")
+                    : (m.content as string) || ""}
                 </div>
               </div>
             ))}

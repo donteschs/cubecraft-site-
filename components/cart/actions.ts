@@ -112,10 +112,8 @@ export async function addItemAndCheckout(variantId: string) {
     const newCart = await createCart();
     (await cookies()).set("cartId", newCart.id!);
   }
-  // Add item to cart
-  await addToCart([{ merchandiseId: variantId, quantity: 1 }]);
+  // Add item — returns cart with checkoutUrl directly
+  const cart = await addToCart([{ merchandiseId: variantId, quantity: 1 }]);
   updateTag(TAGS.cart);
-  // Redirect to Shopify checkout
-  const cart = await getCart();
-  redirect(cart!.checkoutUrl);
+  redirect(cart.checkoutUrl);
 }

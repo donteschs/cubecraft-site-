@@ -1,6 +1,6 @@
 "use client";
 
-import LogoIcon from "components/icons/logo";
+import Image from "next/image";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useState } from "react";
@@ -28,7 +28,14 @@ export function Navbar() {
               className="flex items-center gap-2.5 flex-shrink-0 group"
               prefetch={true}
             >
-              <LogoIcon size="sm" />
+              <Image
+                src="https://res.cloudinary.com/druvbvnob/image/upload/v1776440369/Whisk_5e8f8a6c8e94bfc94584807d324df370dr-removebg-preview_johci7.png"
+                alt="CubeCraft"
+                width={36}
+                height={36}
+                className="flex-shrink-0 object-contain"
+                priority
+              />
               <span className="font-rubik font-black text-pierre text-lg tracking-tight group-hover:text-creeper transition-colors duration-150">
                 CubeCraft
               </span>
