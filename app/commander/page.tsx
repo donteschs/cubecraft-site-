@@ -14,23 +14,23 @@ export const metadata: Metadata = {
 };
 
 export default async function CommanderPage() {
-  const [p64, p128, p256] = await Promise.all([
-    getProduct("cubecraft-64-pieces"),
-    getProduct("cubecraft-128-pieces"),
+  const [p100, p200, p400] = await Promise.all([
+    getProduct("cubecraft-100-pieces"),
+    getProduct("cubecraft-200-pieces"),
     getProduct("cubecraft-pack-famille-256-pieces"),
   ]);
 
   // Shopify variant GIDs — used by addItemAndCheckout server action
   const variantIds: Record<string, string | undefined> = {
-    "100": p64?.variants[0]?.id,
-    "200": p128?.variants[0]?.id,
-    "400": p256?.variants[0]?.id,
+    "100": p100?.variants[0]?.id,
+    "200": p200?.variants[0]?.id,
+    "400": p400?.variants[0]?.id,
   };
 
   // Fallback URLs in case a variant ID is missing
   const checkoutUrls: Record<string, string> = {
-    "100": "https://luxwatch-8683.myshopify.com/products/cubecraft-64-pieces",
-    "200": "https://luxwatch-8683.myshopify.com/products/cubecraft-128-pieces",
+    "100": "https://luxwatch-8683.myshopify.com/products/cubecraft-100-pieces",
+    "200": "https://luxwatch-8683.myshopify.com/products/cubecraft-200-pieces",
     "400": "https://luxwatch-8683.myshopify.com/products/cubecraft-pack-famille-256-pieces",
   };
 
