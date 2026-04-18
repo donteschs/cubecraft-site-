@@ -1,0 +1,27 @@
+name: Generate Blog Article
+
+on:
+  schedule:
+    - cron: "0 8 * * 1"
+  workflow_dispatch:
+
+jobs:
+  generate:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Generate article with GPT-4o-mini
+        env:
+          OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
+        run: python3 .github/scripts/generate-article.py
+
+      - name: Commit and push article
+        run: |
+          git config user.name "CubeCraft Bot"
+          git config user.email "bot@cubecrafte.com"
+          git add content/blog/
+          git diff --staged --quiet || git commit -m "blog: add new SEO article"
+          git push
