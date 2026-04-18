@@ -22,16 +22,16 @@ export default async function CommanderPage() {
 
   // Shopify variant GIDs — used by addItemAndCheckout server action
   const variantIds: Record<string, string | undefined> = {
-    "64":  p64?.variants[0]?.id,
-    "128": p128?.variants[0]?.id,
-    "256": p256?.variants[0]?.id,
+    "100": p64?.variants[0]?.id,
+    "200": p128?.variants[0]?.id,
+    "400": p256?.variants[0]?.id,
   };
 
   // Fallback URLs in case a variant ID is missing
   const checkoutUrls: Record<string, string> = {
-    "64":  "https://luxwatch-8683.myshopify.com/products/cubecraft-64-pieces",
-    "128": "https://luxwatch-8683.myshopify.com/products/cubecraft-128-pieces",
-    "256": "https://luxwatch-8683.myshopify.com/products/cubecraft-pack-famille-256-pieces",
+    "100": "https://luxwatch-8683.myshopify.com/products/cubecraft-64-pieces",
+    "200": "https://luxwatch-8683.myshopify.com/products/cubecraft-128-pieces",
+    "400": "https://luxwatch-8683.myshopify.com/products/cubecraft-pack-famille-256-pieces",
   };
 
   return <ProductUI variantIds={variantIds} checkoutUrls={checkoutUrls} />;
