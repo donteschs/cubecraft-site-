@@ -1,0 +1,22 @@
+name: Google Business Post
+
+on:
+  schedule:
+    - cron: "0 9 * * 3"
+  workflow_dispatch:
+
+jobs:
+  post:
+    runs-on: ubuntu-latest
+    env:
+      FORCE_JAVASCRIPT_ACTIONS_TO_NODE24: true
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Post to Google Business Profile
+        env:
+          GOOGLE_CLIENT_ID: ${{ secrets.GOOGLE_CLIENT_ID }}
+          GOOGLE_CLIENT_SECRET: ${{ secrets.GOOGLE_CLIENT_SECRET }}
+          GOOGLE_REFRESH_TOKEN: ${{ secrets.GOOGLE_REFRESH_TOKEN }}
+          GOOGLE_LOCATION_ID: ${{ secrets.GOOGLE_LOCATION_ID }}
+        run: python3 .github/scripts/post-google-business.py
