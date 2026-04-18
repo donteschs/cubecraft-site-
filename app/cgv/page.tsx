@@ -25,7 +25,7 @@ export default function CGVPage() {
           <section>
             <h2 className="font-rubik font-bold text-pierre text-xl mb-3">Article 2 — Produits</h2>
             <p>
-              Les produits proposés à la vente sont des cubes magnétiques de construction (sets de 64, 128 et 256 pièces). Les photographies des produits sont non contractuelles. CubeCraft se réserve le droit de modifier la composition ou le design des produits sans préavis.
+              Les produits proposés à la vente sont des cubes magnétiques de construction (sets de 100, 200 et 400 pièces). Les photographies des produits sont non contractuelles. CubeCraft se réserve le droit de modifier la composition ou le design des produits sans préavis.
             </p>
           </section>
 

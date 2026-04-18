@@ -3,9 +3,9 @@ import Link from "next/link";
 
 const footerLinks = {
   Produit: [
-    { label: "Pack 64 pièces", href: "/#pricing" },
-    { label: "Pack 128 pièces", href: "/#pricing" },
-    { label: "Pack Famille 256", href: "/#pricing" },
+    { label: "Pack 100 pièces", href: "/#pricing" },
+    { label: "Pack 200 pièces", href: "/#pricing" },
+    { label: "Pack Famille 400", href: "/#pricing" },
     { label: "Comment ça marche", href: "/#how-it-works" },
   ],
   "À propos": [

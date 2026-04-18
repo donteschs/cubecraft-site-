@@ -40,8 +40,8 @@ const GALLERY_IMAGES = [
 
 const VARIANTS = [
   {
-    id: "64",
-    label: "64 pièces",
+    id: "100",
+    label: "100 pièces",
     normalPrice: 59.9,
     launchPrice: 39.9,
     savings: 20,
@@ -50,8 +50,8 @@ const VARIANTS = [
     stock: 42,
   },
   {
-    id: "128",
-    label: "128 pièces",
+    id: "200",
+    label: "200 pièces",
     normalPrice: 99.9,
     launchPrice: 69.9,
     savings: 30,
@@ -60,8 +60,8 @@ const VARIANTS = [
     stock: 31,
   },
   {
-    id: "256",
-    label: "256 pièces",
+    id: "400",
+    label: "400 pièces",
     normalPrice: 179.9,
     launchPrice: 119.9,
     savings: 60,
@@ -96,7 +96,7 @@ const ACCORDION_ITEMS = [
   {
     title: "Contenu de la boîte",
     content:
-      "Cubes magnétiques (64/128/256 selon le pack), pochette de rangement premium, guide d'inspiration avec 20 modèles, accès communauté CubeCraft, certificat CE & EN 71.",
+      "Cubes magnétiques (100/200/400 selon le pack), pochette de rangement premium, guide d'inspiration avec 20 modèles, accès communauté CubeCraft, certificat CE & EN 71.",
   },
   {
     title: "Sécurité & certifications",
@@ -116,7 +116,7 @@ const ACCORDION_ITEMS = [
   {
     title: "Compatibilité",
     content:
-      "Tous les packs CubeCraft s'assemblent entre eux. Combinez le pack 64 et le 128 — les aimants s'imbriquent dans tous les sens (faces, arêtes, coins).",
+      "Tous les packs CubeCraft s'assemblent entre eux. Combinez le pack 100 et le 200 — les aimants s'imbriquent dans tous les sens (faces, arêtes, coins).",
   },
 ];
 
@@ -127,7 +127,7 @@ const REVIEWS = [
     rating: 5,
     date: "Il y a 3 jours",
     title: "Mon fils a lâché sa tablette !",
-    body: "Commandé le pack 128 pièces pour son anniversaire. Il a oublié sa tablette pendant une semaine entière. Qualité premium, aimants puissants, livraison ultra rapide. Je recommande à 1000%.",
+    body: "Commandé le pack 200 pièces pour son anniversaire. Il a oublié sa tablette pendant une semaine entière. Qualité premium, aimants puissants, livraison ultra rapide. Je recommande à 1000%.",
     helpful: 47,
   },
   {
@@ -145,7 +145,7 @@ const REVIEWS = [
     rating: 5,
     date: "Il y a 2 semaines",
     title: "Valeur incroyable pour le prix",
-    body: "J'étais sceptique mais la qualité est clairement premium. ABS solide, aimants très puissants. Mes 3 enfants jouent ensemble avec les 256 pièces. Meilleur achat de l'année.",
+    body: "J'étais sceptique mais la qualité est clairement premium. ABS solide, aimants très puissants. Mes 3 enfants jouent ensemble avec les 400 pièces. Meilleur achat de l'année.",
     helpful: 58,
   },
   {
@@ -166,7 +166,7 @@ const MINI_FAQ = [
   },
   {
     q: "Les packs sont-ils compatibles entre eux ?",
-    a: "Oui, tous les packs CubeCraft s'assemblent parfaitement. Vous pouvez commencer par le 64 pièces et ajouter le 128 pièces plus tard.",
+    a: "Oui, tous les packs CubeCraft s'assemblent parfaitement. Vous pouvez commencer par le 100 pièces et ajouter le 200 pièces plus tard.",
   },
   {
     q: "Combien de temps pour la livraison ?",

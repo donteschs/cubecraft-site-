@@ -3,12 +3,12 @@ import { getProduct } from "lib/shopify";
 import { ProductUI } from "./product-ui";
 
 export const metadata: Metadata = {
-  title: "Cubes Magnétiques CubeCraft — Pack 64, 128 & 256 pièces",
+  title: "Cubes Magnétiques CubeCraft — Pack 100, 200 & 400 pièces",
   description:
-    "Commandez les cubes magnétiques CubeCraft. 64, 128 ou 256 pièces. Certifié CE & EN 71, aimants N52. Offre de lancement -30%. Livraison gratuite, garantie 30 jours.",
+    "Commandez les cubes magnétiques CubeCraft. 100, 200 ou 400 pièces. Certifié CE & EN 71, aimants N52. Offre de lancement -30%. Livraison gratuite, garantie 30 jours.",
   openGraph: {
     title: "Cubes Magnétiques CubeCraft — Le Minecraft qu'ils peuvent toucher",
-    description: "Pack 64 à 39,90 € (au lieu de 59,90 €). Certifié CE, N52. Expédié sous 24h.",
+    description: "Pack 100 à 39,90 € (au lieu de 59,90 €). Certifié CE, N52. Expédié sous 24h.",
     type: "website",
   },
 };
