@@ -327,9 +327,11 @@ function Stars({ n, size = "sm" }: { n: number; size?: "sm" | "md" | "lg" }) {
 export function ProductUI({
   variantIds,
   checkoutUrls,
+  upsellVariantId,
 }: {
   variantIds: Record<string, string | undefined>;
   checkoutUrls: Record<string, string>;
+  upsellVariantId?: string;
 }) {
   const [activeImage, setActiveImage] = useState(0);
   const [activeVariant, setActiveVariant] = useState(1);
@@ -390,12 +392,10 @@ export function ProductUI({
 
     const variantId = variantIds[variant.id];
     if (variantId) {
-      // Integrated checkout via Shopify Storefront API
       startTransition(async () => {
-        await addItemAndCheckout(variantId);
+        await addItemAndCheckout(variantId, upsellChecked && upsellVariantId ? upsellVariantId : undefined);
       });
     } else {
-      // Fallback: redirect to Shopify product page
       const url = checkoutUrls[variant.id];
       if (url) window.location.href = url;
     }

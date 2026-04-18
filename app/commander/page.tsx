@@ -14,10 +14,11 @@ export const metadata: Metadata = {
 };
 
 export default async function CommanderPage() {
-  const [p100, p200, p400] = await Promise.all([
+  const [p100, p200, p400, pUpsell] = await Promise.all([
     getProduct("cubecraft-100-pieces"),
     getProduct("cubecraft-200-pieces"),
     getProduct("cubecraft-pack-famille-256-pieces"),
+    getProduct("jeu-magnetique-pierres-strategie"),
   ]);
 
   // Shopify variant GIDs — used by addItemAndCheckout server action
@@ -34,5 +35,7 @@ export default async function CommanderPage() {
     "400": "https://luxwatch-8683.myshopify.com/products/cubecraft-pack-famille-256-pieces",
   };
 
-  return <ProductUI variantIds={variantIds} checkoutUrls={checkoutUrls} />;
+  const upsellVariantId = pUpsell?.variants[0]?.id;
+
+  return <ProductUI variantIds={variantIds} checkoutUrls={checkoutUrls} upsellVariantId={upsellVariantId} />;
 }
