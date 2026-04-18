@@ -1,6 +1,8 @@
 import { getCollections, getPages, getProducts } from "lib/shopify";
 import { baseUrl, validateEnvironmentVariables } from "lib/utils";
 import { MetadataRoute } from "next";
+import fs from "fs";
+import path from "path";
 
 type Route = {
   url: string;
@@ -8,6 +10,22 @@ type Route = {
 };
 
 export const dynamic = "force-dynamic";
+
+function getBlogRoutes(): Route[] {
+  const blogDir = path.join(process.cwd(), "content/blog");
+  if (!fs.existsSync(blogDir)) return [];
+  return fs
+    .readdirSync(blogDir)
+    .filter((f) => f.endsWith(".mdx") || f.endsWith(".md"))
+    .map((file) => {
+      const slug = file.replace(/\.(mdx|md)$/, "");
+      const stat = fs.statSync(path.join(blogDir, file));
+      return {
+        url: `${baseUrl}/blog/${slug}`,
+        lastModified: stat.mtime.toISOString(),
+      };
+    });
+}
 
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   validateEnvironmentVariables();
@@ -48,5 +66,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     throw JSON.stringify(error, null, 2);
   }
 
-  return [...routesMap, ...fetchedRoutes];
+  const blogRoutes = getBlogRoutes();
+
+  return [...routesMap, ...fetchedRoutes, ...blogRoutes];
 }
