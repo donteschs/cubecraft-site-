@@ -8,7 +8,7 @@ export const metadata: Metadata = {
     "Commandez les cubes magnétiques CubeCraft. 100, 200 ou 400 pièces. Certifié CE & EN 71, aimants N52. Offre de lancement -30%. Livraison gratuite, garantie 30 jours.",
   openGraph: {
     title: "Cubes Magnétiques CubeCraft — Le Minecraft qu'ils peuvent toucher",
-    description: "Pack 100 à 39,90 € (au lieu de 59,90 €). Certifié CE, N52. Expédié sous 24h.",
+    description: "Pack 100 à 39,90 € (au lieu de 59,90 €). Certifié CE, N52. Livraison 4-5 jours.",
     type: "website",
   },
 };

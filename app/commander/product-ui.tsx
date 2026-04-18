@@ -77,7 +77,7 @@ const TRUST_BADGES = [
     sub: "Dès 39,90 € d'achat",
     icon: <IconTruck />,
   },
-  { title: "Expédié sous 24h", sub: "Jours ouvrés", icon: <IconBolt /> },
+  { title: "Livraison 4-5 jours", sub: "4-5 jours ouvrés", icon: <IconBolt /> },
   {
     title: "Garantie 30 jours",
     sub: "Satisfait ou remboursé",
@@ -106,7 +106,7 @@ const ACCORDION_ITEMS = [
   {
     title: "Livraison & délais",
     content:
-      "Expédition sous 24h ouvrées depuis la France. Livraison gratuite en métropole. Suivi par email. Délai : 2–4 jours ouvrés.",
+      "Expédition en 4-5 jours ouvrés en France métropolitaine. Livraison gratuite. Suivi par email inclus.",
   },
   {
     title: "Retours & garantie",
@@ -170,7 +170,7 @@ const MINI_FAQ = [
   },
   {
     q: "Combien de temps pour la livraison ?",
-    a: "Expédié sous 24h ouvrées depuis la France. Livraison en 2–4 jours ouvrés en France métropolitaine, entièrement gratuite.",
+    a: "Livraison en 4-5 jours ouvrés en France métropolitaine, entièrement gratuite.",
   },
   {
     q: "Que faire si mon enfant n'aime pas ?",
@@ -843,7 +843,7 @@ export function ProductUI({
                     />
                   </svg>
                 ),
-                label: "Expédié sous 24h",
+                label: "Livraison 4-5 jours",
               },
               {
                 icon: (
@@ -1552,7 +1552,7 @@ export function ProductUI({
                   clipRule="evenodd"
                 />
               </svg>
-              Expédié sous 24h
+              Livraison 4-5 jours
             </span>
           </div>
         </div>

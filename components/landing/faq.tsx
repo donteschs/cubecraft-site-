@@ -29,7 +29,7 @@ const faqs = [
   },
   {
     q: "Vous livrez en combien de temps ?",
-    a: "Expédition sous 24h. Livraison en 2-4 jours ouvrés en France métropolitaine (Colissimo). Livraison en Europe sous 5-7 jours.",
+    a: "Livraison en 4-5 jours ouvrés en France métropolitaine (Colissimo). Livraison en Europe sous 7-10 jours.",
   },
   {
     q: "Et si mon enfant n'aime pas ?",
