@@ -51,7 +51,7 @@ export function Hero() {
           <p className="text-white/70 text-base sm:text-xl leading-relaxed font-inter max-w-xl">
             Les cubes magnétiques CubeCraft transforment les heures d&apos;écran en{" "}
             <strong className="text-white/90">heures de génie créatif</strong>.
-            64 blocs aimantés. Des milliers de possibilités.
+            100 blocs aimantés. Des milliers de possibilités.
           </p>
 
           {/* Social proof inline */}
@@ -133,7 +133,7 @@ export function Hero() {
                 39,90 €
               </div>
               <div className="text-white/50 text-xs font-inter">
-                Pack 64 pièces
+                Pack 100 pièces
               </div>
             </div>
           </div>
