@@ -17,10 +17,9 @@ export default function LegalPage() {
             <h2 className="font-rubik font-bold text-pierre text-xl mb-3">Éditeur du site</h2>
             <p>
               <strong>CubeCraft</strong><br />
-              14 rue de la Santé<br />
+              54 rue de Bezons, 92400 Courbevoie<br />
               France<br />
-              Téléphone : <a href="tel:00755532648" className="text-creeper hover:underline">00755532648</a><br />
-              Email : <a href="mailto:contact@cubecraft.fr" className="text-creeper hover:underline">contact@cubecraft.fr</a>
+              Email : <a href="mailto:contact@cubecrafte.com" className="text-creeper hover:underline">contact@cubecrafte.com</a>
             </p>
           </section>
 

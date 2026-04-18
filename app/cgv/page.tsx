@@ -17,9 +17,8 @@ export default function CGVPage() {
             <h2 className="font-rubik font-bold text-pierre text-xl mb-3">Article 1 — Vendeur</h2>
             <p>
               <strong>CubeCraft</strong><br />
-              14 rue de la Santé, France<br />
-              Tél. : 00755532648<br />
-              Email : contact@cubecraft.fr
+              54 rue de Bezons, 92400 Courbevoie, France<br />
+              Email : contact@cubecrafte.com
             </p>
           </section>
 
@@ -54,7 +53,7 @@ export default function CGVPage() {
           <section>
             <h2 className="font-rubik font-bold text-pierre text-xl mb-3">Article 6 — Livraison</h2>
             <p>
-              La livraison est offerte en France métropolitaine. Les commandes sont expédiées sous 24–48h ouvrées et livrées en 3 à 4 jours ouvrés. CubeCraft ne saurait être tenu responsable des retards imputables au transporteur.
+              La livraison est offerte en France métropolitaine. Les commandes sont expédiées sous 24–48h ouvrées et livrées en 4 à 5 jours ouvrés. CubeCraft ne saurait être tenu responsable des retards imputables au transporteur.
             </p>
           </section>
 
