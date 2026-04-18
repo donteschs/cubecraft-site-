@@ -2,8 +2,8 @@ import { Fredoka, Inter, Press_Start_2P, Rubik } from "next/font/google";
 import Script from "next/script";
 import { CartProvider } from "components/cart/cart-context";
 import { Navbar } from "components/layout/navbar";
-import { ChatWidget } from "components/ui/chat-widget";
-import { PromoPopup } from "components/ui/promo-popup";
+import { ChatWidgetLoader } from "components/ui/chat-widget-loader";
+import { PromoPopupLoader } from "components/ui/promo-popup-loader";
 import { getCart, getProduct } from "lib/shopify";
 import { ReactNode } from "react";
 import { Toaster } from "sonner";
@@ -115,7 +115,7 @@ export default async function RootLayout({
             style={{ display: "none", visibility: "hidden" }}
           />
         </noscript>
-        <Script id="google-tag-manager" strategy="beforeInteractive">
+        <Script id="google-tag-manager" strategy="afterInteractive">
           {`
             (function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
             new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
@@ -126,9 +126,9 @@ export default async function RootLayout({
         </Script>
         <Script
           src={`https://www.googletagmanager.com/gtag/js?id=${GA_MEASUREMENT_ID}`}
-          strategy="afterInteractive"
+          strategy="lazyOnload"
         />
-        <Script id="google-analytics" strategy="afterInteractive">
+        <Script id="google-analytics" strategy="lazyOnload">
           {`
             window.dataLayer = window.dataLayer || [];
             function gtag(){dataLayer.push(arguments);}
@@ -145,7 +145,7 @@ export default async function RootLayout({
             }(window, document, 'ttq');
           `}
         </Script>
-        <Script id="meta-pixel" strategy="afterInteractive">
+        <Script id="meta-pixel" strategy="lazyOnload">
           {`
             !function(f,b,e,v,n,t,s)
             {if(f.fbq)return;n=f.fbq=function(){n.callMethod?
@@ -168,7 +168,7 @@ export default async function RootLayout({
             src="https://www.facebook.com/tr?id=3181479418727481&ev=PageView&noscript=1"
           />
         </noscript>
-        <Script id="pinterest-tag" strategy="afterInteractive">
+        <Script id="pinterest-tag" strategy="lazyOnload">
           {`
             !function(e){if(!window.pintrk){window.pintrk = function () {
             window.pintrk.queue.push(Array.prototype.slice.call(arguments))};var
@@ -193,8 +193,8 @@ export default async function RootLayout({
           <Navbar />
           <main>{children}</main>
           <Toaster closeButton />
-          <ChatWidget />
-          <PromoPopup variantIds={variantIds} />
+          <ChatWidgetLoader />
+          <PromoPopupLoader variantIds={variantIds} />
         </CartProvider>
       </body>
     </html>

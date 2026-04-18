@@ -114,6 +114,7 @@ export function Hero() {
               alt="CubeCraft — cubes magnétiques Minecraft style"
               width={500}
               height={500}
+              sizes="(max-width: 640px) 360px, 500px"
               className="relative z-10 w-full h-auto drop-shadow-[0_20px_60px_rgba(76,175,80,0.3)] animate-float"
               priority
             />
