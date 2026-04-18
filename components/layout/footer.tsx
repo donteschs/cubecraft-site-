@@ -39,10 +39,9 @@ export default function Footer() {
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-10 mb-12">
           {/* Brand */}
           <div className="lg:col-span-1">
-            <Link href="/" className="flex items-center gap-2.5 mb-4 group w-fit">
-              <LogoIcon size="sm" />
-              <span className="font-rubik font-black text-xl text-white group-hover:text-creeper transition-colors duration-150">
-                CubeCraft
+            <Link href="/" className="flex items-center mb-4 group w-fit">
+              <span className="font-rubik font-black text-xl text-white tracking-tight">
+                CUBE<span className="text-creeper">CRAFT</span>
               </span>
             </Link>
             <p className="font-fredoka text-white/60 text-sm leading-relaxed mb-5">
