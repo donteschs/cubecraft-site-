@@ -13,7 +13,7 @@ const faqs = [
   },
   {
     q: "Combien de cubes faut-il pour bien jouer ?",
-    a: "Le pack 64 pièces est parfait pour débuter. Pour des constructions plus ambitieuses ou pour jouer à plusieurs, on recommande le pack 128 ou le Pack Famille 256.",
+    a: "Le pack 100 pièces est parfait pour débuter. Pour des constructions plus ambitieuses ou pour jouer à plusieurs, on recommande le pack 200 ou le Pack Famille 400.",
   },
   {
     q: "Est-ce que ça tient vraiment bien ensemble ?",
