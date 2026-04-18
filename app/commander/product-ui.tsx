@@ -722,22 +722,34 @@ export function ProductUI({
               </div>
             </button>
 
-            {/* Trust badges 3×2 */}
-            <div className="grid grid-cols-3 gap-2">
-              {TRUST_BADGES.map((b) => (
-                <div
-                  key={b.title}
-                  className="flex flex-col items-center text-center gap-1 rounded-xl bg-white border border-gray-100 p-2.5 sm:p-3 shadow-sm"
-                >
-                  <span className="text-creeper">{b.icon}</span>
-                  <span className="font-rubik font-bold text-pierre text-[10px] sm:text-[11px] leading-tight">
-                    {b.title}
-                  </span>
-                  <span className="text-pierre/50 text-[9px] font-inter leading-tight">
-                    {b.sub}
-                  </span>
-                </div>
-              ))}
+            {/* Trust badges — défilement animé */}
+            <div
+              className="overflow-hidden rounded-2xl"
+              style={{
+                maskImage: "linear-gradient(to right, transparent 0%, black 10%, black 90%, transparent 100%)",
+                WebkitMaskImage: "linear-gradient(to right, transparent 0%, black 10%, black 90%, transparent 100%)",
+              }}
+            >
+              <div
+                className="flex gap-2 w-max"
+                style={{ animation: "marquee 22s linear infinite" }}
+                onMouseEnter={e => (e.currentTarget as HTMLDivElement).style.animationPlayState = "paused"}
+                onMouseLeave={e => (e.currentTarget as HTMLDivElement).style.animationPlayState = "running"}
+              >
+                {[...TRUST_BADGES, ...TRUST_BADGES].map((b, i) => (
+                  <div
+                    key={i}
+                    aria-hidden={i >= TRUST_BADGES.length}
+                    className="flex items-center gap-2 bg-white border border-gray-100 rounded-full px-3 py-2 shadow-sm whitespace-nowrap flex-shrink-0"
+                  >
+                    <span className="text-creeper flex-shrink-0">{b.icon}</span>
+                    <div>
+                      <div className="font-rubik font-bold text-pierre text-[11px] leading-tight">{b.title}</div>
+                      <div className="text-pierre/45 text-[9px] font-inter leading-tight">{b.sub}</div>
+                    </div>
+                  </div>
+                ))}
+              </div>
             </div>
 
             {/* Accordion */}
