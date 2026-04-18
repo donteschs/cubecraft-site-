@@ -10,8 +10,21 @@ jobs:
     runs-on: ubuntu-latest
     permissions:
       contents: write
+    env:
+      FORCE_JAVASCRIPT_ACTIONS_TO_NODE24: true
     steps:
       - uses: actions/checkout@v4
+
+      - name: Check secret
+        run: |
+          if [ -z "${{ secrets.OPENAI_API_KEY }}" ]; then
+            echo "ERROR: OPENAI_API_KEY secret is not set in GitHub repository settings"
+            exit 1
+          else
+            echo "OPENAI_API_KEY is set (length: ${#OPENAI_API_KEY})"
+          fi
+        env:
+          OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
 
       - name: Generate article
         env:
