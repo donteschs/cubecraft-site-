@@ -9,6 +9,7 @@ import { ReactNode } from "react";
 import { Toaster } from "sonner";
 import "./globals.css";
 import { baseUrl } from "lib/utils";
+import { SITE_IMAGES, absoluteImageUrl } from "lib/site-images";
 
 // Safe cart fetcher — returns undefined silently when Shopify is not configured
 function safeGetCart() {
@@ -49,8 +50,8 @@ const inter = Inter({
   display: "swap",
 });
 
-const GTM_ID = "GTM-NPJTZDZ3";
 const GA_MEASUREMENT_ID = "G-MHQTF67MPH";
+const GOOGLE_ADS_ID = "AW-18110070332";
 
 export const metadata = {
   metadataBase: new URL(baseUrl),
@@ -62,13 +63,30 @@ export const metadata = {
     "Les cubes magnétiques CubeCraft transforment les heures d'écran en heures de génie créatif. Certifiés CE & EN 71, aimants N52. Pour enfants de 6 à 14 ans.",
   keywords: [
     "cubes magnétiques",
+    "cubes magnétiques enfant",
+    "jeu de construction magnétique",
+    "bloc construction magnétique",
+    "jouet magnétique enfant",
     "jouet éducatif",
-    "Minecraft",
+    "jouet éducatif 8 ans",
+    "jouet éducatif 6 ans",
+    "alternative Minecraft jouet",
+    "jouet Minecraft enfant",
     "construction magnétique",
-    "anti-écran",
-    "STEM",
+    "jouet anti-écran",
+    "jouet anti-écran enfant",
+    "STEM jouet France",
+    "jouet STEM 8 ans",
     "Montessori",
-    "cadeau enfant",
+    "jouet Montessori 8 ans",
+    "cadeau enfant 8 ans",
+    "cadeau garçon 8 ans",
+    "cadeau Noël enfant",
+    "jouet créatif enfant",
+    "magna tiles France",
+    "magformers alternative",
+    "aimants néodyme jouet",
+    "cubes aimantés",
   ],
   robots: { follow: true, index: true },
   other: { "p:domain_verify": "efd0f24559d4799c43986cc9992ecad1" },
@@ -79,6 +97,14 @@ export const metadata = {
     title: "CubeCraft — Le Minecraft qu'ils peuvent toucher",
     description:
       "64 cubes magnétiques premium. Certifié CE, aimants N52. Offre lancement -30%.",
+    images: [absoluteImageUrl(SITE_IMAGES.heroPack.src)],
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "CubeCraft — Le Minecraft qu'ils peuvent toucher",
+    description:
+      "64 cubes magnétiques premium. Certifié CE, aimants N52. Offre lancement -30%.",
+    images: [absoluteImageUrl(SITE_IMAGES.heroPack.src)],
   },
 };
 
@@ -107,23 +133,6 @@ export default async function RootLayout({
       suppressHydrationWarning
     >
       <body className="bg-blanc font-inter text-pierre antialiased selection:bg-creeper-light selection:text-creeper-dark">
-        <noscript>
-          <iframe
-            src={`https://www.googletagmanager.com/ns.html?id=${GTM_ID}`}
-            height="0"
-            width="0"
-            style={{ display: "none", visibility: "hidden" }}
-          />
-        </noscript>
-        <Script id="google-tag-manager" strategy="afterInteractive">
-          {`
-            (function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
-            new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
-            j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
-            'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
-            })(window,document,'script','dataLayer','${GTM_ID}');
-          `}
-        </Script>
         <Script
           src={`https://www.googletagmanager.com/gtag/js?id=${GA_MEASUREMENT_ID}`}
           strategy="lazyOnload"
@@ -134,6 +143,7 @@ export default async function RootLayout({
             function gtag(){dataLayer.push(arguments);}
             gtag('js', new Date());
             gtag('config', '${GA_MEASUREMENT_ID}');
+            gtag('config', '${GOOGLE_ADS_ID}');
           `}
         </Script>
         <Script id="tiktok-pixel" strategy="lazyOnload">
