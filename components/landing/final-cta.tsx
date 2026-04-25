@@ -1,5 +1,6 @@
 import Image from "next/image";
 import Link from "next/link";
+import { SITE_IMAGES } from "lib/site-images";
 
 export function FinalCTA() {
   return (
@@ -8,7 +9,7 @@ export function FinalCTA() {
       <div className="absolute inset-0 pixel-grid opacity-30 pointer-events-none" />
       <div className="absolute right-0 bottom-0 opacity-10 pointer-events-none">
         <Image
-          src="/images/Whisk_155d0dfae92253caf61441483e36bfc2dr.png"
+          src={SITE_IMAGES.tower.src}
           alt=""
           width={400}
           height={400}

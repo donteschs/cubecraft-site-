@@ -7,7 +7,7 @@ import { getProducts } from "lib/shopify";
 
 export const metadata = {
   title: "Search",
-  description: "Search for products in the store.",
+  description: "Recherchez parmi nos cubes magnétiques CubeCraft. Trouvez le pack idéal pour votre enfant — 100, 200 ou 400 pièces.",
 };
 
 export default async function SearchPage(props: {

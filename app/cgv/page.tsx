@@ -2,6 +2,7 @@ import Footer from "components/layout/footer";
 
 export const metadata = {
   title: "Conditions Générales de Vente — CubeCraft",
+  description: "Conditions générales de vente CubeCraft. Commande, paiement, livraison et retours. Vente en ligne conforme au droit français.",
 };
 
 export default function CGVPage() {

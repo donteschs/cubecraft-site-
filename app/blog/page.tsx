@@ -1,4 +1,4 @@
-import { getAllPosts } from "lib/blog";
+import { getAllPosts, formatPostDate } from "lib/blog";
 import Link from "next/link";
 import type { Metadata } from "next";
 
@@ -33,20 +33,27 @@ export default function BlogPage() {
           </p>
         ) : (
           <div className="grid gap-6">
-            {posts.map((post) => (
+            {posts.map((post, index) => {
+              const isTop3 = index < 3;
+              return (
               <Link
                 key={post.slug}
                 href={`/blog/${post.slug}`}
-                className="group block bg-white rounded-2xl border border-gray-200/60 p-6 hover:border-creeper/40 hover:shadow-md transition-all duration-200"
+                className={`group block rounded-2xl border p-6 transition-all duration-200 ${
+                  isTop3
+                    ? "bg-creeper-light/20 border-creeper/30 shadow-sm hover:border-creeper/50 hover:shadow-md"
+                    : "bg-white border-gray-200/60 hover:border-creeper/40 hover:shadow-md"
+                }`}
               >
                 <div className="flex items-start justify-between gap-4">
                   <div className="flex-1">
+                    {isTop3 ? (
+                      <span className="inline-flex items-center bg-creeper text-white text-[10px] font-rubik font-bold px-3 py-1 rounded-full uppercase tracking-[0.18em] mb-3">
+                        Nouveau
+                      </span>
+                    ) : null}
                     <p className="text-xs text-pierre/40 font-inter mb-2">
-                      {new Date(post.date).toLocaleDateString("fr-FR", {
-                        day: "numeric",
-                        month: "long",
-                        year: "numeric",
-                      })}
+                      {formatPostDate(post.date)}
                     </p>
                     <h2 className="font-rubik font-bold text-pierre text-xl mb-2 group-hover:text-creeper transition-colors">
                       {post.title}
@@ -60,7 +67,8 @@ export default function BlogPage() {
                   </span>
                 </div>
               </Link>
-            ))}
+              );
+            })}
           </div>
         )}
 

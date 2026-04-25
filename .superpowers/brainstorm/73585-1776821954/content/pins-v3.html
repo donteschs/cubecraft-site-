@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Pinterest Pins v3 — CubeCraft</title>
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body { background: #f0ece6; font-family: 'Arial Black', sans-serif; padding: 32px 24px; }
+  h1 { text-align: center; color: #111; font-size: 20px; margin-bottom: 6px; font-family: sans-serif; font-weight: 700; }
+  .subtitle { text-align: center; color: #888; font-size: 13px; margin-bottom: 32px; font-family: sans-serif; }
+
+  .pins-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 28px;
+    max-width: 960px;
+    margin: 0 auto;
+  }
+
+  .pin-wrap { cursor: pointer; }
+  .pin-label {
+    text-align: center;
+    font-family: sans-serif;
+    font-size: 13px;
+    color: #555;
+    margin-top: 10px;
+    font-weight: 600;
+  }
+
+  .pin {
+    border-radius: 20px;
+    overflow: hidden;
+    aspect-ratio: 2/3;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    box-shadow: 0 12px 40px rgba(0,0,0,0.2);
+    border: 3px solid transparent;
+    transition: border 0.2s, transform 0.15s;
+  }
+  .pin-wrap:hover .pin { transform: translateY(-4px); }
+  .pin-wrap.selected .pin {
+    border-color: #E60023;
+    transform: scale(1.02);
+    box-shadow: 0 0 0 4px rgba(230,0,35,0.2), 0 12px 40px rgba(0,0,0,0.2);
+  }
+  .pin-wrap.selected .pin-label { color: #E60023; font-weight: 800; }
+
+  .pin img {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center top;
+  }
+
+  .top-badge {
+    position: absolute;
+    top: 16px;
+    left: 16px;
+    z-index: 3;
+    background: #fff;
+    border-radius: 50px;
+    padding: 6px 14px;
+    font-size: 11px;
+    font-weight: 900;
+    letter-spacing: 0.5px;
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.15);
+  }
+
+  .pin-overlay {
+    position: relative;
+    z-index: 2;
+    padding: 20px 18px 18px;
+  }
+
+  /* ── PIN 1 : ANTI-ÉCRAN ── */
+  .pin-antiecran .pin-overlay {
+    background: linear-gradient(to top, rgba(15,40,15,0.97) 0%, rgba(15,40,15,0.75) 45%, transparent 100%);
+  }
+  .pin-antiecran .top-badge { color: #2E7D32; }
+  .p1-tag { color: #81C784; font-size: 10px; font-weight: 900; letter-spacing: 2px; text-transform: uppercase; margin-bottom: 8px; }
+  .p1-headline { color: #fff; font-size: 22px; font-weight: 900; line-height: 1.15; margin-bottom: 10px; }
+  .p1-headline em { color: #4CAF50; font-style: normal; }
+  .p1-sub { color: rgba(255,255,255,0.75); font-size: 12px; line-height: 1.5; margin-bottom: 14px; font-family: sans-serif; font-weight: 400; }
+  .p1-cta {
+    background: #4CAF50;
+    color: #fff;
+    font-size: 13px;
+    font-weight: 900;
+    padding: 11px 20px;
+    border-radius: 50px;
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+  }
+
+  /* ── PIN 2 : GAMING ── */
+  .pin-gaming .pin-overlay {
+    background: linear-gradient(to top, rgba(0,0,0,0.95) 0%, rgba(0,0,0,0.6) 50%, transparent 100%);
+  }
+  .pin-gaming .top-badge { color: #1a1a1a; background: #4CAF50; }
+  .p2-kicker { color: #4CAF50; font-size: 10px; font-weight: 900; letter-spacing: 3px; text-transform: uppercase; margin-bottom: 6px; font-family: monospace; }
+  .p2-headline { color: #fff; font-size: 24px; font-weight: 900; line-height: 1.1; margin-bottom: 6px; }
+  .p2-sub { color: rgba(255,255,255,0.6); font-size: 12px; margin-bottom: 14px; font-family: sans-serif; }
+  .p2-price-row { display: flex; align-items: center; gap: 10px; }
+  .p2-price-new { color: #FFB300; font-size: 28px; font-weight: 900; }
+  .p2-price-old { color: #888; font-size: 14px; text-decoration: line-through; }
+  .p2-discount { background: #E60023; color: #fff; font-size: 11px; font-weight: 900; padding: 3px 9px; border-radius: 20px; }
+
+  /* ── PIN 3 : PROMO ── */
+  .pin-promo .pin-overlay {
+    background: linear-gradient(to top, rgba(10,10,10,0.98) 0%, rgba(10,10,10,0.7) 40%, transparent 100%);
+  }
+  .pin-promo .top-badge { color: #B45309; background: #FFF8E7; }
+  .p3-discount-big { color: #FFB300; font-size: 52px; font-weight: 900; line-height: 1; }
+  .p3-label { color: #fff; font-size: 11px; letter-spacing: 3px; text-transform: uppercase; margin-bottom: 10px; opacity: 0.7; font-family: sans-serif; }
+  .p3-price-row { display: flex; align-items: baseline; gap: 10px; margin-bottom: 14px; }
+  .p3-price-new { color: #fff; font-size: 30px; font-weight: 900; }
+  .p3-price-old { color: #666; font-size: 16px; text-decoration: line-through; }
+  .p3-perks { display: flex; flex-direction: column; gap: 5px; }
+  .p3-perk { color: rgba(255,255,255,0.8); font-size: 12px; display: flex; align-items: center; gap: 7px; font-family: sans-serif; }
+  .p3-perk .dot { width: 6px; height: 6px; border-radius: 50%; background: #4CAF50; flex-shrink: 0; }
+</style>
+</head>
+<body>
+
+<h1>Visuels Pinterest — CubeCraft</h1>
+<p class="subtitle">Même image enfant · 3 angles différents</p>
+
+<div class="pins-grid">
+
+  <!-- PIN 1 : ANTI-ÉCRAN -->
+  <div class="pin-wrap" onclick="this.classList.toggle('selected')">
+    <div class="pin pin-antiecran">
+      <img src="https://res.cloudinary.com/druvbvnob/image/upload/v1776795420/main-image-7_j2uswp.jpg" />
+      <div class="top-badge">📵 Anti-écran</div>
+      <div class="pin-overlay">
+        <div class="p1-tag">Jouet magnétique</div>
+        <div class="p1-headline">Moins d'écrans,<br><em>plus de magie.</em></div>
+        <div class="p1-sub">Les cubes magnétiques qui remplacent la tablette — et qu'ils adorent vraiment.</div>
+        <div class="p1-cta">Découvrir → 39,90 €</div>
+      </div>
+    </div>
+    <div class="pin-label">📵 Anti-écran</div>
+  </div>
+
+  <!-- PIN 2 : GAMING -->
+  <div class="pin-wrap" onclick="this.classList.toggle('selected')">
+    <div class="pin pin-gaming">
+      <img src="https://res.cloudinary.com/druvbvnob/image/upload/v1776795420/main-image-7_j2uswp.jpg" />
+      <div class="top-badge">⛏️ Minecraft IRL</div>
+      <div class="pin-overlay">
+        <div class="p2-kicker">Nouveau · Jouet magnétique</div>
+        <div class="p2-headline">Construis ton<br>monde.</div>
+        <div class="p2-sub">Cubes magnétiques inspirés de Minecraft · Aimants N52</div>
+        <div class="p2-price-row">
+          <div class="p2-price-new">39,90 €</div>
+          <div class="p2-price-old">59,90 €</div>
+          <div class="p2-discount">-30%</div>
+        </div>
+      </div>
+    </div>
+    <div class="pin-label">⛏️ Gaming</div>
+  </div>
+
+  <!-- PIN 3 : PROMO -->
+  <div class="pin-wrap" onclick="this.classList.toggle('selected')">
+    <div class="pin pin-promo">
+      <img src="https://res.cloudinary.com/druvbvnob/image/upload/v1776795420/main-image-7_j2uswp.jpg" />
+      <div class="top-badge">🔥 Offre de lancement</div>
+      <div class="pin-overlay">
+        <div class="p3-discount-big">-30%</div>
+        <div class="p3-label">Offre limitée</div>
+        <div class="p3-price-row">
+          <div class="p3-price-new">39,90 €</div>
+          <div class="p3-price-old">59,90 €</div>
+        </div>
+        <div class="p3-perks">
+          <div class="p3-perk"><div class="dot"></div>Livraison gratuite en France</div>
+          <div class="p3-perk"><div class="dot"></div>Certifié CE & EN 71</div>
+          <div class="p3-perk"><div class="dot"></div>Retours gratuits 30 jours</div>
+        </div>
+      </div>
+    </div>
+    <div class="pin-label">🔥 Promo</div>
+  </div>
+
+</div>
+
+<p style="text-align:center; margin-top:28px; color:#999; font-family:sans-serif; font-size:12px;">
+  Format réel : 1000 × 1500 px · Ratio 2:3 Pinterest
+</p>
+
+</body>
+</html>

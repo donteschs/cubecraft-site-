@@ -2,8 +2,10 @@ import { Fredoka, Inter, Press_Start_2P, Rubik } from "next/font/google";
 import Script from "next/script";
 import { CartProvider } from "components/cart/cart-context";
 import { Navbar } from "components/layout/navbar";
+import { UrgencyBanner } from "components/landing/urgency-banner";
 import { ChatWidgetLoader } from "components/ui/chat-widget-loader";
 import { PromoPopupLoader } from "components/ui/promo-popup-loader";
+import { ExitIntentPopupLoader } from "components/ui/exit-intent-popup-loader";
 import { getCart, getProduct } from "lib/shopify";
 import { ReactNode } from "react";
 import { Toaster } from "sonner";
@@ -211,11 +213,13 @@ export default async function RootLayout({
           />
         </noscript>
         <CartProvider cartPromise={cart}>
+          <UrgencyBanner />
           <Navbar />
           <main>{children}</main>
           <Toaster closeButton />
           <ChatWidgetLoader />
           <PromoPopupLoader variantIds={variantIds} />
+          <ExitIntentPopupLoader />
         </CartProvider>
       </body>
     </html>

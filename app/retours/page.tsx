@@ -2,6 +2,7 @@ import Footer from "components/layout/footer";
 
 export const metadata = {
   title: "Retours & Garantie — CubeCraft",
+  description: "Garantie 30 jours satisfait ou remboursé. Retour gratuit. Remboursement intégral sous 5 jours ouvrés.",
 };
 
 export default function RetoursPage() {

@@ -27,7 +27,7 @@ export function Gallery({
     imageIndex === 0 ? images.length - 1 : imageIndex - 1;
 
   const buttonClassName =
-    "h-full px-6 transition-all ease-in-out hover:scale-110 hover:text-black dark:hover:text-white flex items-center justify-center";
+    "h-full px-4 sm:px-6 transition-all ease-in-out hover:scale-110 hover:text-black dark:hover:text-white flex items-center justify-center min-w-[44px]";
 
   return (
     <form>
@@ -67,7 +67,7 @@ export function Gallery({
       </div>
 
       {images.length > 1 ? (
-        <ul className="my-12 flex items-center flex-wrap justify-center gap-2 overflow-auto py-1 lg:mb-0">
+        <ul className="my-4 flex items-center flex-wrap justify-center gap-2 overflow-auto py-1 lg:my-12 lg:mb-0">
           {images.map((image, index) => {
             const isActive = index === imageIndex;
 

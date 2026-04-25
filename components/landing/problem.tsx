@@ -1,4 +1,5 @@
 import Image from "next/image";
+import { SITE_IMAGES } from "lib/site-images";
 
 const painPoints = [
   {
@@ -88,8 +89,8 @@ export function Problem() {
           </div>
           <div className="flex-shrink-0 w-full sm:w-auto">
             <Image
-              src="/images/Whisk_4416eb927c0020d8a5046ad544d19c74dr.png"
-              alt="Enfant qui joue avec CubeCraft"
+              src={SITE_IMAGES.childPlaying.src}
+              alt="Enfant concentre qui joue avec les cubes magnetiques CubeCraft"
               width={320}
               height={280}
               className="rounded-2xl shadow-xl object-cover w-full sm:w-auto max-w-sm mx-auto lg:mx-0"

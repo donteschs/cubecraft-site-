@@ -127,6 +127,7 @@ const removeEdgesAndNodes = <T>(array: Connection<T>): T[] => {
 };
 
 const reshapeCart = (cart: ShopifyCart): Cart => {
+  if (!cart) throw new Error("Cart not found or expired");
   if (!cart.cost?.totalTaxAmount) {
     cart.cost.totalTaxAmount = {
       amount: "0.0",
@@ -226,9 +227,10 @@ export async function createCart(): Promise<Cart> {
 }
 
 export async function addToCart(
-  lines: { merchandiseId: string; quantity: number }[]
+  lines: { merchandiseId: string; quantity: number }[],
+  overrideCartId?: string
 ): Promise<Cart> {
-  const cartId = (await cookies()).get("cartId")?.value!;
+  const cartId = overrideCartId ?? (await cookies()).get("cartId")?.value!;
   const res = await shopifyFetch<ShopifyAddToCartOperation>({
     query: addToCartMutation,
     variables: {

@@ -2,6 +2,7 @@ import Footer from "components/layout/footer";
 
 export const metadata = {
   title: "Contact — CubeCraft",
+  description: "Contactez l'équipe CubeCraft. Réponse sous 24h. Email, adresse et formulaire de contact pour toute question sur vos cubes magnétiques.",
 };
 
 export default function ContactPage() {

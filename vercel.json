@@ -1,1 +1,8 @@
-{}
+{
+  "crons": [
+    {
+      "path": "/api/cron/pin",
+      "schedule": "0 19 * * *"
+    }
+  ]
+}

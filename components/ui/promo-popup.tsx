@@ -3,7 +3,9 @@
 import Image from "next/image";
 import { useEffect, useState, useTransition } from "react";
 import { addItemAndCheckout } from "components/cart/actions";
+import { buildGAProductPayload, trackGAEvent } from "lib/google-analytics";
 import { buildMetaProductPayload, trackMetaEvent } from "lib/meta-pixel";
+import { SITE_IMAGES } from "lib/site-images";
 
 const STORAGE_KEY = "cubecraft_popup_seen_v2";
 
@@ -59,12 +61,33 @@ export function PromoPopup({
 
   function handleOrder() {
     const variantId = variantIds[selected];
+    const price = Number(chosen.price.replace(" EUR", "").replace(" €", "").replace(",", "."));
     trackMetaEvent(
       "InitiateCheckout",
       buildMetaProductPayload({
         contentId: variantId || selected,
         title: "Cubes Magnétiques CubeCraft",
-        price: Number(chosen.price.replace(" €", "").replace(",", ".")),
+        price,
+        currency: "EUR",
+        variantTitle: chosen.label,
+      }),
+    );
+    trackGAEvent(
+      "add_to_cart",
+      buildGAProductPayload({
+        itemId: variantId || selected,
+        title: "Cubes Magnetiques CubeCraft",
+        price,
+        currency: "EUR",
+        variantTitle: chosen.label,
+      }),
+    );
+    trackGAEvent(
+      "begin_checkout",
+      buildGAProductPayload({
+        itemId: variantId || selected,
+        title: "Cubes Magnetiques CubeCraft",
+        price,
         currency: "EUR",
         variantTitle: chosen.label,
       }),
@@ -112,8 +135,8 @@ export function PromoPopup({
         {/* ── LEFT — image (desktop) / top image (mobile) ── */}
         <div className="relative w-full sm:w-[42%] shrink-0 h-44 sm:h-auto bg-gradient-to-br from-[#1b2e1b] to-[#2d4a2d]">
           <Image
-            src="/images/Whisk_21fe8406a0537f38ec8479f261076368dr.png"
-            alt="CubeCraft cubes magnétiques"
+            src={SITE_IMAGES.heroPack.src}
+            alt="Pack principal CubeCraft de cubes magnetiques pour enfant"
             fill
             className="object-cover opacity-90"
             sizes="(max-width:640px) 100vw, 42vw"

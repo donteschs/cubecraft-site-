@@ -83,9 +83,9 @@ export function VariantSelector({
                 key={value}
                 aria-disabled={!isAvailableForSale}
                 disabled={!isAvailableForSale}
-                title={`${option.name} ${value}${!isAvailableForSale ? " (Out of Stock)" : ""}`}
+                title={`${option.name} ${value}${!isAvailableForSale ? " (Rupture de stock)" : ""}`}
                 className={clsx(
-                  "flex min-w-[48px] items-center justify-center rounded-full border bg-neutral-100 px-2 py-1 text-sm dark:border-neutral-800 dark:bg-neutral-900",
+                  "flex min-w-[48px] min-h-[44px] items-center justify-center rounded-full border bg-neutral-100 px-3 py-2 text-sm dark:border-neutral-800 dark:bg-neutral-900",
                   {
                     "cursor-default ring-2 ring-blue-600": isActive,
                     "ring-1 ring-transparent transition duration-300 ease-in-out hover:ring-blue-600":

@@ -1,4 +1,6 @@
-const IMAGES = [
+import { Buffer } from "node:buffer";
+
+const FALLBACK_IMAGES = [
   "https://res.cloudinary.com/druvbvnob/image/upload/v1776470443/Whisk_092747553965cd5ae3e4e996c106e938dr_epy1a1.png",
   "https://res.cloudinary.com/druvbvnob/image/upload/v1776470441/Whisk_959615b5dd14fddb8d34afd06bad4e98dr_je5m1g.png",
   "https://res.cloudinary.com/druvbvnob/image/upload/v1776470440/Whisk_73d2bf4464e743e914844e1e170ea0ffdr_jaqbl6.png",
@@ -16,6 +18,21 @@ const IMAGES = [
   "https://res.cloudinary.com/druvbvnob/image/upload/v1776470423/Whisk_c2260f93dc76429982949638a47bff7edr_ms8rot.png",
   "https://res.cloudinary.com/druvbvnob/image/upload/v1776440369/Whisk_5e8f8a6c8e94bfc94584807d324df370dr-removebg-preview_johci7.png",
 ];
+
+const CLOUDINARY_CLOUD_NAME = "druvbvnob";
+const CLOUDINARY_PINS_FOLDER = "Pins";
+const CLOUDINARY_SEARCH_API = `https://api.cloudinary.com/v1_1/${CLOUDINARY_CLOUD_NAME}/resources/search`;
+const CLOUDINARY_API_KEY = process.env.CLOUDINARY_API_KEY;
+const CLOUDINARY_API_SECRET = process.env.CLOUDINARY_API_SECRET;
+
+type CloudinaryAsset = {
+  asset_id?: string;
+  public_id?: string;
+  resource_type: "image" | "video" | string;
+  secure_url?: string;
+  version?: number | string;
+  created_at?: string;
+};
 
 type PinTemplate = { title: string; content: string };
 
@@ -55,15 +72,129 @@ const TEMPLATES: PinTemplate[] = [
     content:
       "Quand toute la famille construit ensemble 👨‍👩‍👧‍👦✨\n\nLe Pack Famille 256 pièces CubeCraft : des heures de jeu partagé.\n\n🏠 Idéal pour la maison · Certifié CE & EN 71\n\n#jeuxenfamille #jouetenfant #constructionmagnétique #cadeau",
   },
+  {
+    title: "Top 10 jeux anti-écran qui captivent vraiment les enfants 🧱",
+    content:
+      "Votre enfant passe 6h/jour sur les écrans ? Ces 10 jeux rivalisent avec Minecraft — sans tablette 📱❌\n\nLe #1 fait oublier la console pendant des heures.\n\n👉 Liste complète sur cubecrafte.com/blog\n\n#antiécran #jouetenfant #parentalité #minecraft #joueteducatif",
+  },
+  {
+    title: "Cadeau garçon 8 ans fan de Minecraft — notre top 5 🎁",
+    content:
+      "Fan de Minecraft mais trop d'écrans ? Ce cadeau reproduit la même sensation en vrai 🧲\n\n2847 parents satisfaits · Note 4,9/5 · Livraison rapide\n\n👉 cubecrafte.com/blog/meilleur-cadeau-garcon-8-ans-minecraft\n\n#cadeauenfant #minecraft #jouetenfant #anniversaire #noel",
+  },
+  {
+    title: "Meilleur jouet STEM 2026 — top 7 pour enfants 6-14 ans 🔬",
+    content:
+      "Ils apprennent géométrie, logique et physique sans s'en rendre compte 🧠\n\nNotre sélection des meilleurs jouets STEM par tranche d'âge.\n\n👉 cubecrafte.com/blog/jouet-stem-enfant-2026\n\n#jouetSTEM #éducation #parentalité #montessori #joueteducatif",
+  },
+  {
+    title: "Jouet Montessori 8 ans — les vrais critères ✅",
+    content:
+      "Un vrai jouet Montessori : ouvert, concret, autonome, progressif.\n\nVoici lesquels respectent vraiment ces critères à 8 ans 🌱\n\n👉 cubecrafte.com/blog/jouet-montessori-8-ans-creativite\n\n#montessori #joueteducatif #parentalité #développementenfant",
+  },
+  {
+    title: "Magformers vs CubeCraft — lequel choisir en 2026 ? ⚡",
+    content:
+      "Prix, aimants, certifications, âge recommandé — comparatif complet 👇\n\nSpoiler : pour les 8-12 ans, le choix est clair.\n\n👉 cubecrafte.com/blog/magformers-vs-cubecraft-jouet-magnetique\n\n#magformers #jouetmagnétique #constructionmagnétique #jouetenfant",
+  },
 ];
 
-export type Pin = { imageUrl: string; title: string; content: string };
+export type PinMediaItem = {
+  type: "image" | "video";
+  url: string;
+  thumbnail?: string;
+};
 
-export function getPinForSlot(slot: number): Pin {
-  const imgIndex = slot % IMAGES.length;
+export type Pin = {
+  mediaItem: PinMediaItem;
+  imageUrl: string;
+  title: string;
+  content: string;
+};
+
+function getCloudinaryVideoThumbnail(asset: CloudinaryAsset): string | undefined {
+  if (asset.resource_type !== "video" || !asset.public_id || !asset.version) {
+    return undefined;
+  }
+
+  return `https://res.cloudinary.com/${CLOUDINARY_CLOUD_NAME}/video/upload/f_jpg,q_auto,so_2/v${asset.version}/${asset.public_id}.jpg`;
+}
+
+async function getCloudinaryFolderMediaItems(): Promise<PinMediaItem[]> {
+  if (!CLOUDINARY_API_KEY || !CLOUDINARY_API_SECRET) {
+    return [];
+  }
+
+  try {
+    const auth = Buffer.from(`${CLOUDINARY_API_KEY}:${CLOUDINARY_API_SECRET}`).toString("base64");
+    const res = await fetch(CLOUDINARY_SEARCH_API, {
+      method: "POST",
+      headers: {
+        Authorization: `Basic ${auth}`,
+        "Content-Type": "application/json",
+      },
+      cache: "no-store",
+      body: JSON.stringify({
+        expression: `asset_folder=${CLOUDINARY_PINS_FOLDER}`,
+        max_results: 100,
+        sort_by: [{ created_at: "desc" }],
+      }),
+    });
+
+    if (!res.ok) {
+      throw new Error(`cloudinary folder request failed: ${res.status}`);
+    }
+
+    const data = (await res.json()) as { resources?: CloudinaryAsset[] };
+    const items =
+      data.resources?.reduce<PinMediaItem[]>((acc, asset) => {
+        const original = asset.secure_url;
+        if (!original) {
+          return acc;
+        }
+
+        if (asset.resource_type === "video") {
+          acc.push({
+            type: "video",
+            url: original,
+            thumbnail: getCloudinaryVideoThumbnail(asset),
+          });
+          return acc;
+        }
+
+        if (asset.resource_type === "image") {
+          acc.push({
+            type: "image",
+            url: original,
+          });
+        }
+
+        return acc;
+      }, []) ?? [];
+
+    if (items.length > 0) {
+      return items;
+    }
+  } catch (error) {
+    console.error("[pinterest-autopins] failed to load Pins folder assets", error);
+  }
+
+  return [];
+}
+
+export async function getPinForSlot(slot: number): Promise<Pin> {
+  const cloudinaryMediaItems = await getCloudinaryFolderMediaItems();
+  const mediaItems =
+    cloudinaryMediaItems.length > 0
+      ? cloudinaryMediaItems
+      : FALLBACK_IMAGES.map((url) => ({ type: "image" as const, url }));
+  const imgIndex = slot % mediaItems.length;
   const tplIndex = slot % TEMPLATES.length;
+  const mediaItem = mediaItems[imgIndex]!;
+
   return {
-    imageUrl: IMAGES[imgIndex]!,
+    mediaItem,
+    imageUrl: mediaItem.type === "image" ? mediaItem.url : mediaItem.thumbnail || mediaItem.url,
     title: TEMPLATES[tplIndex]!.title,
     content: TEMPLATES[tplIndex]!.content,
   };

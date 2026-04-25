@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body { width: 1000px; height: 1500px; overflow: hidden; font-family: 'Arial Black', sans-serif; }
+
+  .pin {
+    width: 1000px;
+    height: 1500px;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    background: #1a1a2e;
+  }
+
+  .pin img {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center 20%;
+  }
+
+  .top-badge {
+    position: absolute;
+    top: 40px;
+    left: 40px;
+    z-index: 3;
+    background: #fff;
+    border-radius: 100px;
+    padding: 16px 32px;
+    font-size: 28px;
+    font-weight: 900;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    box-shadow: 0 4px 20px rgba(0,0,0,0.15);
+    color: #2E7D32;
+  }
+
+  .logo {
+    position: absolute;
+    top: 40px;
+    right: 40px;
+    z-index: 3;
+    background: rgba(255,255,255,0.95);
+    border-radius: 16px;
+    padding: 12px 24px;
+    font-size: 26px;
+    font-weight: 900;
+    box-shadow: 0 4px 20px rgba(0,0,0,0.12);
+    color: #455A64;
+  }
+  .logo span { color: #4CAF50; }
+
+  .overlay {
+    position: relative;
+    z-index: 2;
+    padding: 60px 52px 52px;
+    background: linear-gradient(to top, rgba(15,40,15,0.98) 0%, rgba(15,40,15,0.8) 40%, transparent 100%);
+  }
+
+  .tag {
+    color: #81C784;
+    font-size: 26px;
+    font-weight: 900;
+    letter-spacing: 4px;
+    text-transform: uppercase;
+    margin-bottom: 20px;
+  }
+
+  .headline {
+    color: #fff;
+    font-size: 68px;
+    font-weight: 900;
+    line-height: 1.1;
+    margin-bottom: 24px;
+  }
+  .headline em { color: #4CAF50; font-style: normal; }
+
+  .sub {
+    color: rgba(255,255,255,0.72);
+    font-size: 30px;
+    line-height: 1.5;
+    margin-bottom: 40px;
+    font-family: Arial, sans-serif;
+    font-weight: 400;
+  }
+
+  .cta {
+    background: #4CAF50;
+    color: #fff;
+    font-size: 34px;
+    font-weight: 900;
+    padding: 28px 52px;
+    border-radius: 100px;
+    display: inline-flex;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 36px;
+  }
+
+  .certifs {
+    display: flex;
+    gap: 16px;
+    flex-wrap: wrap;
+  }
+  .certif {
+    background: rgba(255,255,255,0.12);
+    color: rgba(255,255,255,0.85);
+    font-size: 22px;
+    padding: 10px 20px;
+    border-radius: 8px;
+    border: 1px solid rgba(255,255,255,0.25);
+    font-family: Arial, sans-serif;
+  }
+</style>
+</head>
+<body>
+<div class="pin">
+  <img src="https://res.cloudinary.com/druvbvnob/image/upload/v1776600026/Whisk_19a009ed6a33513908946a206c5af180dr_hzs49b.png" />
+  <div class="top-badge">🧲 Jouet magnétique</div>
+  <div class="logo">CUBE<span>CRAFT</span></div>
+  <div class="overlay">
+    <div class="tag">Construction · Créativité</div>
+    <div class="headline">Ensemble,<br>ils construisent<br><em>des mondes.</em></div>
+    <div class="sub">Le jouet magnétique qui réunit les enfants — sans écran, avec des étoiles dans les yeux.</div>
+    <div class="cta">Découvrir → 39,90 €</div>
+    <div class="certifs">
+      <div class="certif">✓ CE &amp; EN 71</div>
+      <div class="certif">✓ Livraison offerte</div>
+      <div class="certif">✓ -30% ce mois</div>
+    </div>
+  </div>
+</div>
+</body>
+</html>

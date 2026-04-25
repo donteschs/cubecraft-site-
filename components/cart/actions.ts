@@ -106,14 +106,29 @@ export async function createCartAndSetCookie() {
 }
 
 export async function addItemAndCheckout(variantId: string, quantity = 1, extraVariantId?: string) {
-  let cartId = (await cookies()).get("cartId")?.value;
+  const cookieStore = await cookies();
+  let cartId = cookieStore.get("cartId")?.value;
   if (!cartId) {
     const newCart = await createCart();
-    (await cookies()).set("cartId", newCart.id!);
+    cartId = newCart.id!;
+    cookieStore.set("cartId", cartId);
   }
+
   const items: { merchandiseId: string; quantity: number }[] = [{ merchandiseId: variantId, quantity }];
   if (extraVariantId) items.push({ merchandiseId: extraVariantId, quantity: 1 });
-  const cart = await addToCart(items);
+
+  let cart;
+  try {
+    cart = await addToCart(items, cartId);
+    if (!cart?.checkoutUrl) throw new Error("invalid cart");
+  } catch {
+    // Panier expiré ou invalide — on en crée un nouveau et on réessaie
+    const freshCart = await createCart();
+    const freshCartId = freshCart.id!;
+    cookieStore.set("cartId", freshCartId);
+    cart = await addToCart(items, freshCartId);
+  }
+
   updateTag(TAGS.cart);
   redirect(cart.checkoutUrl);
 }

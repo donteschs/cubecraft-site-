@@ -22,7 +22,7 @@ export async function GET(req: NextRequest) {
   }
 
   const slot = getCurrentSlot();
-  const pin = getPinForSlot(slot);
+  const pin = await getPinForSlot(slot);
 
   const res = await fetch("https://zernio.com/api/v1/posts", {
     method: "POST",
@@ -33,7 +33,7 @@ export async function GET(req: NextRequest) {
     body: JSON.stringify({
       content: pin.content,
       publishNow: true,
-      mediaItems: [{ type: "image", url: pin.imageUrl }],
+      mediaItems: [pin.mediaItem],
       platforms: [
         {
           platform: "pinterest",
@@ -52,5 +52,12 @@ export async function GET(req: NextRequest) {
   const status = data?.post?.platforms?.[0]?.status ?? "unknown";
   const pinUrl = data?.post?.platforms?.[0]?.platformPostUrl ?? null;
 
-  return NextResponse.json({ slot, title: pin.title, status, pinUrl });
+  return NextResponse.json({
+    slot,
+    title: pin.title,
+    status,
+    pinUrl,
+    mediaType: pin.mediaItem.type,
+    mediaUrl: pin.mediaItem.url,
+  });
 }

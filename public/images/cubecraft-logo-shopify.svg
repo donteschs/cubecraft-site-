@@ -1,0 +1,23 @@
+<svg width="380" height="80" viewBox="0 0 380 80" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <style>
+      @import url('https://fonts.googleapis.com/css2?family=Rubik:wght@900&amp;display=swap');
+    </style>
+  </defs>
+  <text
+    x="8"
+    y="60"
+    font-family="Rubik, 'Arial Black', sans-serif"
+    font-weight="900"
+    font-size="56"
+    fill="#455A64"
+  >CUBE</text>
+  <text
+    x="170"
+    y="60"
+    font-family="Rubik, 'Arial Black', sans-serif"
+    font-weight="900"
+    font-size="56"
+    fill="#4CAF50"
+  >CRAFT</text>
+</svg>

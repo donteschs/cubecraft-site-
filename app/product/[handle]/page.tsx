@@ -1,4 +1,4 @@
-export const dynamic = "force-dynamic";
+export const revalidate = 3600;
 
 import { GridTileImage } from "components/grid/tile";
 import Footer from "components/layout/footer";
@@ -82,8 +82,8 @@ export default async function ProductPage(props: {
           __html: JSON.stringify(productJsonLd),
         }}
       />
-      <div className="mx-auto max-w-(--breakpoint-2xl) px-4">
-        <div className="flex flex-col rounded-lg border border-neutral-200 bg-white p-8 md:p-12 lg:flex-row lg:gap-8 dark:border-neutral-800 dark:bg-black">
+      <div className="mx-auto max-w-(--breakpoint-2xl) px-4 pb-24 md:pb-0">
+        <div className="flex flex-col rounded-lg border border-neutral-200 bg-white p-4 md:p-12 lg:flex-row lg:gap-8 dark:border-neutral-800 dark:bg-black">
           <div className="h-full w-full basis-full lg:basis-4/6">
             <Suspense
               fallback={
@@ -100,7 +100,7 @@ export default async function ProductPage(props: {
           </div>
 
           <div className="basis-full lg:basis-2/6">
-            <Suspense fallback={null}>
+            <Suspense fallback={<div className="animate-pulse space-y-4"><div className="h-10 w-3/4 rounded bg-neutral-200 dark:bg-neutral-700" /><div className="h-8 w-1/3 rounded-full bg-neutral-200 dark:bg-neutral-700" /><div className="h-4 w-full rounded bg-neutral-100 dark:bg-neutral-800" /><div className="h-4 w-5/6 rounded bg-neutral-100 dark:bg-neutral-800" /></div>}>
               <ProductDescription product={product} />
             </Suspense>
           </div>
@@ -119,7 +119,7 @@ async function RelatedProducts({ id }: { id: string }) {
 
   return (
     <div className="py-8">
-      <h2 className="mb-4 text-2xl font-bold">Related Products</h2>
+      <h2 className="mb-4 text-2xl font-bold">Vous aimerez aussi</h2>
       <ul className="flex w-full gap-4 overflow-x-auto pt-1">
         {relatedProducts.map((product) => (
           <li

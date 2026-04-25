@@ -3,6 +3,10 @@
 import { PlusIcon } from "@heroicons/react/24/outline";
 import clsx from "clsx";
 import { addItem } from "components/cart/actions";
+import {
+  buildGAProductEventPayload,
+  trackGAEvent,
+} from "lib/google-analytics";
 import { buildProductMetaPayload, trackMetaEvent } from "lib/meta-pixel";
 import { buildPinterestProductPayload, trackPinterestEvent } from "lib/pinterest";
 import { buildTikTokProductPayload, trackTikTokEvent } from "lib/tiktok";
@@ -25,7 +29,7 @@ function SubmitButton({
   if (!availableForSale) {
     return (
       <button disabled className={clsx(buttonClasses, disabledClasses)}>
-        Out Of Stock
+        Rupture de stock
       </button>
     );
   }
@@ -33,21 +37,21 @@ function SubmitButton({
   if (!selectedVariantId) {
     return (
       <button
-        aria-label="Please select an option"
+        aria-label="Sélectionnez une option"
         disabled
         className={clsx(buttonClasses, disabledClasses)}
       >
         <div className="absolute left-0 ml-4">
           <PlusIcon className="h-5" />
         </div>
-        Add To Cart
+        Ajouter au panier
       </button>
     );
   }
 
   return (
     <button
-      aria-label="Add to cart"
+      aria-label="Ajouter au panier"
       className={clsx(buttonClasses, {
         "hover:opacity-90": true,
       })}
@@ -55,7 +59,7 @@ function SubmitButton({
       <div className="absolute left-0 ml-4">
         <PlusIcon className="h-5" />
       </div>
-      Add To Cart
+      Ajouter au panier
     </button>
   );
 }
@@ -88,6 +92,7 @@ export function AddToCart({ product }: { product: Product }) {
       "ViewContent",
       buildProductMetaPayload(product, finalVariant),
     );
+    trackGAEvent("view_item", buildGAProductEventPayload(product, finalVariant));
     trackTikTokEvent("ViewContent", buildTikTokProductPayload(product, finalVariant));
     trackedViewRef.current = selectedVariantId;
   }, [finalVariant, product, selectedVariantId]);
@@ -98,6 +103,10 @@ export function AddToCart({ product }: { product: Product }) {
         trackMetaEvent(
           "AddToCart",
           buildProductMetaPayload(product, finalVariant),
+        );
+        trackGAEvent(
+          "add_to_cart",
+          buildGAProductEventPayload(product, finalVariant),
         );
         trackPinterestEvent(
           "addtocart",

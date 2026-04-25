@@ -43,7 +43,15 @@ export async function POST(req: NextRequest) {
           event_id: event_id ?? `${event_name}-${Date.now()}`,
           event_source_url: user_data.url ?? "https://cubecrafte.com/",
           user_data: userData,
-          custom_data,
+          custom_data: {
+            ...custom_data,
+            // Pinterest exige value en string
+            value: custom_data.value != null ? String(custom_data.value) : undefined,
+            currency: custom_data.currency ?? "EUR",
+            num_items: custom_data.order_quantity ?? undefined,
+            order_id: custom_data.order_id ?? event_id ?? undefined,
+            content_ids: custom_data.line_items?.map((l: { product_id: string }) => l.product_id) ?? undefined,
+          },
         },
       ],
     };

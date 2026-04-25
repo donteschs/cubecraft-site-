@@ -4,37 +4,105 @@ import Image from "next/image";
 import Link from "next/link";
 import { useEffect, useRef, useState, useTransition } from "react";
 import { addItemAndCheckout } from "components/cart/actions";
+import {
+  buildGAProductPayload,
+  trackGAEvent,
+} from "lib/google-analytics";
 import { buildMetaProductPayload, trackMetaEvent } from "lib/meta-pixel";
 import { trackTikTokEvent } from "lib/tiktok";
 import { trackPinterestEvent } from "lib/pinterest";
+import { SITE_IMAGES } from "lib/site-images";
 import { VideoSection } from "./video-section";
+import { CountdownTimer } from "components/ui/countdown-timer";
 
 /* ─────────────────── data ─────────────────── */
 
-const GALLERY_IMAGES = [
+const CLOUDINARY_CLOUD = "druvbvnob";
+
+function cldVideo(publicId: string, version: string) {
+  return `https://res.cloudinary.com/${CLOUDINARY_CLOUD}/video/upload/f_auto,q_auto,vc_auto/v${version}/${publicId}.mp4`;
+}
+
+function cldPoster(publicId: string, version: string) {
+  return `https://res.cloudinary.com/${CLOUDINARY_CLOUD}/video/upload/f_jpg,q_auto,so_2/v${version}/${publicId}.jpg`;
+}
+
+function cldImage(publicId: string, version: string) {
+  return `https://res.cloudinary.com/${CLOUDINARY_CLOUD}/image/upload/f_auto,q_auto/v${version}/${publicId}.jpg`;
+}
+
+function cldSquareVideo(publicId: string, version: string) {
+  return `https://res.cloudinary.com/${CLOUDINARY_CLOUD}/video/upload/c_fill,ar_1:1/g_auto/f_auto,q_auto,vc_auto/v${version}/${publicId}.mp4`;
+}
+
+function cldSquarePoster(publicId: string, version: string) {
+  return `https://res.cloudinary.com/${CLOUDINARY_CLOUD}/video/upload/c_fill,ar_1:1,g_auto,f_jpg,q_auto,so_2/v${version}/${publicId}.jpg`;
+}
+
+type GalleryMedia =
+  | {
+      type: "image";
+      src: string;
+      alt: string;
+    }
+  | {
+      type: "video";
+      src: string;
+      poster: string;
+      alt: string;
+    };
+
+const GALLERY_MEDIA: GalleryMedia[] = [
   {
-    src: "/images/Whisk_21fe8406a0537f38ec8479f261076368dr.png",
-    alt: "CubeCraft — pack cubes magnétiques, vue principale",
+    type: "video",
+    src: cldSquareVideo("2dbc3685-2afa-4e9c-950c-b2c5e2d823dd-h265-hd_uf24zi", "1776795414"),
+    poster: cldSquarePoster("2dbc3685-2afa-4e9c-950c-b2c5e2d823dd-h265-hd_uf24zi", "1776795414"),
+    alt: "Video de demonstration CubeCraft des cubes magnetiques en action",
   },
   {
-    src: "/images/Whisk_04c245b3be0535c81d242e1c301414f5dr.png",
-    alt: "Gros plan sur les cubes 3D colorés",
+    type: "image",
+    src: SITE_IMAGES.heroPack.src,
+    alt: "Pack principal CubeCraft de cubes magnetiques pour enfant",
   },
   {
-    src: "/images/Whisk_49ebf466efa83188d3c4771deac3c2bcdr.png",
-    alt: "6 créations différentes sur socles blancs",
+    type: "image",
+    src: cldImage("main-image-7_j2uswp", "1776795420"),
+    alt: "Construction CubeCraft en cubes magnetiques sur fond blanc",
   },
   {
-    src: "/images/Whisk_86eed3c52579d98badd4ea718118cbd0dr.png",
-    alt: "Arrangement de cubes, vue de dessus",
+    type: "image",
+    src: cldImage("main-image-5_cwxmi5", "1776795418"),
+    alt: "Arbre Minecraft construit avec les cubes magnetiques CubeCraft",
   },
   {
-    src: "/images/Whisk_0f4f789c58d8d62974e423a8f570af63dr.png",
-    alt: "Emballage cadeau premium CubeCraft",
+    type: "image",
+    src: cldImage("main-image-4_yc7nnw", "1776795418"),
+    alt: "Structure CubeCraft en cubes magnetiques avec base sur pilotis",
   },
   {
-    src: "/images/Whisk_55d0052c7faf764a3484e82a295cc64bdr.png",
-    alt: "Château Minecraft construit en cubes magnétiques",
+    type: "image",
+    src: SITE_IMAGES.detailColors.src,
+    alt: "Gros plan CubeCraft sur des cubes magnetiques aux textures Minecraft",
+  },
+  {
+    type: "image",
+    src: SITE_IMAGES.creations3d.src,
+    alt: "Creations 3D realisees avec les cubes magnetiques CubeCraft",
+  },
+  {
+    type: "image",
+    src: SITE_IMAGES.topView.src,
+    alt: "Vue de dessus des cubes magnetiques CubeCraft",
+  },
+  {
+    type: "image",
+    src: SITE_IMAGES.giftBox.src,
+    alt: "Coffret cadeau CubeCraft pour cubes magnetiques enfant",
+  },
+  {
+    type: "image",
+    src: SITE_IMAGES.minecraftCastle.src,
+    alt: "Chateau Minecraft construit avec les cubes magnetiques CubeCraft",
   },
 ];
 
@@ -47,7 +115,7 @@ const VARIANTS = [
     savings: 20,
     badge: null,
     tag: "Idéal pour débuter",
-    stock: 42,
+    stock: 127,
   },
   {
     id: "200",
@@ -57,7 +125,7 @@ const VARIANTS = [
     savings: 30,
     badge: "⭐ Le + populaire",
     tag: "Choix des familles",
-    stock: 31,
+    stock: 94,
   },
   {
     id: "400",
@@ -67,7 +135,7 @@ const VARIANTS = [
     savings: 60,
     badge: "🏆 Meilleure valeur",
     tag: "Projets épiques",
-    stock: 18,
+    stock: 73,
   },
 ];
 
@@ -341,7 +409,11 @@ export function ProductUI({
   const [upsellChecked, setUpsellChecked] = useState(false);
   const [quantity, setQuantity] = useState(1);
   const [cartVisible, setCartVisible] = useState(false);
+  const [visitors, setVisitors] = useState<number | null>(null);
+  const [stickyVisible, setStickyVisible] = useState(false);
   const trackedViewRef = useRef<string | null>(null);
+  const ctaRef = useRef<HTMLButtonElement>(null);
+  const activeMedia = GALLERY_MEDIA[activeImage]!;
 
   const variant = VARIANTS[activeVariant]!;
   const discountPct = Math.round((variant.savings / variant.normalPrice) * 100);
@@ -361,6 +433,16 @@ export function ProductUI({
         variantTitle: variant.label,
       }),
     );
+    trackGAEvent(
+      "view_item",
+      buildGAProductPayload({
+        itemId: variantIds[variant.id] || variant.id,
+        title: "Cubes Magnetiques CubeCraft",
+        price: variant.launchPrice,
+        currency: "EUR",
+        variantTitle: variant.label,
+      }),
+    );
     trackTikTokEvent("ViewContent", {
       contents: [{ content_id: variantIds[variant.id] || variant.id, content_type: "product", content_name: `CubeCraft ${variant.label}` }],
       value: variant.launchPrice,
@@ -371,6 +453,27 @@ export function ProductUI({
     trackedViewRef.current = variant.id;
   }, [variant, variantIds]);
 
+  useEffect(() => {
+    const randomBetween = (min: number, max: number) =>
+      Math.floor(Math.random() * (max - min + 1)) + min;
+    setVisitors(randomBetween(18, 42));
+    const interval = setInterval(() => {
+      setVisitors(randomBetween(18, 42));
+    }, 25_000);
+    return () => clearInterval(interval);
+  }, []);
+
+  useEffect(() => {
+    const el = ctaRef.current;
+    if (!el) return;
+    const observer = new IntersectionObserver(
+      ([entry]) => setStickyVisible(!entry!.isIntersecting),
+      { threshold: 0 }
+    );
+    observer.observe(el);
+    return () => observer.disconnect();
+  }, []);
+
   function handleOrder() {
     const payload = {
       contentId: variantIds[variant.id] || variant.id,
@@ -380,6 +483,28 @@ export function ProductUI({
       variantTitle: variant.label,
     };
     trackMetaEvent("InitiateCheckout", buildMetaProductPayload(payload));
+    trackGAEvent(
+      "add_to_cart",
+      buildGAProductPayload({
+        itemId: payload.contentId,
+        title: "Cubes Magnetiques CubeCraft",
+        price: variant.launchPrice,
+        currency: "EUR",
+        quantity,
+        variantTitle: variant.label,
+      }),
+    );
+    trackGAEvent(
+      "begin_checkout",
+      buildGAProductPayload({
+        itemId: payload.contentId,
+        title: "Cubes Magnetiques CubeCraft",
+        price: variant.launchPrice,
+        currency: "EUR",
+        quantity,
+        variantTitle: variant.label,
+      }),
+    );
     trackTikTokEvent("AddToCart", {
       contents: [{ content_id: payload.contentId, content_type: "product", content_name: `CubeCraft ${variant.label}` }],
       value: variant.launchPrice,
@@ -433,39 +558,84 @@ export function ProductUI({
           §1 — GALLERY + BUY BOX
       ══════════════════════════════════════════ */}
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-6 sm:py-10 lg:py-14">
-        <div className="grid lg:grid-cols-2 gap-8 xl:gap-14 items-start">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 xl:gap-14 items-start">
           {/* Gallery */}
           <div className="lg:sticky lg:top-6">
             <div className="relative aspect-square bg-white rounded-2xl overflow-hidden border border-gray-100 shadow-sm mb-3 group">
-              <Image
-                key={activeImage}
-                src={GALLERY_IMAGES[activeImage]!.src}
-                alt={GALLERY_IMAGES[activeImage]!.alt}
-                fill
-                className="object-contain p-4 transition-opacity duration-200"
-                sizes="(min-width: 1024px) 50vw, 100vw"
-                priority={activeImage === 0}
-              />
+              <div className="absolute inset-0">
+                {activeMedia.type === "video" ? (
+                  <video
+                    key={`video-${activeImage}`}
+                    src={activeMedia.src}
+                    poster={activeMedia.poster}
+                    controls
+                    autoPlay
+                    muted
+                    loop
+                    playsInline
+                    className="h-full w-full object-contain bg-white"
+                  />
+                ) : (
+                  <Image
+                    key={`image-${activeImage}`}
+                    src={activeMedia.src}
+                    alt={activeMedia.alt}
+                    fill
+                    className="object-contain transition-opacity duration-200"
+                    sizes="(min-width: 1024px) 50vw, 100vw"
+                    priority={activeImage === 0}
+                  />
+                )}
+              </div>
               <div className="absolute top-3 left-3 bg-or text-dark font-rubik font-black text-base w-14 h-14 rounded-full flex items-center justify-center shadow-lg shadow-or/40 rotate-6">
                 -{discountPct}%
               </div>
             </div>
-            <div className="grid grid-cols-6 gap-2">
-              {GALLERY_IMAGES.map((img, i) => (
+            <div className="flex gap-2 overflow-x-auto pb-1 snap-x snap-mandatory scroll-smooth" style={{ scrollbarWidth: "none" }}>
+              {GALLERY_MEDIA.map((media, i) => (
                 <button
                   key={i}
                   onClick={() => setActiveImage(i)}
-                  aria-label={`Image ${i + 1}`}
+                  aria-label={media.alt}
                   aria-pressed={activeImage === i}
-                  className={`relative aspect-square rounded-lg overflow-hidden border-2 transition-all duration-150 min-h-[44px] ${activeImage === i ? "border-creeper shadow-md shadow-creeper/20" : "border-gray-100 hover:border-creeper/40"}`}
+                  className={`relative aspect-square w-[64px] sm:w-[88px] shrink-0 rounded-lg overflow-hidden border-2 transition-all duration-150 min-h-[44px] snap-start ${activeImage === i ? "border-creeper shadow-md shadow-creeper/20" : "border-gray-100 hover:border-creeper/40"}`}
                 >
-                  <Image
-                    src={img.src}
-                    alt=""
-                    fill
-                    className="object-contain p-1"
-                    sizes="64px"
-                  />
+                  {media.type === "video" ? (
+                    <>
+                      <div className="absolute inset-1">
+                        <Image
+                          src={media.poster}
+                          alt=""
+                          fill
+                          className="rounded-md object-cover"
+                          sizes="64px"
+                        />
+                      </div>
+                      <div className="absolute inset-0 bg-black/20" />
+                      <div className="absolute inset-0 flex items-center justify-center">
+                        <span className="flex h-8 w-8 items-center justify-center rounded-full bg-white/92 text-pierre shadow-md">
+                          <svg
+                            className="ml-0.5 h-4 w-4"
+                            viewBox="0 0 20 20"
+                            fill="currentColor"
+                            aria-hidden
+                          >
+                            <path d="M6.5 5.75a.75.75 0 011.14-.64l7 4.25a.75.75 0 010 1.28l-7 4.25A.75.75 0 016.5 14.25v-8.5z" />
+                          </svg>
+                        </span>
+                      </div>
+                    </>
+                  ) : (
+                    <div className="absolute inset-1">
+                      <Image
+                        src={media.src}
+                        alt=""
+                        fill
+                        className="object-contain"
+                        sizes="64px"
+                      />
+                    </div>
+                  )}
                 </button>
               ))}
             </div>
@@ -498,7 +668,7 @@ export function ProductUI({
           </div>
 
           {/* Buy box */}
-          <div className="flex flex-col gap-5 min-w-0 overflow-hidden">
+          <div className="flex flex-col gap-5 min-w-0">
             <div>
               <span className="font-pixel text-[8px] text-creeper tracking-widest uppercase">
                 MINECRAFT IRL · 2026
@@ -527,7 +697,7 @@ export function ProductUI({
             {/* Price */}
             <div className="bg-gradient-to-br from-creeper-light/30 to-blanc rounded-2xl border border-creeper/10 p-4 sm:p-5">
               <div className="flex items-end gap-3 mb-1">
-                <span className="font-rubik font-black text-4xl sm:text-5xl text-creeper-dark leading-none">
+                <span className="font-rubik font-black text-3xl sm:text-5xl text-creeper-dark leading-none">
                   {variant.launchPrice.toFixed(2).replace(".", ",")} €
                 </span>
                 <span className="text-pierre/40 line-through text-lg font-inter mb-1">
@@ -597,6 +767,19 @@ export function ProductUI({
               </span>
             </div>
 
+            {/* Live visitors */}
+            {visitors !== null && (
+              <div className="flex items-center gap-2 bg-red-50 border border-red-200/50 rounded-lg px-4 py-2.5">
+                <span className="relative flex h-2 w-2 flex-shrink-0">
+                  <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-red-400 opacity-75" />
+                  <span className="relative inline-flex rounded-full h-2 w-2 bg-red-500" />
+                </span>
+                <span className="text-sm font-inter text-red-700">
+                  <strong>{visitors} personnes</strong> regardent ce produit en ce moment
+                </span>
+              </div>
+            )}
+
             {/* Quantity selector */}
             <div className="flex items-center gap-4">
               <span className="font-rubik font-bold text-pierre text-sm">Quantité</span>
@@ -617,9 +800,10 @@ export function ProductUI({
 
             {/* CTA — Ajouter au panier */}
             <button
+              ref={ctaRef}
               type="button"
               onClick={() => setCartVisible(true)}
-              className="w-full rounded-xl py-4 sm:py-5 font-rubik font-black text-lg sm:text-xl text-white shadow-xl transition-all duration-200 cursor-pointer btn-shimmer animate-pulse-green hover:scale-[1.02] active:scale-100 shadow-creeper/30 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-creeper focus-visible:ring-offset-2"
+              className="w-full rounded-xl py-5 sm:py-5 font-rubik font-black text-xl sm:text-xl text-white shadow-xl transition-all duration-200 cursor-pointer btn-shimmer animate-pulse-green hover:scale-[1.02] active:scale-100 shadow-creeper/30 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-creeper focus-visible:ring-offset-2"
             >
               <span className="flex items-center justify-center gap-2">
                 🛒 Ajouter au panier — {(variant.launchPrice * quantity).toFixed(2).replace(".", ",")} €
@@ -670,6 +854,7 @@ export function ProductUI({
                     {(variant.launchPrice * quantity + (upsellChecked ? 14.9 : 0)).toFixed(2).replace(".", ",")} €
                   </span>
                 </div>
+                <CountdownTimer />
                 {/* Bouton valider */}
                 <button
                   onClick={handleOrder}
@@ -706,6 +891,15 @@ export function ProductUI({
                       <path fillRule="evenodd" d="M10.28 2.28a.75.75 0 010 1.06l-5.5 5.5a.75.75 0 01-1.06 0l-2.5-2.5a.75.75 0 111.06-1.06L4.25 7.19l4.97-4.97a.75.75 0 011.06.06z" />
                     </svg>
                   )}
+                </div>
+                <div className="relative w-14 h-14 rounded-lg overflow-hidden border border-gray-100 flex-shrink-0">
+                  <Image
+                    src="https://res.cloudinary.com/druvbvnob/image/upload/v1776549264/main-image-7_wbbwaj.jpg"
+                    alt="Jeu Magnétique pierres de stratégie"
+                    fill
+                    className="object-cover"
+                    sizes="56px"
+                  />
                 </div>
                 <div className="flex-1 min-w-0">
                   <div className="flex items-center gap-2 flex-wrap">
@@ -925,7 +1119,8 @@ export function ProductUI({
                 statLabel: "de temps écran",
                 title: "Ils posent la tablette. Naturellement.",
                 desc: "CubeCraft active les mêmes circuits de récompense qu'un jeu vidéo — satisfaction, défi, progression — sans lumière bleue ni dopamine artificielle. Les parents constatent la différence dès la première semaine.",
-                img: "/images/Whisk_4416eb927c0020d8a5046ad544d19c74dr.png",
+                img: SITE_IMAGES.childPlaying.src,
+                alt: "Enfant qui joue avec les cubes magnetiques CubeCraft au lieu d'un ecran",
                 accent: "bg-creeper",
                 light: "bg-creeper-light/20",
                 border: "border-creeper/20",
@@ -935,7 +1130,8 @@ export function ProductUI({
                 statLabel: "plus créatifs",
                 title: "Leur imagination explose.",
                 desc: "Sans mode d'emploi, sans règles imposées — juste 64 cubes et une imagination sans limite. Chaque jour ils inventent quelque chose de nouveau. Les neuro-pédiatres le confirment : la construction libre est l'une des meilleures activités pour le cerveau en développement.",
-                img: "/images/Whisk_49ebf466efa83188d3c4771deac3c2bcdr.png",
+                img: SITE_IMAGES.creations3d.src,
+                alt: "Creations 3D en cubes magnetiques CubeCraft",
                 accent: "bg-or",
                 light: "bg-or/10",
                 border: "border-or/20",
@@ -945,7 +1141,8 @@ export function ProductUI({
                 statLabel: "de concentration",
                 title: "L'état de flow. Sans effort.",
                 desc: "Concentrés pendant 2, 3, parfois 4 heures d'affilée. Ce n'est pas de la discipline — c'est du plaisir pur. Les psychologues appellent ça le « flow state » : absorption totale dans une activité créatrice. CubeCraft le déclenche naturellement.",
-                img: "/images/Whisk_19a009ed6a33513908946a206c5af180dr.png",
+                img: SITE_IMAGES.childrenPlaying.src,
+                alt: "Enfants concentres sur une construction magnetique CubeCraft",
                 accent: "bg-ciel",
                 light: "bg-ciel/10",
                 border: "border-ciel/20",
@@ -955,7 +1152,8 @@ export function ProductUI({
                 statLabel: "moments partagés",
                 title: "Toute la famille crée ensemble.",
                 desc: "Parents, enfants, frères et sœurs — tout le monde peut jouer. Les CubeCraft créent des moments de complicité authentiques que les écrans ne peuvent pas offrir. Ces souvenirs-là restent pour toujours.",
-                img: "/images/Whisk_4416eb927c0020d8a5046ad544d19c74dr.png",
+                img: SITE_IMAGES.childPlaying.src,
+                alt: "Famille reunie autour des cubes magnetiques CubeCraft",
                 accent: "bg-terre",
                 light: "bg-terre/10",
                 border: "border-terre/20",
@@ -979,7 +1177,7 @@ export function ProductUI({
                   <div className="relative w-20 h-20 sm:w-24 sm:h-24 rounded-xl overflow-hidden flex-shrink-0 shadow-md">
                     <Image
                       src={b.img}
-                      alt=""
+                      alt={b.alt}
                       fill
                       className="object-cover"
                       sizes="96px"
@@ -1689,35 +1887,38 @@ export function ProductUI({
         </div>
       </section>
 
-      {/* ── Sticky mobile bottom bar ── */}
-      <div
-        className="fixed bottom-0 left-0 right-0 z-50 lg:hidden bg-white/95 backdrop-blur-md border-t border-gray-200 shadow-2xl px-4 pb-safe pt-3"
-        style={{ paddingBottom: "max(12px, env(safe-area-inset-bottom))" }}
-      >
-        <div className="flex items-center gap-3">
-          <div className="flex-1 min-w-0">
-            <div className="font-rubik font-black text-pierre text-sm leading-tight">
-              Pack {variant.label}
+      {/* ── Sticky CTA bar (scroll-triggered) ── */}
+      {stickyVisible && (
+        <div
+          className="fixed bottom-0 left-0 right-0 z-50 bg-white/97 backdrop-blur-md border-t border-gray-200 shadow-[0_-4px_24px_rgba(0,0,0,0.10)] px-4 pt-3"
+          style={{ paddingBottom: "max(16px, env(safe-area-inset-bottom))" }}
+        >
+          <div className="flex items-center gap-3 max-w-lg mx-auto">
+            <div className="flex-1 min-w-0">
+              <div className="font-rubik font-bold text-pierre/60 text-xs leading-tight">Pack sélectionné</div>
+              <div className="font-rubik font-black text-pierre text-sm leading-tight">
+                {variant.label}
+              </div>
+              <div className="flex items-center gap-2 mt-0.5">
+                <span className="font-rubik font-black text-creeper-dark text-xl leading-none">
+                  {variant.launchPrice.toFixed(2).replace(".", ",")} €
+                </span>
+                <span className="text-pierre/35 line-through text-xs font-inter">
+                  {variant.normalPrice.toFixed(2).replace(".", ",")} €
+                </span>
+              </div>
             </div>
-            <div className="flex items-center gap-2">
-              <span className="font-rubik font-black text-creeper-dark text-lg">
-                {variant.launchPrice.toFixed(2).replace(".", ",")} €
-              </span>
-              <span className="text-pierre/35 line-through text-sm font-inter">
-                {variant.normalPrice.toFixed(2).replace(".", ",")} €
-              </span>
-            </div>
+            <button
+              onClick={() => setCartVisible(true)}
+              disabled={isPending}
+              className={`flex-shrink-0 rounded-xl px-6 py-4 font-rubik font-black text-base text-white transition-all duration-150 cursor-pointer min-h-[52px] shadow-lg shadow-creeper/30 ${isPending ? "bg-creeper-dark" : "btn-shimmer"}`}
+            >
+              {isPending ? "…" : "🛒 Ajouter →"}
+            </button>
           </div>
-          <button
-            onClick={handleOrder}
-            disabled={isPending}
-            className={`flex-shrink-0 rounded-xl px-5 py-3.5 font-rubik font-black text-base text-white transition-all duration-150 cursor-pointer min-h-[48px] ${isPending ? "bg-creeper-dark" : "btn-shimmer"}`}
-          >
-            {isPending ? "…" : "Commander →"}
-          </button>
         </div>
-      </div>
-      <div className="h-20 lg:hidden" aria-hidden />
+      )}
+      {stickyVisible && <div className="h-24" aria-hidden />}
     </div>
   );
 }

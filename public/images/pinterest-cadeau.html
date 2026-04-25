@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body { width: 1000px; height: 1500px; overflow: hidden; font-family: 'Arial Black', sans-serif; }
+
+  .pin {
+    width: 1000px;
+    height: 1500px;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+  }
+
+  .pin img {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center top;
+  }
+
+  .top-badge {
+    position: absolute;
+    top: 40px;
+    left: 40px;
+    z-index: 3;
+    background: #FFB300;
+    border-radius: 100px;
+    padding: 16px 32px;
+    font-size: 28px;
+    font-weight: 900;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    box-shadow: 0 4px 20px rgba(0,0,0,0.2);
+    color: #1a1a1a;
+  }
+
+  .logo {
+    position: absolute;
+    top: 40px;
+    right: 40px;
+    z-index: 3;
+    background: rgba(255,255,255,0.95);
+    border-radius: 16px;
+    padding: 12px 24px;
+    font-size: 26px;
+    font-weight: 900;
+    box-shadow: 0 4px 20px rgba(0,0,0,0.12);
+    color: #455A64;
+  }
+  .logo span { color: #4CAF50; }
+
+  .overlay {
+    position: relative;
+    z-index: 2;
+    padding: 60px 52px 52px;
+    background: linear-gradient(to top, rgba(20,10,5,0.97) 0%, rgba(20,10,5,0.75) 45%, transparent 100%);
+  }
+
+  .tag {
+    color: #FFB300;
+    font-size: 26px;
+    font-weight: 900;
+    letter-spacing: 4px;
+    text-transform: uppercase;
+    margin-bottom: 20px;
+  }
+
+  .headline {
+    color: #fff;
+    font-size: 68px;
+    font-weight: 900;
+    line-height: 1.1;
+    margin-bottom: 20px;
+  }
+  .headline em {
+    color: #FFB300;
+    font-style: normal;
+  }
+
+  .stars {
+    color: #FFB300;
+    font-size: 40px;
+    margin-bottom: 8px;
+    letter-spacing: 4px;
+  }
+
+  .reviews {
+    color: rgba(255,255,255,0.6);
+    font-size: 26px;
+    font-family: Arial, sans-serif;
+    font-weight: 400;
+    margin-bottom: 36px;
+  }
+
+  .cta {
+    background: #FFB300;
+    color: #1a1a1a;
+    font-size: 34px;
+    font-weight: 900;
+    padding: 28px 52px;
+    border-radius: 100px;
+    display: inline-flex;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 36px;
+  }
+
+  .perks {
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+  }
+  .perk {
+    color: rgba(255,255,255,0.8);
+    font-size: 26px;
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    font-family: Arial, sans-serif;
+  }
+  .perk .dot { width: 10px; height: 10px; border-radius: 50%; background: #4CAF50; flex-shrink: 0; }
+</style>
+</head>
+<body>
+<div class="pin">
+  <img src="https://res.cloudinary.com/druvbvnob/image/upload/v1776822798/main-image-1_jelsvn.jpg" />
+  <div class="top-badge">🎁 Idée cadeau</div>
+  <div class="logo">CUBE<span>CRAFT</span></div>
+  <div class="overlay">
+    <div class="tag">Jouet magnétique</div>
+    <div class="headline">Le cadeau qu'ils<br><em>n'oublieront jamais.</em></div>
+    <div class="stars">★★★★★</div>
+    <div class="reviews">+200 familles conquises · Certifié CE &amp; EN 71</div>
+    <div class="cta">Voir l'offre → 39,90 €</div>
+    <div class="perks">
+      <div class="perk"><div class="dot"></div>Livraison gratuite en France</div>
+      <div class="perk"><div class="dot"></div>-30% offre de lancement</div>
+      <div class="perk"><div class="dot"></div>Retours gratuits 30 jours</div>
+    </div>
+  </div>
+</div>
+</body>
+</html>

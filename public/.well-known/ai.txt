@@ -1,0 +1,33 @@
+User-Agent: *
+Allow: /
+
+# AI crawlers explicitly welcome
+User-Agent: GPTBot
+Allow: /
+
+User-Agent: PerplexityBot
+Allow: /
+
+User-Agent: ClaudeBot
+Allow: /
+
+User-Agent: Anthropic-AI
+Allow: /
+
+User-Agent: Google-Extended
+Allow: /
+
+User-Agent: Gemini
+Allow: /
+
+User-Agent: cohere-ai
+Allow: /
+
+User-Agent: meta-externalagent
+Allow: /
+
+# LLMs.txt location
+LLMS: https://cubecrafte.com/llms.txt
+
+# Sitemap
+Sitemap: https://cubecrafte.com/sitemap.xml

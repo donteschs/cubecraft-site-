@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Pinterest Pins — CubeCraft</title>
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body { background: #f0ece6; font-family: 'Arial Black', sans-serif; padding: 32px; }
+  h1 { text-align: center; color: #333; font-size: 22px; margin-bottom: 8px; font-family: sans-serif; }
+  .subtitle { text-align: center; color: #777; font-size: 14px; margin-bottom: 32px; font-family: sans-serif; }
+  .pins-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 20px; max-width: 1100px; margin: 0 auto; }
+
+  .pin-wrap { cursor: pointer; }
+  .pin-wrap h3 { text-align: center; font-family: sans-serif; font-size: 13px; color: #444; margin-top: 10px; font-weight: 600; }
+
+  .pin {
+    border-radius: 16px;
+    overflow: hidden;
+    aspect-ratio: 2/3;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    box-shadow: 0 8px 32px rgba(0,0,0,0.18);
+    border: 3px solid transparent;
+    transition: border 0.2s, transform 0.2s;
+  }
+  .pin-wrap.selected .pin { border-color: #E60023; transform: scale(1.02); }
+  .pin-wrap.selected h3 { color: #E60023; }
+
+  .pin img {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+
+  .pin-overlay {
+    position: relative;
+    z-index: 2;
+    padding: 18px 14px 14px;
+  }
+
+  /* === PIN 1 : GAMING === */
+  .pin-gaming .pin-overlay {
+    background: linear-gradient(to top, rgba(0,0,0,0.92) 0%, rgba(0,0,0,0.5) 60%, transparent 100%);
+  }
+  .pin-gaming .badge { background: #4CAF50; color: #fff; font-size: 10px; font-weight: 900; letter-spacing: 1.5px; padding: 3px 8px; border-radius: 4px; display: inline-block; margin-bottom: 6px; font-family: monospace; }
+  .pin-gaming .headline { color: #fff; font-size: 20px; font-weight: 900; line-height: 1.15; margin-bottom: 6px; }
+  .pin-gaming .sub { color: #4CAF50; font-size: 12px; font-weight: 700; letter-spacing: 0.5px; margin-bottom: 10px; }
+  .pin-gaming .price-row { display: flex; align-items: center; gap: 8px; }
+  .pin-gaming .price-old { color: #aaa; font-size: 13px; text-decoration: line-through; }
+  .pin-gaming .price-new { color: #FFB300; font-size: 20px; font-weight: 900; }
+  .pin-gaming .promo-badge { background: #E60023; color: #fff; font-size: 10px; font-weight: 900; padding: 2px 7px; border-radius: 20px; }
+
+  /* === PIN 2 : CADEAU === */
+  .pin-cadeau .pin-overlay {
+    background: linear-gradient(to top, rgba(30,10,10,0.95) 0%, rgba(30,10,10,0.55) 60%, transparent 100%);
+  }
+  .pin-cadeau .badge { background: #FFB300; color: #1a1a1a; font-size: 10px; font-weight: 900; letter-spacing: 1px; padding: 3px 8px; border-radius: 4px; display: inline-block; margin-bottom: 6px; }
+  .pin-cadeau .headline { color: #fff; font-size: 19px; font-weight: 900; line-height: 1.2; margin-bottom: 6px; }
+  .pin-cadeau .stars { color: #FFB300; font-size: 14px; margin-bottom: 4px; }
+  .pin-cadeau .reviews { color: #ccc; font-size: 11px; margin-bottom: 10px; }
+  .pin-cadeau .cta { background: #FFB300; color: #1a1a1a; font-size: 13px; font-weight: 900; padding: 8px 16px; border-radius: 50px; display: inline-block; }
+
+  /* === PIN 3 : ANTI-ÉCRAN === */
+  .pin-antiecran .pin-overlay {
+    background: linear-gradient(to top, rgba(20,50,20,0.97) 0%, rgba(20,50,20,0.6) 55%, transparent 100%);
+  }
+  .pin-antiecran .badge { background: #fff; color: #2E7D32; font-size: 10px; font-weight: 900; letter-spacing: 1px; padding: 3px 8px; border-radius: 4px; display: inline-block; margin-bottom: 6px; }
+  .pin-antiecran .headline { color: #fff; font-size: 18px; font-weight: 900; line-height: 1.2; margin-bottom: 6px; }
+  .pin-antiecran .sub { color: #81C784; font-size: 12px; margin-bottom: 10px; line-height: 1.4; }
+  .pin-antiecran .certifs { display: flex; gap: 6px; flex-wrap: wrap; }
+  .pin-antiecran .certif { background: rgba(255,255,255,0.15); color: #fff; font-size: 10px; padding: 3px 7px; border-radius: 4px; border: 1px solid rgba(255,255,255,0.3); }
+
+  /* === PIN 4 : PROMO === */
+  .pin-promo .pin-overlay {
+    background: linear-gradient(to top, rgba(0,0,0,0.96) 0%, rgba(0,0,0,0.65) 55%, transparent 100%);
+  }
+  .pin-promo .discount-big { color: #FFB300; font-size: 42px; font-weight: 900; line-height: 1; margin-bottom: 2px; }
+  .pin-promo .discount-label { color: #fff; font-size: 12px; letter-spacing: 2px; text-transform: uppercase; margin-bottom: 8px; opacity: 0.85; }
+  .pin-promo .price-row { display: flex; align-items: baseline; gap: 10px; margin-bottom: 8px; }
+  .pin-promo .price-new { color: #fff; font-size: 26px; font-weight: 900; }
+  .pin-promo .price-old { color: #999; font-size: 15px; text-decoration: line-through; }
+  .pin-promo .perks { display: flex; flex-direction: column; gap: 4px; }
+  .pin-promo .perk { color: #ccc; font-size: 11px; display: flex; align-items: center; gap: 5px; }
+  .pin-promo .perk span { color: #4CAF50; font-weight: 900; }
+</style>
+</head>
+<body>
+
+<h1>Visuels Pinterest — CubeCraft</h1>
+<p class="subtitle">Clique sur les pins qui te plaisent pour les sélectionner</p>
+
+<div class="pins-grid">
+
+  <!-- PIN 1 : GAMING -->
+  <div class="pin-wrap" onclick="this.classList.toggle('selected')" data-choice="gaming">
+    <div class="pin pin-gaming">
+      <img src="https://cubecrafte.com/images/cubecraft-chateau-minecraft-cubes-magnetiques.png" alt="Château Minecraft" />
+      <div class="pin-overlay">
+        <div class="badge">⛏️ MINECRAFT IRL</div>
+        <div class="headline">Construis ton monde.<br>Pour de vrai.</div>
+        <div class="sub">Cubes magnétiques N52 · Certifié CE</div>
+        <div class="price-row">
+          <div class="price-old">59,90 €</div>
+          <div class="price-new">39,90 €</div>
+          <div class="promo-badge">-30%</div>
+        </div>
+      </div>
+    </div>
+    <h3>🎮 Angle Gaming</h3>
+  </div>
+
+  <!-- PIN 2 : CADEAU -->
+  <div class="pin-wrap" onclick="this.classList.toggle('selected')" data-choice="cadeau">
+    <div class="pin pin-cadeau">
+      <img src="https://cubecrafte.com/images/cubecraft-coffret-cadeau-cubes-magnetiques.png" alt="Coffret cadeau" />
+      <div class="pin-overlay">
+        <div class="badge">🎁 IDÉE CADEAU</div>
+        <div class="headline">Le cadeau qu'ils<br>n'oublieront jamais</div>
+        <div class="stars">★★★★★</div>
+        <div class="reviews">+200 familles conquises</div>
+        <div class="cta">Voir l'offre → 39,90 €</div>
+      </div>
+    </div>
+    <h3>🎁 Angle Cadeau</h3>
+  </div>
+
+  <!-- PIN 3 : ANTI-ÉCRAN -->
+  <div class="pin-wrap" onclick="this.classList.toggle('selected')" data-choice="antiecran">
+    <div class="pin pin-antiecran">
+      <img src="https://cubecrafte.com/images/cubecraft-enfants-jeu-construction-magnetique.png" alt="Enfants qui jouent" />
+      <div class="pin-overlay">
+        <div class="badge">📵 ANTI-ÉCRAN</div>
+        <div class="headline">Moins d'écrans,<br>plus de créativité</div>
+        <div class="sub">Les cubes magnétiques qui remplacent la tablette — et qu'ils adorent vraiment.</div>
+        <div class="certifs">
+          <div class="certif">✓ CE & EN 71</div>
+          <div class="certif">✓ Livraison offerte</div>
+          <div class="certif">✓ Retour 30j</div>
+        </div>
+      </div>
+    </div>
+    <h3>📵 Angle Anti-écran</h3>
+  </div>
+
+  <!-- PIN 4 : PROMO -->
+  <div class="pin-wrap" onclick="this.classList.toggle('selected')" data-choice="promo">
+    <div class="pin pin-promo">
+      <img src="https://cubecrafte.com/images/cubecraft-cubes-magnetiques-pack-principal.png" alt="Pack CubeCraft" />
+      <div class="pin-overlay">
+        <div class="discount-big">-30%</div>
+        <div class="discount-label">Offre de lancement</div>
+        <div class="price-row">
+          <div class="price-new">39,90 €</div>
+          <div class="price-old">59,90 €</div>
+        </div>
+        <div class="perks">
+          <div class="perk"><span>✓</span> Livraison gratuite en France</div>
+          <div class="perk"><span>✓</span> Certifié CE & EN 71</div>
+          <div class="perk"><span>✓</span> Retours gratuits 30 jours</div>
+        </div>
+      </div>
+    </div>
+    <h3>🔥 Angle Promo</h3>
+  </div>
+
+</div>
+
+<p style="text-align:center; margin-top: 28px; color: #888; font-family: sans-serif; font-size: 13px;">Clique sur les pins qui te plaisent → dis-moi dans le terminal</p>
+
+</body>
+</html>

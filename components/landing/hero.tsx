@@ -1,5 +1,6 @@
 import Image from "next/image";
 import Link from "next/link";
+import { SITE_IMAGES } from "lib/site-images";
 
 const STARS = "★★★★★";
 
@@ -12,7 +13,7 @@ export function Hero() {
       {/* Decorative cubes – top right, hidden on small mobile to avoid overflow */}
       <div className="absolute top-8 right-0 sm:right-8 lg:right-16 opacity-10 sm:opacity-20 pointer-events-none select-none w-40 sm:w-56 lg:w-72">
         <Image
-          src="/images/Whisk_04c245b3be0535c81d242e1c301414f5dr.png"
+          src={SITE_IMAGES.detailColors.src}
           alt=""
           width={280}
           height={280}
@@ -110,8 +111,8 @@ export function Hero() {
           <div className="relative w-full max-w-xs sm:max-w-sm md:max-w-md mx-auto">
             <div className="absolute inset-0 bg-creeper/20 blur-3xl rounded-full scale-75 animate-pulse" />
             <Image
-              src="/images/Whisk_21fe8406a0537f38ec8479f261076368dr.png"
-              alt="CubeCraft — cubes magnétiques Minecraft style"
+              src={SITE_IMAGES.heroPack.src}
+              alt="CubeCraft pack principal de cubes magnetiques enfant style Minecraft"
               width={500}
               height={500}
               sizes="(max-width: 640px) 360px, 500px"

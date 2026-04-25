@@ -1,27 +1,28 @@
 import Image from "next/image";
 import { AnimateOnScroll } from "components/ui/animate-on-scroll";
+import { SITE_IMAGES } from "lib/site-images";
 
 const steps = [
   {
     num: "01",
     title: "Ouvrez la boîte",
     desc: "100 cubes magnétiques aux couleurs vives, prêts à l'emploi. Pas de montage, pas de notice compliquée.",
-    img: "/images/Whisk_0f4f789c58d8d62974e423a8f570af63dr.png",
-    alt: "Boîte cadeau CubeCraft",
+    img: SITE_IMAGES.giftBox.src,
+    alt: "Coffret cadeau CubeCraft pour cubes magnetiques enfant",
   },
   {
     num: "02",
     title: "Laissez-les créer",
     desc: "Maisons, robots, animaux, tours, véhicules… Chaque cube s'aimante aux autres en un clic satisfaisant.",
-    img: "/images/Whisk_19a009ed6a33513908946a206c5af180dr.png",
-    alt: "Enfants qui jouent avec CubeCraft",
+    img: SITE_IMAGES.childrenPlaying.src,
+    alt: "Enfants qui jouent avec les cubes magnetiques CubeCraft",
   },
   {
     num: "03",
     title: "Observez la magie",
     desc: "Votre enfant entre dans un état de flow — concentration totale, créativité libérée, satisfaction profonde.",
-    img: "/images/Whisk_4416eb927c0020d8a5046ad544d19c74dr.png",
-    alt: "Enfant concentré sur sa construction CubeCraft",
+    img: SITE_IMAGES.childPlaying.src,
+    alt: "Enfant concentre sur sa construction en cubes magnetiques CubeCraft",
   },
 ];
 

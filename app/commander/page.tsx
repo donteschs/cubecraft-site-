@@ -3,6 +3,7 @@ import { getProduct } from "lib/shopify";
 import { COMMANDER_SEO_IMAGES, absoluteImageUrl, absoluteImageUrls } from "lib/site-images";
 import { ProductUI } from "./product-ui";
 import { JsonLd } from "components/json-ld";
+import Footer from "components/layout/footer";
 
 export const metadata: Metadata = {
   title: "Cubes Magnétiques CubeCraft — Pack 100, 200 & 400 pièces",
@@ -204,6 +205,7 @@ export default async function CommanderPage() {
       <JsonLd data={productSchema} />
       <JsonLd data={faqSchema} />
       <ProductUI variantIds={variantIds} checkoutUrls={checkoutUrls} upsellVariantId={upsellVariantId} />
+      <Footer />
     </>
   );
 }

@@ -3,6 +3,7 @@ import { Navbar } from "components/layout/navbar";
 
 export const metadata = {
   title: "Mentions légales — CubeCraft",
+  description: "Mentions légales du site CubeCraft. Éditeur, hébergeur, propriété intellectuelle et informations légales.",
 };
 
 export default function LegalPage() {

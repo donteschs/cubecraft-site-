@@ -2,6 +2,7 @@ import Footer from "components/layout/footer";
 
 export const metadata = {
   title: "Livraison — CubeCraft",
+  description: "Livraison gratuite en France métropolitaine. Expédition sous 24-48h. Suivi de commande inclus. Tout savoir sur la livraison de vos cubes magnétiques CubeCraft.",
 };
 
 export default function LivraisonPage() {
