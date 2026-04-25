@@ -2,7 +2,7 @@ import os, sys, json, datetime, urllib.request, urllib.error
 
 TOPICS = [
     ("comment-limiter-temps-ecran-enfant", "Comment limiter le temps d ecran de son enfant sans conflit", "Strategies concretes et jouets alternatifs pour reduire le temps d ecran de facon naturelle et sans larmes."),
-    ("jouets-stem-enfant", "Jouets STEM : lesquels choisir pour votre enfant en 2025", "Les jouets STEM developpent les competences du futur. Notre guide pour choisir les meilleurs selon l age."),
+    ("jouet-stem-enfant-2026", "Jouets STEM : lesquels choisir pour votre enfant en 2026", "Les jouets STEM developpent les competences du futur. Notre guide pour choisir les meilleurs selon l age."),
     ("idee-cadeau-enfant-8-ans", "Idee cadeau enfant 8 ans : 10 idees originales en 2025", "Trouver le cadeau parfait pour un enfant de 8 ans. Voici 10 idees testees et approuvees."),
     ("cubes-magnetiques-guide", "Cubes magnetiques : guide complet 2025", "Tout savoir sur les cubes magnetiques : comment les choisir et pourquoi les enfants les adorent."),
     ("jouet-montessori-guide", "Jouet Montessori : qu est-ce que c est et comment choisir", "La pedagogie Montessori en pratique : quels jouets favorisent vraiment l autonomie de votre enfant ?"),
