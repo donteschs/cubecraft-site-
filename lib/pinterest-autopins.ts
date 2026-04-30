@@ -184,10 +184,16 @@ async function getCloudinaryFolderMediaItems(): Promise<PinMediaItem[]> {
 
 export async function getPinForSlot(slot: number): Promise<Pin> {
   const cloudinaryMediaItems = await getCloudinaryFolderMediaItems();
-  const mediaItems =
+  const raw =
     cloudinaryMediaItems.length > 0
       ? cloudinaryMediaItems
       : FALLBACK_IMAGES.map((url) => ({ type: "image" as const, url }));
+
+  // Vidéos en priorité, puis images (les deux restent triés par date desc)
+  const videos = raw.filter((m) => m.type === "video");
+  const images = raw.filter((m) => m.type !== "video");
+  const mediaItems = [...videos, ...images];
+
   const imgIndex = slot % mediaItems.length;
   const tplIndex = slot % TEMPLATES.length;
   const mediaItem = mediaItems[imgIndex]!;
