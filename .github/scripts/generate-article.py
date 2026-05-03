@@ -11,6 +11,16 @@ TOPICS = [
     ("developpement-intelligence-spatiale", "Comment developper l intelligence spatiale de votre enfant", "L intelligence spatiale est essentielle pour les maths. Activites et jouets pour la stimuler des 6 ans."),
     ("alternative-minecraft-enfant", "Alternative a Minecraft pour les enfants : les meilleurs jouets de construction 3D", "Votre enfant est fan de Minecraft ? Decouvrez les meilleures alternatives physiques qui developpent les memes competences creatives."),
     ("jouet-educatif-6-12-ans", "Jouet educatif 6-12 ans : notre selection 2025", "Quels jouets educatifs choisir pour les 6-12 ans ? Notre guide complet pour stimuler creativite et intelligence."),
+    ("cadeau-garcon-6-ans", "Cadeau garcon 6 ans : 10 idees qui font briller les yeux", "Trouver un cadeau original pour un garcon de 6 ans. Notre selection de jouets educatifs et amusants."),
+    ("jouet-construction-fille-7-ans", "Jouet de construction pour fille 7 ans : notre guide 2026", "Les filles adorent construire aussi. Decouvrez les meilleurs jouets de construction adaptes aux filles de 7 ans."),
+    ("bienfaits-jeu-libre-enfant", "Les bienfaits du jeu libre pour le developpement de l enfant", "Pourquoi laisser votre enfant jouer librement est essentiel. Science et conseils pratiques pour les parents."),
+    ("jouet-anti-stress-enfant", "Jouet anti-stress pour enfant : lesquels choisir vraiment", "Face au stress scolaire, quels jouets aident vraiment les enfants a se detendre ? Notre guide sans gadgets inutiles."),
+    ("cadeau-anniversaire-fille-9-ans", "Cadeau anniversaire fille 9 ans : les idees qui font la difference", "Notre selection de cadeaux d anniversaire pour une fille de 9 ans curieuse et creative."),
+    ("jouet-magnetique-vs-lego", "Jouets magnetiques vs LEGO : lequel choisir pour votre enfant", "Comparatif complet entre jeux magnetiques et LEGO. Avantages, prix, age recommande — on vous aide a choisir."),
+    ("activite-rainy-day-enfant", "Activites pour les jours de pluie : 12 idees sans ecran", "Il pleut ? Voici 12 activites creatives et educatives pour occuper vos enfants sans tablette ni tele."),
+    ("comment-choisir-jouet-educatif", "Comment choisir un jouet vraiment educatif : le guide des parents", "Tous les jouets se disent educatifs. Comment distinguer le vrai du faux ? Notre methode en 5 criteres."),
+    ("jeu-construction-3d-cerveau-enfant", "Comment les jeux de construction 3D developpent le cerveau de votre enfant", "Neurosciences et jeux de construction : ce que la science dit sur l impact des cubes magnetiques sur le QI spatial."),
+    ("cadeau-depart-ecole-primaire", "Cadeau rentree scolaire enfant : preparer la rentree avec le bon jouet", "La rentree approche. Quels jouets educatifs offrir pour booster la confiance et la creativite de votre enfant."),
 ]
 
 os.makedirs("content/blog", exist_ok=True)
