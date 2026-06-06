@@ -91,6 +91,7 @@ export const metadata = {
     "cubes aimantés",
   ],
   robots: { follow: true, index: true },
+  verification: { google: "ZH-f5KrZ8q7I4-XCIwArTNFV6GupoCUjQEW_0f5PN9c" },
   other: { "p:domain_verify": "efd0f24559d4799c43986cc9992ecad1" },
   openGraph: {
     type: "website",
