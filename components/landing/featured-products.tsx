@@ -15,40 +15,20 @@ export async function FeaturedProducts() {
     return null;
   }
 
-  const list = products.filter((p) => p.featuredImage?.url).slice(0, 8);
+  const list = products.filter((p) => p.featuredImage?.url).slice(0, 4);
   if (list.length === 0) return null;
 
   return (
     <section className="relative bg-white py-16 sm:py-24">
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         {/* En-tête */}
-        <div className="mb-10 flex flex-col items-start justify-between gap-4 sm:flex-row sm:items-end">
-          <div>
-            <span className="font-pixel text-[9px] text-or-dark bg-or/15 border border-or/30 px-3 py-1.5 rounded-sm tracking-wider">
-              BEST-SELLERS
-            </span>
-            <h2 className="mt-4 font-rubik font-black text-pierre text-3xl sm:text-4xl lg:text-5xl">
-              Les jouets préférés des familles
-            </h2>
-          </div>
-          <Link
-            href="/search"
-            className="group inline-flex items-center gap-2 font-rubik font-bold text-creeper-dark hover:text-creeper transition-colors"
-          >
-            Voir toute la boutique
-            <svg
-              className="w-5 h-5 transition-transform duration-200 group-hover:translate-x-1"
-              viewBox="0 0 20 20"
-              fill="currentColor"
-              aria-hidden
-            >
-              <path
-                fillRule="evenodd"
-                d="M7.21 14.77a.75.75 0 01.02-1.06L11.168 10 7.23 6.29a.75.75 0 111.04-1.08l4.5 4.25a.75.75 0 010 1.08l-4.5 4.25a.75.75 0 01-1.06-.02z"
-                clipRule="evenodd"
-              />
-            </svg>
-          </Link>
+        <div className="mb-10 text-center">
+          <span className="font-pixel text-[9px] text-or-dark bg-or/15 border border-or/30 px-3 py-1.5 rounded-sm tracking-wider">
+            BEST-SELLERS
+          </span>
+          <h2 className="mt-4 font-rubik font-black text-pierre text-3xl sm:text-4xl lg:text-5xl">
+            Les jouets préférés des familles
+          </h2>
         </div>
 
         {/* Grille produits */}
@@ -92,6 +72,22 @@ export async function FeaturedProducts() {
               </div>
             </Link>
           ))}
+        </div>
+
+        <div className="mt-10 flex justify-center">
+          <Link
+            href="/search"
+            className="btn-shimmer inline-flex items-center justify-center gap-2 rounded-xl px-8 py-4 font-rubik font-bold text-white text-base shadow-lg shadow-creeper/30 transition-all duration-200 hover:scale-105"
+          >
+            Voir les autres
+            <svg className="w-5 h-5" viewBox="0 0 20 20" fill="currentColor" aria-hidden>
+              <path
+                fillRule="evenodd"
+                d="M7.21 14.77a.75.75 0 01.02-1.06L11.168 10 7.23 6.29a.75.75 0 111.04-1.08l4.5 4.25a.75.75 0 010 1.08l-4.5 4.25a.75.75 0 01-1.06-.02z"
+                clipRule="evenodd"
+              />
+            </svg>
+          </Link>
         </div>
       </div>
     </section>
