@@ -1,4 +1,5 @@
 import { AddToCart } from "components/cart/add-to-cart";
+import { BuyNowButton } from "components/cart/buy-now-button";
 import Price from "components/price";
 import Prose from "components/prose";
 import { Product } from "lib/shopify/types";
@@ -76,9 +77,12 @@ export function ProductDescription({ product }: { product: Product }) {
 
       {/* Ajouter au panier (sticky mobile) */}
       <div className="fixed bottom-0 left-0 right-0 z-50 border-t border-pierre/10 bg-white p-4 shadow-[0_-4px_16px_rgba(0,0,0,0.08)] md:relative md:bottom-auto md:left-auto md:right-auto md:z-auto md:mt-6 md:border-0 md:bg-transparent md:p-0 md:shadow-none">
-        <AddToCart product={product} />
+        <div className="flex flex-col gap-3">
+          <BuyNowButton product={product} />
+          <AddToCart product={product} />
+        </div>
         <p className="mt-3 text-center font-inter text-xs text-pierre/50 md:text-left">
-          ✓ Garantie 30 jours &nbsp;·&nbsp; ✓ Livraison 4-5 j &nbsp;·&nbsp; ✓ Retours gratuits
+          ✓ Paiement sécurisé Shopify &nbsp;·&nbsp; ✓ Garantie 30 jours &nbsp;·&nbsp; ✓ Livraison 4-5 j
         </p>
       </div>
 
