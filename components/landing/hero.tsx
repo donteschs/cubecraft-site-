@@ -28,31 +28,31 @@ export function Hero() {
           {/* Gaming tag */}
           <div className="inline-flex items-center gap-2 w-fit">
             <span className="font-pixel text-[9px] text-creeper bg-creeper/10 border border-creeper/30 px-3 py-1.5 rounded-sm tracking-wider">
-              MINECRAFT IRL
+              LA BOUTIQUE ANTI-ÉCRAN
             </span>
           </div>
 
           {/* Headline */}
           <h1 className="font-rubik font-black text-white leading-tight">
             <span className="text-3xl sm:text-5xl lg:text-6xl xl:text-7xl block">
-              Ils adorent
+              Les jouets
             </span>
             <span className="text-3xl sm:text-5xl lg:text-6xl xl:text-7xl block text-gradient-green">
-              Minecraft&nbsp;?
+              créatifs
             </span>
             <span className="text-2xl sm:text-4xl lg:text-5xl xl:text-6xl block text-white/90 mt-1 sm:mt-2">
-              Offrez-leur le vrai
+              qui remplacent
             </span>
             <span className="text-2xl sm:text-4xl lg:text-5xl xl:text-6xl block text-or">
-              monde des blocs.
+              les écrans.
             </span>
           </h1>
 
           {/* Subheadline */}
           <p className="text-white/70 text-base sm:text-xl leading-relaxed font-inter max-w-xl">
-            Les cubes magnétiques CubeCraft transforment les heures d&apos;écran en{" "}
-            <strong className="text-white/90">heures de génie créatif</strong>.
-            100 blocs aimantés. Des milliers de possibilités.
+            Construction, sciences, créatif, Montessori, jeux en famille — une
+            sélection de <strong className="text-white/90">jouets éducatifs premium</strong>.
+            Certifiés CE &amp; EN&nbsp;71, livrés en 4-5 jours.
           </p>
 
           {/* Social proof inline */}
@@ -68,26 +68,26 @@ export function Hero() {
             <span className="text-white/20 hidden sm:inline">|</span>
             <div className="flex items-center gap-2 text-sm text-white/60 flex-wrap">
               <span className="text-creeper">✓</span> Certifié CE &amp; EN 71
-              <span className="text-creeper ml-1 sm:ml-2">✓</span> Aimants N52
+              <span className="text-creeper ml-1 sm:ml-2">✓</span> Livraison 4-5 j
             </div>
           </div>
 
           {/* CTA buttons */}
           <div className="flex flex-col sm:flex-row gap-3 mt-1">
             <Link
-              href="/commander"
+              href="/search"
               className="btn-shimmer cursor-pointer inline-flex items-center justify-center gap-2 rounded-xl px-6 sm:px-8 py-4 font-rubik font-bold text-white text-base sm:text-lg shadow-lg shadow-creeper/30 transition-all duration-200 hover:scale-105 hover:shadow-creeper/50 active:scale-100 animate-pulse-green min-h-[52px]"
             >
-              Commander maintenant
+              Découvrir la boutique
               <svg className="w-5 h-5 flex-shrink-0" viewBox="0 0 20 20" fill="currentColor" aria-hidden>
                 <path fillRule="evenodd" d="M7.21 14.77a.75.75 0 01.02-1.06L11.168 10 7.23 6.29a.75.75 0 111.04-1.08l4.5 4.25a.75.75 0 010 1.08l-4.5 4.25a.75.75 0 01-1.06-.02z" clipRule="evenodd" />
               </svg>
             </Link>
             <Link
-              href="#how-it-works"
+              href="#univers"
               className="cursor-pointer inline-flex items-center justify-center gap-2 rounded-xl px-6 py-4 font-rubik font-semibold text-white/80 border border-white/20 hover:border-creeper hover:text-creeper transition-all duration-200 text-sm sm:text-base min-h-[52px]"
             >
-              Voir comment ça marche
+              Voir nos univers
             </Link>
           </div>
 
