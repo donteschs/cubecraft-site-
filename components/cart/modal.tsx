@@ -53,7 +53,12 @@ export default function CartModal() {
 
   return (
     <>
-      <button aria-label="Open cart" onClick={openCart}>
+      <button
+        aria-label="Ouvrir le panier"
+        className="group cursor-pointer rounded-xl"
+        onClick={openCart}
+        type="button"
+      >
         <OpenCart quantity={cart?.totalQuantity} />
       </button>
       <Transition show={isOpen}>
@@ -235,7 +240,10 @@ export default function CartModal() {
                         "checkout",
                         buildPinterestCartPayload(cart),
                       );
-                      trackTikTokEvent("InitiateCheckout", buildTikTokCartPayload(cart));
+                      trackTikTokEvent(
+                        "InitiateCheckout",
+                        buildTikTokCartPayload(cart),
+                      );
                     }}
                   >
                     <CheckoutButton />
