@@ -184,7 +184,14 @@ export function getBlogInternalLinks(
     (a, b) => scoreLink(b, topic) - scoreLink(a, topic),
   );
 
-  return uniqueLinks([productLinks[0], categoryLinks[0]]).slice(0, 2);
+  // 2 produits + 2 catégories pertinents (objectif : 2-4 liens internes/article,
+  // et assez de liens entrants vers les pages produits importantes).
+  return uniqueLinks([
+    productLinks[0],
+    categoryLinks[0],
+    productLinks[1],
+    categoryLinks[1],
+  ]).slice(0, 4);
 }
 
 export function getBlogAffiliateProductIds(
