@@ -11,8 +11,8 @@ import {
  * Grille de produits affiliés — « Notre sélection », « Accessoires recommandés »…
  *
  * Utilisable directement dans les articles MDX :
- *   <AffiliateGrid title="Notre sélection" ids={["lego-classic-boite-creative","robot-coding-mtbot"]} />
- *   <AffiliateGrid title="Idées STEM" category="stem" />
+ *   <AffiliateGrid title="Notre sélection" ids={["sac-rangement-jouets-tapis"]} />
+ *   <AffiliateGrid title="Accessoires" category="accessoires" />
  *
  * Résout les produits depuis lib/affiliate/products.ts (source unique).
  */

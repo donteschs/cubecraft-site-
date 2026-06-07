@@ -7,6 +7,10 @@ import { ProductDescription } from "components/product/product-description";
 import { ProductSellingPoints } from "components/product/selling-points";
 import { HIDDEN_PRODUCT_TAG } from "lib/constants";
 import { getProduct, getProductRecommendations } from "lib/shopify";
+import {
+  getProductArticleLinks,
+  getSimilarProductLinks,
+} from "lib/seo/internal-links";
 import type { Image } from "lib/shopify/types";
 import type { Metadata } from "next";
 import NextImage from "next/image";
@@ -33,9 +37,7 @@ export async function generateMetadata(props: {
       follow: indexable,
       googleBot: { index: indexable, follow: indexable },
     },
-    openGraph: url
-      ? { images: [{ url, width, height, alt }] }
-      : null,
+    openGraph: url ? { images: [{ url, width, height, alt }] } : null,
   };
 }
 
@@ -46,6 +48,8 @@ export default async function ProductPage(props: {
   const product = await getProduct(params.handle);
 
   if (!product) return notFound();
+  const articleLinks = getProductArticleLinks(params.handle);
+  const similarProductLinks = getSimilarProductLinks(params.handle);
 
   const productJsonLd = {
     "@context": "https://schema.org",
@@ -79,9 +83,13 @@ export default async function ProductPage(props: {
       <div className="mx-auto max-w-7xl px-4 pb-24 pt-6 md:pb-16">
         {/* Fil d'Ariane */}
         <nav className="mb-6 flex items-center gap-2 font-inter text-sm text-pierre/50">
-          <Link href="/" className="hover:text-creeper">Accueil</Link>
+          <Link href="/" className="hover:text-creeper">
+            Accueil
+          </Link>
           <span>/</span>
-          <Link href="/search" className="hover:text-creeper">Boutique</Link>
+          <Link href="/search" className="hover:text-creeper">
+            Boutique
+          </Link>
           <span>/</span>
           <span className="truncate text-pierre/80">{product.title}</span>
         </nav>
@@ -124,9 +132,83 @@ export default async function ProductPage(props: {
 
         {/* Cross-sell */}
         <RelatedProducts id={product.id} />
+
+        <ProductEditorialLinks
+          articleLinks={articleLinks}
+          similarProductLinks={similarProductLinks}
+          productTitle={product.title}
+        />
       </div>
       <Footer />
     </>
+  );
+}
+
+function ProductEditorialLinks({
+  articleLinks,
+  similarProductLinks,
+  productTitle,
+}: {
+  articleLinks: ReturnType<typeof getProductArticleLinks>;
+  similarProductLinks: ReturnType<typeof getSimilarProductLinks>;
+  productTitle: string;
+}) {
+  if (!articleLinks.length && !similarProductLinks.length) return null;
+
+  return (
+    <section className="mt-14 grid gap-6 lg:grid-cols-[1.15fr_0.85fr]">
+      <div className="rounded-2xl border-2 border-pierre/10 bg-white p-6 sm:p-8">
+        <h2 className="font-rubik text-2xl font-black text-pierre">
+          À lire aussi
+        </h2>
+        <p className="mt-2 font-inter text-sm leading-relaxed text-pierre/60">
+          Avant de choisir {productTitle}, ces guides expliquent comment adapter
+          le nombre de pièces, l'âge et le type de jeu à votre enfant.
+        </p>
+        <div className="mt-5 grid gap-3 sm:grid-cols-2">
+          {articleLinks.map((link) => (
+            <Link
+              key={link.href}
+              href={link.href}
+              className="group rounded-xl border border-pierre/10 bg-blanc p-4 transition-colors hover:border-creeper/40 hover:bg-creeper-light/20"
+            >
+              <span className="font-rubik text-sm font-bold text-pierre group-hover:text-creeper">
+                {link.label}
+              </span>
+              <span className="mt-1 block font-inter text-xs leading-relaxed text-pierre/55">
+                {link.description}
+              </span>
+            </Link>
+          ))}
+        </div>
+      </div>
+
+      {similarProductLinks.length > 0 ? (
+        <div className="rounded-2xl border-2 border-creeper/20 bg-creeper-light/20 p-6 sm:p-8">
+          <h2 className="font-rubik text-2xl font-black text-pierre">
+            Produits similaires
+          </h2>
+          <p className="mt-2 font-inter text-sm leading-relaxed text-pierre/60">
+            Si vous hésitez sur le format, comparez aussi ces packs CubeCraft.
+          </p>
+          <ul className="mt-5 space-y-3">
+            {similarProductLinks.map((link) => (
+              <li key={link.href}>
+                <Link
+                  href={link.href}
+                  className="inline-flex font-rubik text-sm font-bold text-creeper-dark hover:text-creeper hover:underline"
+                >
+                  {link.label}
+                </Link>
+                <p className="mt-1 font-inter text-xs leading-relaxed text-pierre/55">
+                  {link.description}
+                </p>
+              </li>
+            ))}
+          </ul>
+        </div>
+      ) : null}
+    </section>
   );
 }
 

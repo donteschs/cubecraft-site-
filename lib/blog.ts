@@ -12,6 +12,10 @@ export type BlogPost = {
   content: string;
 };
 
+type BlogPostWithFile = BlogPost & {
+  file: string;
+};
+
 function parseDateOnly(date: string) {
   const [year, month, day] = date.split("-").map(Number);
 
@@ -69,7 +73,7 @@ export function formatPostDate(date: string): string {
   });
 }
 
-export function getAllPosts(): BlogPost[] {
+function readAllPosts(): BlogPostWithFile[] {
   if (!fs.existsSync(BLOG_DIR)) return [];
   const files = fs.readdirSync(BLOG_DIR).filter((f) => f.endsWith(".mdx"));
   return files
@@ -82,9 +86,14 @@ export function getAllPosts(): BlogPost[] {
         description: data.description ?? "",
         date: data.date ?? "",
         content,
+        file,
       };
     })
     .sort((a, b) => (a.date < b.date ? 1 : -1));
+}
+
+export function getAllPosts(): BlogPost[] {
+  return readAllPosts().map(({ file: _file, ...post }) => post);
 }
 
 export function getLatestPosts(limit: number = 3): BlogPost[] {
@@ -106,11 +115,16 @@ export function isNewPost(date: string, days: number = 2): boolean {
 
 export function getPostBySlug(slug: string): BlogPost | null {
   const filePath = path.join(BLOG_DIR, `${slug}.mdx`);
-  if (!fs.existsSync(filePath)) return null;
+  if (!fs.existsSync(filePath)) {
+    const post = readAllPosts().find((p) => p.slug === slug);
+    if (!post) return null;
+    const { file: _file, ...publicPost } = post;
+    return publicPost;
+  }
   const raw = fs.readFileSync(filePath, "utf-8");
   const { data, content } = matter(raw);
   return {
-    slug,
+    slug: data.slug ?? slug,
     title: data.title ?? "",
     description: data.description ?? "",
     date: data.date ?? "",

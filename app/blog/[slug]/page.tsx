@@ -10,6 +10,11 @@ import { JsonLd } from "components/json-ld";
 import { mdxComponents } from "components/mdx/mdx-components";
 import { NewsletterBlock } from "components/newsletter/newsletter-block";
 import { BLOG_DEFAULT_IMAGE, absoluteImageUrl } from "lib/site-images";
+import { AffiliateProductGrid } from "components/affiliate/affiliate-product-grid";
+import {
+  getBlogAffiliateProductIds,
+  getBlogInternalLinks,
+} from "lib/seo/internal-links";
 
 export async function generateStaticParams() {
   return getAllPosts().map((p) => ({ slug: p.slug }));
@@ -53,6 +58,8 @@ export default async function BlogPostPage({
   const { slug } = await params;
   const post = getPostBySlug(slug);
   if (!post) notFound();
+  const internalLinks = getBlogInternalLinks(slug, post.title);
+  const affiliateProductIds = getBlogAffiliateProductIds(slug, post.title);
 
   const breadcrumbSchema = {
     "@context": "https://schema.org",
@@ -112,53 +119,100 @@ export default async function BlogPostPage({
       <JsonLd data={breadcrumbSchema} />
       <JsonLd data={articleSchema} />
       <main className="min-h-screen bg-blanc">
-      <div className="max-w-3xl mx-auto px-4 py-16">
-        <Link
-          href="/blog"
-          className="inline-flex items-center gap-2 text-pierre/50 hover:text-creeper text-sm font-inter mb-8 transition-colors"
-        >
-          ← Retour au blog
-        </Link>
-
-        <article>
-          <p className="text-xs text-pierre/40 font-inter mb-3">
-            {formatPostDate(post.date)}
-          </p>
-          <h1 className="font-rubik font-black text-pierre text-3xl md:text-4xl leading-tight mb-6">
-            {post.title}
-          </h1>
-          <p className="text-pierre/60 text-lg border-l-4 border-creeper pl-4 mb-10">
-            {post.description}
-          </p>
-
-          <div className="prose prose-lg max-w-none prose-headings:font-rubik prose-headings:font-bold prose-headings:text-pierre prose-p:text-pierre/70 prose-p:leading-relaxed prose-a:text-creeper prose-a:no-underline hover:prose-a:underline prose-strong:text-pierre prose-li:text-pierre/70 prose-table:w-full prose-th:bg-creeper-light prose-th:text-creeper-dark prose-th:font-bold prose-th:p-3 prose-th:text-sm prose-td:p-3 prose-td:border prose-td:border-pierre/20 prose-td:text-pierre/70 prose-td:text-sm prose-tr:even:bg-pierre/5">
-            <MDXRemote
-              source={post.content}
-              components={mdxComponents}
-              options={{ mdxOptions: { remarkPlugins: [remarkGfm] } }}
-            />
-          </div>
-        </article>
-
-        {/* Newsletter — automatique en bas de chaque article */}
-        <NewsletterBlock className="mt-16" />
-
-        <div className="mt-10 bg-creeper-light rounded-2xl p-8 text-center">
-          <p className="font-rubik font-black text-creeper-dark text-2xl mb-2">
-            Envie de jouets qui remplacent les écrans ?
-          </p>
-          <p className="text-creeper-dark/70 mb-6">
-            Construction, STEM, créatif, Montessori · Certifié CE · Livraison 4-5 j
-          </p>
+        <div className="max-w-3xl mx-auto px-4 py-16">
           <Link
-            href="/search"
-            className="inline-flex btn-shimmer items-center gap-2 rounded-xl px-6 py-3 font-rubik font-bold text-white shadow-md"
+            href="/blog"
+            className="inline-flex items-center gap-2 text-pierre/50 hover:text-creeper text-sm font-inter mb-8 transition-colors"
           >
-            Découvrir la boutique →
+            ← Retour au blog
           </Link>
+
+          <article>
+            <p className="text-xs text-pierre/40 font-inter mb-3">
+              {formatPostDate(post.date)}
+            </p>
+            <h1 className="font-rubik font-black text-pierre text-3xl md:text-4xl leading-tight mb-6">
+              {post.title}
+            </h1>
+            <p className="text-pierre/60 text-lg border-l-4 border-creeper pl-4 mb-10">
+              {post.description}
+            </p>
+
+            <div className="prose prose-lg max-w-none prose-headings:font-rubik prose-headings:font-bold prose-headings:text-pierre prose-p:text-pierre/70 prose-p:leading-relaxed prose-a:text-creeper prose-a:no-underline hover:prose-a:underline prose-strong:text-pierre prose-li:text-pierre/70 prose-table:w-full prose-th:bg-creeper-light prose-th:text-creeper-dark prose-th:font-bold prose-th:p-3 prose-th:text-sm prose-td:p-3 prose-td:border prose-td:border-pierre/20 prose-td:text-pierre/70 prose-td:text-sm prose-tr:even:bg-pierre/5">
+              {internalLinks.length >= 2 ? (
+                <p>
+                  Pour passer du conseil à l'action, comparez{" "}
+                  <Link href={internalLinks[0]!.href}>
+                    {internalLinks[0]!.label}
+                  </Link>{" "}
+                  et gardez sous la main notre guide{" "}
+                  <Link href={internalLinks[1]!.href}>
+                    {internalLinks[1]!.label}
+                  </Link>
+                  .
+                </p>
+              ) : null}
+              <MDXRemote
+                source={post.content}
+                components={mdxComponents}
+                options={{ mdxOptions: { remarkPlugins: [remarkGfm] } }}
+              />
+            </div>
+
+            <AffiliateProductGrid
+              title="Accessoires complémentaires affiliés"
+              ids={affiliateProductIds}
+            />
+
+            {internalLinks.length > 0 ? (
+              <section className="mt-12 rounded-2xl border-2 border-pierre/10 bg-white p-6">
+                <h2 className="font-rubik text-2xl font-black text-pierre">
+                  Continuer avec les bons produits
+                </h2>
+                <p className="mt-2 font-inter text-sm leading-relaxed text-pierre/60">
+                  Ces pages complètent naturellement le sujet et aident à
+                  choisir un jouet adapté sans repartir de zéro.
+                </p>
+                <div className="mt-5 grid gap-3 sm:grid-cols-2">
+                  {internalLinks.map((link) => (
+                    <Link
+                      key={link.href}
+                      href={link.href}
+                      className="group rounded-xl border border-pierre/10 bg-blanc p-4 transition-colors hover:border-creeper/40 hover:bg-creeper-light/20"
+                    >
+                      <span className="font-rubik text-sm font-bold text-pierre group-hover:text-creeper">
+                        {link.label}
+                      </span>
+                      <span className="mt-1 block font-inter text-xs leading-relaxed text-pierre/55">
+                        {link.description}
+                      </span>
+                    </Link>
+                  ))}
+                </div>
+              </section>
+            ) : null}
+          </article>
+
+          {/* Newsletter — automatique en bas de chaque article */}
+          <NewsletterBlock className="mt-16" />
+
+          <div className="mt-10 bg-creeper-light rounded-2xl p-8 text-center">
+            <p className="font-rubik font-black text-creeper-dark text-2xl mb-2">
+              Envie de jouets qui remplacent les écrans ?
+            </p>
+            <p className="text-creeper-dark/70 mb-6">
+              Construction, STEM, créatif, Montessori · Certifié CE · Livraison
+              4-5 j
+            </p>
+            <Link
+              href="/search"
+              className="inline-flex btn-shimmer items-center gap-2 rounded-xl px-6 py-3 font-rubik font-bold text-white shadow-md"
+            >
+              Découvrir la boutique →
+            </Link>
+          </div>
         </div>
-      </div>
-    </main>
+      </main>
     </>
   );
 }

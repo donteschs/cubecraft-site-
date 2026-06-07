@@ -1,4 +1,5 @@
 import { getAllPosts, formatPostDate } from "lib/blog";
+import { getPriorityProductLinks } from "lib/seo/internal-links";
 import Link from "next/link";
 import type { Metadata } from "next";
 
@@ -10,6 +11,7 @@ export const metadata: Metadata = {
 
 export default function BlogPage() {
   const posts = getAllPosts();
+  const productLinks = getPriorityProductLinks();
 
   return (
     <main className="min-h-screen bg-blanc">
@@ -36,41 +38,62 @@ export default function BlogPage() {
             {posts.map((post, index) => {
               const isTop3 = index < 3;
               return (
-              <Link
-                key={post.slug}
-                href={`/blog/${post.slug}`}
-                className={`group block rounded-2xl border p-6 transition-all duration-200 ${
-                  isTop3
-                    ? "bg-creeper-light/20 border-creeper/30 shadow-sm hover:border-creeper/50 hover:shadow-md"
-                    : "bg-white border-gray-200/60 hover:border-creeper/40 hover:shadow-md"
-                }`}
-              >
-                <div className="flex items-start justify-between gap-4">
-                  <div className="flex-1">
-                    {isTop3 ? (
-                      <span className="inline-flex items-center bg-creeper text-white text-[10px] font-rubik font-bold px-3 py-1 rounded-full uppercase tracking-[0.18em] mb-3">
-                        Nouveau
-                      </span>
-                    ) : null}
-                    <p className="text-xs text-pierre/40 font-inter mb-2">
-                      {formatPostDate(post.date)}
-                    </p>
-                    <h2 className="font-rubik font-bold text-pierre text-xl mb-2 group-hover:text-creeper transition-colors">
-                      {post.title}
-                    </h2>
-                    <p className="text-pierre/60 text-sm leading-relaxed line-clamp-2">
-                      {post.description}
-                    </p>
+                <Link
+                  key={post.slug}
+                  href={`/blog/${post.slug}`}
+                  className={`group block rounded-2xl border p-6 transition-all duration-200 ${
+                    isTop3
+                      ? "bg-creeper-light/20 border-creeper/30 shadow-sm hover:border-creeper/50 hover:shadow-md"
+                      : "bg-white border-gray-200/60 hover:border-creeper/40 hover:shadow-md"
+                  }`}
+                >
+                  <div className="flex items-start justify-between gap-4">
+                    <div className="flex-1">
+                      {isTop3 ? (
+                        <span className="inline-flex items-center bg-creeper text-white text-[10px] font-rubik font-bold px-3 py-1 rounded-full uppercase tracking-[0.18em] mb-3">
+                          Nouveau
+                        </span>
+                      ) : null}
+                      <p className="text-xs text-pierre/40 font-inter mb-2">
+                        {formatPostDate(post.date)}
+                      </p>
+                      <h2 className="font-rubik font-bold text-pierre text-xl mb-2 group-hover:text-creeper transition-colors">
+                        {post.title}
+                      </h2>
+                      <p className="text-pierre/60 text-sm leading-relaxed line-clamp-2">
+                        {post.description}
+                      </p>
+                    </div>
+                    <span className="text-creeper text-xl flex-shrink-0 group-hover:translate-x-1 transition-transform">
+                      →
+                    </span>
                   </div>
-                  <span className="text-creeper text-xl flex-shrink-0 group-hover:translate-x-1 transition-transform">
-                    →
-                  </span>
-                </div>
-              </Link>
+                </Link>
               );
             })}
           </div>
         )}
+
+        <section className="mt-12 rounded-2xl border-2 border-pierre/10 bg-white p-6">
+          <h2 className="font-rubik text-2xl font-black text-pierre">
+            Produits CubeCraft cités dans nos guides
+          </h2>
+          <p className="mt-2 font-inter text-sm leading-relaxed text-pierre/60">
+            Les articles renvoient vers ces pages produit pour comparer les
+            formats selon l'âge, le budget et le nombre d'enfants à la maison.
+          </p>
+          <div className="mt-5 grid gap-3 sm:grid-cols-3">
+            {productLinks.map((link) => (
+              <Link
+                key={link.href}
+                href={link.href}
+                className="rounded-xl border border-pierre/10 bg-blanc p-4 font-rubik text-sm font-bold text-pierre transition-colors hover:border-creeper/40 hover:text-creeper"
+              >
+                {link.label}
+              </Link>
+            ))}
+          </div>
+        </section>
 
         <div className="mt-16 bg-creeper-light rounded-2xl p-8 text-center">
           <p className="font-rubik font-black text-creeper-dark text-2xl mb-2">

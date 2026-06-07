@@ -53,14 +53,27 @@ export default async function SelectionPage({
     : selection.category
       ? getAffiliateProductsByCategory(selection.category)
       : [];
+  const onlyAccessoryProducts =
+    products.length > 0 &&
+    products.every((product) => product.category === "accessoires");
 
   const breadcrumbSchema = {
     "@context": "https://schema.org",
     "@type": "BreadcrumbList",
     itemListElement: [
       { "@type": "ListItem", position: 1, name: "Accueil", item: SITE },
-      { "@type": "ListItem", position: 2, name: "Sélections", item: `${SITE}/selection` },
-      { "@type": "ListItem", position: 3, name: selection.title, item: `${SITE}/selection/${slug}` },
+      {
+        "@type": "ListItem",
+        position: 2,
+        name: "Sélections",
+        item: `${SITE}/selection`,
+      },
+      {
+        "@type": "ListItem",
+        position: 3,
+        name: selection.title,
+        item: `${SITE}/selection/${slug}`,
+      },
     ],
   };
 
@@ -102,7 +115,9 @@ export default async function SelectionPage({
         <div className="mx-auto max-w-4xl px-4 py-12 sm:py-16">
           {/* Fil d'Ariane */}
           <nav className="mb-6 flex items-center gap-2 font-inter text-sm text-pierre/50">
-            <Link href="/" className="hover:text-creeper">Accueil</Link>
+            <Link href="/" className="hover:text-creeper">
+              Accueil
+            </Link>
             <span>/</span>
             <span className="text-pierre/80">Sélections</span>
           </nav>
@@ -119,7 +134,14 @@ export default async function SelectionPage({
           </p>
 
           {/* Grille de produits affiliés */}
-          <AffiliateProductGrid title="Notre sélection" products={products} />
+          <AffiliateProductGrid
+            title={
+              onlyAccessoryProducts
+                ? "Accessoires complémentaires"
+                : "Notre sélection"
+            }
+            products={products}
+          />
 
           {/* Conseils d'achat */}
           {selection.buyingTips.length > 0 ? (
@@ -133,7 +155,9 @@ export default async function SelectionPage({
                     key={tip.title}
                     className="rounded-2xl border-2 border-pierre/10 bg-white p-5"
                   >
-                    <h3 className="font-rubik font-bold text-pierre">{tip.title}</h3>
+                    <h3 className="font-rubik font-bold text-pierre">
+                      {tip.title}
+                    </h3>
                     <p className="mt-2 font-inter text-sm leading-relaxed text-pierre/65">
                       {tip.text}
                     </p>
@@ -157,8 +181,17 @@ export default async function SelectionPage({
                   >
                     <summary className="flex cursor-pointer list-none items-center justify-between gap-2 font-rubik font-bold text-pierre">
                       {f.q}
-                      <svg className="h-5 w-5 flex-shrink-0 text-pierre/40 transition-transform group-open:rotate-180" viewBox="0 0 20 20" fill="currentColor" aria-hidden>
-                        <path fillRule="evenodd" d="M5.23 7.21a.75.75 0 011.06.02L10 11.168l3.71-3.938a.75.75 0 111.08 1.04l-4.25 4.5a.75.75 0 01-1.08 0l-4.25-4.5a.75.75 0 01.02-1.06z" clipRule="evenodd" />
+                      <svg
+                        className="h-5 w-5 flex-shrink-0 text-pierre/40 transition-transform group-open:rotate-180"
+                        viewBox="0 0 20 20"
+                        fill="currentColor"
+                        aria-hidden
+                      >
+                        <path
+                          fillRule="evenodd"
+                          d="M5.23 7.21a.75.75 0 011.06.02L10 11.168l3.71-3.938a.75.75 0 111.08 1.04l-4.25 4.5a.75.75 0 01-1.08 0l-4.25-4.5a.75.75 0 01.02-1.06z"
+                          clipRule="evenodd"
+                        />
                       </svg>
                     </summary>
                     <p className="mt-3 font-inter text-sm leading-relaxed text-pierre/65">

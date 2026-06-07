@@ -3,6 +3,7 @@ import Footer from "components/layout/footer";
 export const metadata = {
   title: "Politique de Confidentialité — CubeCraft",
   description: "Politique de confidentialité CubeCraft. Collecte, utilisation et protection de vos données personnelles conformément au RGPD.",
+  robots: { index: false, follow: true },
 };
 
 export default function PrivacyPage() {
