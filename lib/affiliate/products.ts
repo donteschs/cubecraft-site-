@@ -32,93 +32,68 @@ export type AffiliateCategory =
 export const AFFILIATE_PRODUCTS: AffiliateProduct[] = [
   {
     id: "sac-rangement-jouets-tapis",
-    title: "Sac de rangement tapis de jeu",
+    title: "Boîte de rangement compartimentée",
     description:
-      "Un tapis qui se referme en sac pour garder les cubes, accessoires et petites pièces au même endroit après le jeu.",
-    image:
-      "https://ws-eu.amazon-adsystem.com/widgets/q?_encoding=UTF8&MarketPlace=FR&ASIN=B07YF8FQGZ&ServiceVersion=20070822&ID=AsinImage&WS=1&Format=_SL500_",
-    affiliateUrl:
-      "https://www.amazon.fr/s?k=sac+rangement+jouets+tapis+jeu&tag=issakanoute-21",
+      "Une boîte transparente avec compartiments pour trier les cubes, accessoires et petites pièces après le jeu.",
+    image: "https://m.media-amazon.com/images/I/41oLdWhbYWL._SL500_.jpg",
+    affiliateUrl: "https://www.amazon.fr/dp/B0CQ7D6PJ6?tag=issakanoute-21",
     category: "accessoires",
-    tags: ["rangement", "tapis", "accessoire", "famille"],
-    price: "Voir le prix",
+    tags: ["rangement", "boîte", "accessoire", "famille"],
+    price: "21,99 €",
     merchant: "Amazon",
-    asin: "B07YF8FQGZ",
+    asin: "B0CQ7D6PJ6",
   },
   {
     id: "boite-rangement-jouets",
-    title: "Boîte de rangement pour jouets",
+    title: "Étagère de rangement enfant SONGMICS",
     description:
-      "Une boîte transparente ou compartimentée pour trier les cubes par couleur et éviter les pièces perdues.",
-    image:
-      "https://ws-eu.amazon-adsystem.com/widgets/q?_encoding=UTF8&MarketPlace=FR&ASIN=B000KN4DQ4&ServiceVersion=20070822&ID=AsinImage&WS=1&Format=_SL500_",
-    affiliateUrl:
-      "https://www.amazon.fr/s?k=boite+rangement+jouets+compartiments&tag=issakanoute-21",
+      "Une étagère basse avec bacs amovibles pour garder les sets CubeCraft et les livres créatifs à portée d'enfant.",
+    image: "https://m.media-amazon.com/images/I/51kiIP5Y6BL._SL500_.jpg",
+    affiliateUrl: "https://www.amazon.fr/dp/B07QN2T62H?tag=issakanoute-21",
     category: "accessoires",
-    tags: ["rangement", "boîte", "organisation", "accessoire"],
-    price: "Voir le prix",
+    tags: ["rangement", "étagère", "organisation", "accessoire"],
+    price: "24,99 €",
     merchant: "Amazon",
-    asin: "B000KN4DQ4",
+    asin: "B07QN2T62H",
   },
   {
     id: "time-timer-visuel-enfant",
-    title: "Minuteur visuel pour routine sans écran",
+    title: "TimeBuddy minuteur visuel enfant",
     description:
       "Un minuteur visuel aide à instaurer une routine : temps d'écran limité, puis temps de construction CubeCraft.",
-    image:
-      "https://ws-eu.amazon-adsystem.com/widgets/q?_encoding=UTF8&MarketPlace=FR&ASIN=B000J5OFW0&ServiceVersion=20070822&ID=AsinImage&WS=1&Format=_SL500_",
-    affiliateUrl:
-      "https://www.amazon.fr/s?k=minuteur+visuel+enfant+time+timer&tag=issakanoute-21",
+    image: "https://m.media-amazon.com/images/I/41jwYFMZlcL._SL500_.jpg",
+    affiliateUrl: "https://www.amazon.fr/dp/B0D97SZ71D?tag=issakanoute-21",
     category: "accessoires",
     tags: ["anti-écran", "routine", "temps", "famille"],
-    price: "Voir le prix",
+    price: "17,99 €",
     merchant: "Amazon",
-    asin: "B000J5OFW0",
+    asin: "B0D97SZ71D",
   },
   {
-    id: "livre-idees-construction-enfant",
-    title: "Livre d'idées de constructions pour enfant",
+    id: "coffre-rangement-jouets",
+    title: "Coffre à jouets bois HOOBRO",
     description:
-      "Des idées de modèles et défis créatifs pour relancer l'inspiration quand l'enfant a déjà son set CubeCraft.",
-    image:
-      "https://ws-eu.amazon-adsystem.com/widgets/q?_encoding=UTF8&MarketPlace=FR&ASIN=2324024075&ServiceVersion=20070822&ID=AsinImage&WS=1&Format=_SL500_",
-    affiliateUrl:
-      "https://www.amazon.fr/s?k=livre+id%C3%A9es+construction+enfant&tag=issakanoute-21",
+      "Un coffre bas pour ranger les grands packs, les livrets de modèles et les créations en cours sans tout mélanger.",
+    image: "https://m.media-amazon.com/images/I/51gVwAuzc9L._SL500_.jpg",
+    affiliateUrl: "https://www.amazon.fr/dp/B083GN2RT9?tag=issakanoute-21",
     category: "accessoires",
-    tags: ["inspiration", "construction", "livre", "créatif"],
-    price: "Voir le prix",
+    tags: ["rangement", "coffre", "famille", "accessoire"],
+    price: "64,99 €",
     merchant: "Amazon",
-    asin: "2324024075",
+    asin: "B083GN2RT9",
   },
   {
-    id: "carnet-croquis-enfant",
-    title: "Carnet de croquis pour plans de construction",
+    id: "banc-rangement-jouets",
+    title: "Banc coffre de rangement blanc",
     description:
-      "Un carnet simple pour dessiner ses maisons, tours et circuits avant de les construire avec CubeCraft.",
-    image:
-      "https://ws-eu.amazon-adsystem.com/widgets/q?_encoding=UTF8&MarketPlace=FR&ASIN=B07H2C66S1&ServiceVersion=20070822&ID=AsinImage&WS=1&Format=_SL500_",
-    affiliateUrl:
-      "https://www.amazon.fr/s?k=carnet+croquis+enfant&tag=issakanoute-21",
+      "Un banc coffre compact pour créer un coin construction propre dans une chambre ou une salle de jeux.",
+    image: "https://m.media-amazon.com/images/I/31vkk+cR6JL._SL500_.jpg",
+    affiliateUrl: "https://www.amazon.fr/dp/B0FD3B7KBP?tag=issakanoute-21",
     category: "accessoires",
-    tags: ["dessin", "plan", "créatif", "stem"],
-    price: "Voir le prix",
+    tags: ["rangement", "banc", "coffre", "accessoire"],
+    price: "79,99 €",
     merchant: "Amazon",
-    asin: "B07H2C66S1",
-  },
-  {
-    id: "lampe-bureau-enfant",
-    title: "Lampe de bureau pour coin construction",
-    description:
-      "Une lumière douce et orientable pour installer un vrai coin créatif, même le soir ou les jours de pluie.",
-    image:
-      "https://ws-eu.amazon-adsystem.com/widgets/q?_encoding=UTF8&MarketPlace=FR&ASIN=B08V8LQW6M&ServiceVersion=20070822&ID=AsinImage&WS=1&Format=_SL500_",
-    affiliateUrl:
-      "https://www.amazon.fr/s?k=lampe+bureau+enfant+led&tag=issakanoute-21",
-    category: "accessoires",
-    tags: ["bureau", "lumière", "créatif", "accessoire"],
-    price: "Voir le prix",
-    merchant: "Amazon",
-    asin: "B08V8LQW6M",
+    asin: "B0FD3B7KBP",
   },
 ];
 

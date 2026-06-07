@@ -48,10 +48,7 @@ export function AffiliateProductGrid({
   return (
     <section className="not-prose my-10">
       {title ? (
-        <div className="mb-5 flex items-center gap-3">
-          <span className="font-pixel text-[9px] text-creeper bg-creeper/10 border border-creeper/30 px-2.5 py-1 rounded-sm tracking-wider">
-            SÉLECTION
-          </span>
+        <div className="mb-5">
           <h3 className="font-rubik font-black text-pierre text-xl sm:text-2xl">
             {title}
           </h3>

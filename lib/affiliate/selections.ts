@@ -31,8 +31,7 @@ export const SELECTIONS: SelectionPage[] = [
     productIds: [
       "sac-rangement-jouets-tapis",
       "boite-rangement-jouets",
-      "livre-idees-construction-enfant",
-      "carnet-croquis-enfant",
+      "coffre-rangement-jouets",
     ],
     buyingTips: [
       {
@@ -77,9 +76,9 @@ export const SELECTIONS: SelectionPage[] = [
     intro:
       "Les jouets STEM (sciences, technologie, ingénierie, maths) apprennent en jouant. Voici nos coups de cœur pour éveiller l'esprit scientifique de votre enfant, sans écran.",
     productIds: [
-      "carnet-croquis-enfant",
       "time-timer-visuel-enfant",
-      "lampe-bureau-enfant",
+      "boite-rangement-jouets",
+      "coffre-rangement-jouets",
     ],
     buyingTips: [
       {
@@ -127,7 +126,7 @@ export const SELECTIONS: SelectionPage[] = [
       "sac-rangement-jouets-tapis",
       "boite-rangement-jouets",
       "time-timer-visuel-enfant",
-      "livre-idees-construction-enfant",
+      "coffre-rangement-jouets",
     ],
     buyingTips: [
       {
@@ -170,7 +169,7 @@ export const SELECTIONS: SelectionPage[] = [
     productIds: [
       "boite-rangement-jouets",
       "time-timer-visuel-enfant",
-      "carnet-croquis-enfant",
+      "coffre-rangement-jouets",
     ],
     buyingTips: [
       {

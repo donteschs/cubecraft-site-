@@ -114,29 +114,29 @@ export const PRIORITY_ARTICLES: InternalLink[] = [
 const DEFAULT_AFFILIATE_IDS = [
   "sac-rangement-jouets-tapis",
   "time-timer-visuel-enfant",
-  "livre-idees-construction-enfant",
+  "boite-rangement-jouets",
 ];
 
 const TOPIC_AFFILIATE_IDS: Record<string, string[]> = {
   minecraft: [
-    "livre-idees-construction-enfant",
+    "coffre-rangement-jouets",
     "sac-rangement-jouets-tapis",
-    "lampe-bureau-enfant",
+    "boite-rangement-jouets",
   ],
   magnetique: [
     "sac-rangement-jouets-tapis",
     "boite-rangement-jouets",
-    "livre-idees-construction-enfant",
+    "coffre-rangement-jouets",
   ],
   stem: [
-    "carnet-croquis-enfant",
     "time-timer-visuel-enfant",
-    "lampe-bureau-enfant",
+    "boite-rangement-jouets",
+    "coffre-rangement-jouets",
   ],
   montessori: [
     "boite-rangement-jouets",
     "time-timer-visuel-enfant",
-    "carnet-croquis-enfant",
+    "coffre-rangement-jouets",
   ],
   famille: [
     "sac-rangement-jouets-tapis",
@@ -201,7 +201,7 @@ export function getBlogAffiliateProductIds(
     return [
       "time-timer-visuel-enfant",
       "sac-rangement-jouets-tapis",
-      "livre-idees-construction-enfant",
+      "boite-rangement-jouets",
     ];
   }
   return DEFAULT_AFFILIATE_IDS;
