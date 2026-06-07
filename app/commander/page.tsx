@@ -5,6 +5,10 @@ import { ProductUI } from "./product-ui";
 import { JsonLd } from "components/json-ld";
 import Footer from "components/layout/footer";
 
+// Rendu à la demande : évite qu'un hoquet Shopify au build (prerender) ne casse
+// tout le déploiement. La page reste rapide et se met en cache côté serveur.
+export const dynamic = "force-dynamic";
+
 export const metadata: Metadata = {
   title: "Cubes Magnétiques CubeCraft — Pack 100, 200 & 400 pièces",
   description:
