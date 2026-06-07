@@ -18,6 +18,7 @@ export type AffiliateProduct = {
   tags: string[];
   price?: string; // ex "29,90 €" — purement indicatif, optionnel
   merchant?: string; // ex "Amazon"
+  asin?: string;
 };
 
 export type AffiliateCategory =
@@ -30,83 +31,103 @@ export type AffiliateCategory =
 
 export const AFFILIATE_PRODUCTS: AffiliateProduct[] = [
   {
-    id: "magformers-classic-30",
-    title: "Magformers Classic 30 pièces",
+    id: "sac-rangement-jouets-tapis",
+    title: "Sac de rangement tapis de jeu",
     description:
-      "Tuiles magnétiques colorées pour construire en 3D. Une référence du jeu de construction magnétique, dès 3 ans.",
-    image: "",
-    affiliateUrl: "https://www.amazon.fr/dp/EXEMPLE?tag=cubecrafte-21",
-    category: "construction",
-    tags: ["magnétique", "construction", "3 ans", "best-seller"],
-    price: "39,90 €",
+      "Un tapis qui se referme en sac pour garder les cubes, accessoires et petites pièces au même endroit après le jeu.",
+    image:
+      "https://ws-eu.amazon-adsystem.com/widgets/q?_encoding=UTF8&MarketPlace=FR&ASIN=B07YF8FQGZ&ServiceVersion=20070822&ID=AsinImage&WS=1&Format=_SL500_",
+    affiliateUrl:
+      "https://www.amazon.fr/s?k=sac+rangement+jouets+tapis+jeu&tag=issakanoute-21",
+    category: "accessoires",
+    tags: ["rangement", "tapis", "accessoire", "famille"],
+    price: "Voir le prix",
     merchant: "Amazon",
+    asin: "B07YF8FQGZ",
   },
   {
-    id: "lego-classic-boite-creative",
-    title: "LEGO Classic — La boîte de briques créatives",
+    id: "boite-rangement-jouets",
+    title: "Boîte de rangement pour jouets",
     description:
-      "790 briques LEGO de toutes les couleurs pour libérer l'imagination. Un incontournable de la créativité.",
-    image: "",
-    affiliateUrl: "https://www.amazon.fr/dp/EXEMPLE?tag=cubecrafte-21",
-    category: "creatif",
-    tags: ["briques", "créatif", "4 ans", "cadeau"],
-    price: "34,99 €",
+      "Une boîte transparente ou compartimentée pour trier les cubes par couleur et éviter les pièces perdues.",
+    image:
+      "https://ws-eu.amazon-adsystem.com/widgets/q?_encoding=UTF8&MarketPlace=FR&ASIN=B000KN4DQ4&ServiceVersion=20070822&ID=AsinImage&WS=1&Format=_SL500_",
+    affiliateUrl:
+      "https://www.amazon.fr/s?k=boite+rangement+jouets+compartiments&tag=issakanoute-21",
+    category: "accessoires",
+    tags: ["rangement", "boîte", "organisation", "accessoire"],
+    price: "Voir le prix",
     merchant: "Amazon",
+    asin: "B000KN4DQ4",
   },
   {
-    id: "robot-coding-mtbot",
-    title: "Robot de codage pour enfant",
+    id: "time-timer-visuel-enfant",
+    title: "Minuteur visuel pour routine sans écran",
     description:
-      "Initiation au codage sans écran : l'enfant programme les déplacements et relève des défis logiques.",
-    image: "",
-    affiliateUrl: "https://www.amazon.fr/dp/EXEMPLE?tag=cubecrafte-21",
-    category: "stem",
-    tags: ["codage", "robot", "STEM", "6 ans"],
-    price: "49,90 €",
+      "Un minuteur visuel aide à instaurer une routine : temps d'écran limité, puis temps de construction CubeCraft.",
+    image:
+      "https://ws-eu.amazon-adsystem.com/widgets/q?_encoding=UTF8&MarketPlace=FR&ASIN=B000J5OFW0&ServiceVersion=20070822&ID=AsinImage&WS=1&Format=_SL500_",
+    affiliateUrl:
+      "https://www.amazon.fr/s?k=minuteur+visuel+enfant+time+timer&tag=issakanoute-21",
+    category: "accessoires",
+    tags: ["anti-écran", "routine", "temps", "famille"],
+    price: "Voir le prix",
     merchant: "Amazon",
+    asin: "B000J5OFW0",
   },
   {
-    id: "kit-experiences-sciences",
-    title: "Coffret 30 expériences scientifiques",
+    id: "livre-idees-construction-enfant",
+    title: "Livre d'idées de constructions pour enfant",
     description:
-      "Un mini-labo à la maison : volcan, cristaux, réactions colorées. Pour éveiller la curiosité scientifique.",
-    image: "",
-    affiliateUrl: "https://www.amazon.fr/dp/EXEMPLE?tag=cubecrafte-21",
-    category: "stem",
-    tags: ["sciences", "expériences", "STEM", "cadeau"],
-    price: "29,90 €",
+      "Des idées de modèles et défis créatifs pour relancer l'inspiration quand l'enfant a déjà son set CubeCraft.",
+    image:
+      "https://ws-eu.amazon-adsystem.com/widgets/q?_encoding=UTF8&MarketPlace=FR&ASIN=2324024075&ServiceVersion=20070822&ID=AsinImage&WS=1&Format=_SL500_",
+    affiliateUrl:
+      "https://www.amazon.fr/s?k=livre+id%C3%A9es+construction+enfant&tag=issakanoute-21",
+    category: "accessoires",
+    tags: ["inspiration", "construction", "livre", "créatif"],
+    price: "Voir le prix",
     merchant: "Amazon",
+    asin: "2324024075",
   },
   {
-    id: "jouet-montessori-bois",
-    title: "Jouet d'éveil Montessori en bois",
+    id: "carnet-croquis-enfant",
+    title: "Carnet de croquis pour plans de construction",
     description:
-      "Tri des formes et encastrements en bois naturel. Développe la motricité fine des tout-petits.",
-    image: "",
-    affiliateUrl: "https://www.amazon.fr/dp/EXEMPLE?tag=cubecrafte-21",
-    category: "montessori",
-    tags: ["montessori", "bois", "éveil", "2 ans"],
-    price: "24,90 €",
+      "Un carnet simple pour dessiner ses maisons, tours et circuits avant de les construire avec CubeCraft.",
+    image:
+      "https://ws-eu.amazon-adsystem.com/widgets/q?_encoding=UTF8&MarketPlace=FR&ASIN=B07H2C66S1&ServiceVersion=20070822&ID=AsinImage&WS=1&Format=_SL500_",
+    affiliateUrl:
+      "https://www.amazon.fr/s?k=carnet+croquis+enfant&tag=issakanoute-21",
+    category: "accessoires",
+    tags: ["dessin", "plan", "créatif", "stem"],
+    price: "Voir le prix",
     merchant: "Amazon",
+    asin: "B07H2C66S1",
   },
   {
-    id: "jeu-societe-famille",
-    title: "Jeu de société stratégie en famille",
+    id: "lampe-bureau-enfant",
+    title: "Lampe de bureau pour coin construction",
     description:
-      "Règles simples, parties rapides : le rituel anti-écran parfait pour rassembler toute la famille.",
-    image: "",
-    affiliateUrl: "https://www.amazon.fr/dp/EXEMPLE?tag=cubecrafte-21",
-    category: "famille",
-    tags: ["jeu de société", "famille", "anti-écran", "6 ans"],
-    price: "22,90 €",
+      "Une lumière douce et orientable pour installer un vrai coin créatif, même le soir ou les jours de pluie.",
+    image:
+      "https://ws-eu.amazon-adsystem.com/widgets/q?_encoding=UTF8&MarketPlace=FR&ASIN=B08V8LQW6M&ServiceVersion=20070822&ID=AsinImage&WS=1&Format=_SL500_",
+    affiliateUrl:
+      "https://www.amazon.fr/s?k=lampe+bureau+enfant+led&tag=issakanoute-21",
+    category: "accessoires",
+    tags: ["bureau", "lumière", "créatif", "accessoire"],
+    price: "Voir le prix",
     merchant: "Amazon",
+    asin: "B08V8LQW6M",
   },
 ];
 
 const BY_ID = new Map(AFFILIATE_PRODUCTS.map((p) => [p.id, p]));
 
 export function getAffiliateProductsByIds(ids: string[]): AffiliateProduct[] {
-  return ids.map((id) => BY_ID.get(id)).filter((p): p is AffiliateProduct => Boolean(p));
+  return ids
+    .map((id) => BY_ID.get(id))
+    .filter((p): p is AffiliateProduct => Boolean(p));
 }
 
 export function getAffiliateProductsByCategory(

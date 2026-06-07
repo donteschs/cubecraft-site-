@@ -8,9 +8,9 @@ import { getAffiliateProductsByIds } from "lib/affiliate/products";
  * Composants exposés aux articles MDX (next-mdx-remote).
  *
  * Dans n'importe quel article .mdx, on peut désormais écrire :
- *   <AffiliateGrid title="Notre sélection" ids={["lego-classic-boite-creative"]} />
- *   <AffiliateGrid title="Idées STEM" category="stem" />
- *   <AffiliateCard id="robot-coding-mtbot" />
+ *   <AffiliateGrid title="Notre sélection" ids={["sac-rangement-jouets-tapis"]} />
+ *   <AffiliateGrid title="Accessoires" category="accessoires" />
+ *   <AffiliateCard id="time-timer-visuel-enfant" />
  *   <Newsletter />
  *   <Disclosure />
  */
