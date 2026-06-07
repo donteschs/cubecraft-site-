@@ -22,8 +22,8 @@ function Stars({ count }: { count: number }) {
 }
 
 const reassuranceBadges = [
-  { icon: <svg className="w-4 h-4" viewBox="0 0 20 20" fill="currentColor" aria-hidden><path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.857-9.809a.75.75 0 00-1.214-.882l-3.483 4.79-1.88-1.88a.75.75 0 10-1.06 1.061l2.5 2.5a.75.75 0 001.137-.089l4-5.5z" clipRule="evenodd"/></svg>, label: "Note 4,9/5" },
-  { icon: <svg className="w-4 h-4" viewBox="0 0 20 20" fill="currentColor" aria-hidden><path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.857-9.809a.75.75 0 00-1.214-.882l-3.483 4.79-1.88-1.88a.75.75 0 10-1.06 1.061l2.5 2.5a.75.75 0 001.137-.089l4-5.5z" clipRule="evenodd"/></svg>, label: "2 847 avis vérifiés" },
+  { icon: <svg className="w-4 h-4" viewBox="0 0 20 20" fill="currentColor" aria-hidden><path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.857-9.809a.75.75 0 00-1.214-.882l-3.483 4.79-1.88-1.88a.75.75 0 10-1.06 1.061l2.5 2.5a.75.75 0 001.137-.089l4-5.5z" clipRule="evenodd"/></svg>, label: "Avis clients" },
+  { icon: <svg className="w-4 h-4" viewBox="0 0 20 20" fill="currentColor" aria-hidden><path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.857-9.809a.75.75 0 00-1.214-.882l-3.483 4.79-1.88-1.88a.75.75 0 10-1.06 1.061l2.5 2.5a.75.75 0 001.137-.089l4-5.5z" clipRule="evenodd"/></svg>, label: "Premiers avis clients" },
   { icon: <svg className="w-4 h-4" viewBox="0 0 20 20" fill="currentColor" aria-hidden><path fillRule="evenodd" d="M10 1a4.5 4.5 0 00-4.5 4.5V9H5a2 2 0 00-2 2v6a2 2 0 002 2h10a2 2 0 002-2v-6a2 2 0 00-2-2h-.5V5.5A4.5 4.5 0 0010 1zm3 8V5.5a3 3 0 10-6 0V9h6z" clipRule="evenodd"/></svg>, label: "Certifié CE" },
   { icon: <svg className="w-4 h-4" viewBox="0 0 20 20" fill="currentColor" aria-hidden><path d="M6.5 9a.5.5 0 000 1h7a.5.5 0 000-1h-7zM4 1a2 2 0 00-2 2v14a2 2 0 002 2h12a2 2 0 002-2V3a2 2 0 00-2-2H4zm0 1.5h12a.5.5 0 01.5.5v14a.5.5 0 01-.5.5H4a.5.5 0 01-.5-.5V3a.5.5 0 01.5-.5z"/></svg>, label: "Livraison 24h" },
   { icon: <svg className="w-4 h-4" viewBox="0 0 20 20" fill="currentColor" aria-hidden><path fillRule="evenodd" d="M15.312 11.424a5.5 5.5 0 01-9.201 2.466l-.312-.311h2.433a.75.75 0 000-1.5H3.989a.75.75 0 00-.75.75v4.242a.75.75 0 001.5 0v-2.43l.31.31a7 7 0 0011.712-3.138.75.75 0 00-1.449-.39zm1.23-3.723a.75.75 0 00.219-.53V2.929a.75.75 0 00-1.5 0V5.36l-.31-.31A7 7 0 003.239 8.188a.75.75 0 101.448.389A5.5 5.5 0 0113.89 6.11l.311.31h-2.432a.75.75 0 000 1.5h4.243a.75.75 0 00.53-.219z" clipRule="evenodd"/></svg>, label: "Retour gratuit 30j" },
@@ -44,8 +44,8 @@ export function Testimonials() {
           {/* Aggregate rating */}
           <div className="inline-flex items-center gap-3 bg-or/10 border border-or/20 rounded-full px-4 sm:px-5 py-2 sm:py-2.5">
             <Stars count={5} />
-            <span className="font-rubik font-bold text-pierre text-base sm:text-lg">4,9/5</span>
-            <span className="text-pierre/60 font-inter text-xs sm:text-sm">— 2 847 avis vérifiés</span>
+            <span className="font-rubik font-bold text-pierre text-base sm:text-lg">Adoré</span>
+            <span className="text-pierre/60 font-inter text-xs sm:text-sm">— Premiers avis clients</span>
           </div>
         </div>
 

@@ -137,12 +137,6 @@ export default async function CommanderPage() {
         hasMerchantReturnPolicy: returnPolicy,
       },
     ],
-    aggregateRating: {
-      "@type": "AggregateRating",
-      ratingValue: "4.9",
-      reviewCount: "47",
-      bestRating: "5",
-    },
   };
 
   const faqSchema = {

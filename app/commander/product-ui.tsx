@@ -152,7 +152,7 @@ const TRUST_BADGES = [
     icon: <IconShield />,
   },
   { title: "Paiement sécurisé", sub: "SSL · CB · PayPal", icon: <IconLock /> },
-  { title: "4,9 / 5 étoiles", sub: "2 847 avis vérifiés", icon: <IconStar /> },
+  { title: "Adoré des familles", sub: "Premiers avis clients", icon: <IconStar /> },
   {
     title: "Certifié CE & EN 71",
     sub: "Aimants néodyme N52",
@@ -680,13 +680,13 @@ export function ProductUI({
               <div className="flex items-center gap-3 flex-wrap mt-2">
                 <Stars n={5} size="md" />
                 <span className="font-rubik font-bold text-pierre text-sm">
-                  4,9/5
+                  Adoré
                 </span>
                 <a
                   href="#reviews"
                   className="text-ciel text-sm font-inter hover:underline"
                 >
-                  2 847 avis
+                  Avis clients
                 </a>
                 <span className="text-creeper text-sm font-inter">
                   · {variant.stock} restants
@@ -994,7 +994,7 @@ export function ProductUI({
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-4">
           <div className="flex items-center gap-6 sm:gap-10 overflow-x-auto scrollbar-hide pb-1 sm:pb-0 sm:justify-center flex-nowrap sm:flex-wrap">
             {[
-              { icon: <Stars n={5} size="sm" />, label: "4,9/5 · 2 847 avis" },
+              { icon: <Stars n={5} size="sm" />, label: "Recommandé par des parents" },
               {
                 icon: (
                   <span className="font-rubik font-black text-creeper text-lg">
@@ -1510,16 +1510,16 @@ export function ProductUI({
               Témoignages
             </span>
             <h2 className="font-rubik font-black text-pierre text-2xl sm:text-4xl leading-tight mb-2">
-              <span className="text-gradient-green">2 847 familles</span> ont
+              <span className="text-gradient-green">De nombreuses familles</span> ont
               déjà sauté le pas
             </h2>
             <div className="inline-flex items-center gap-2 bg-or/10 border border-or/20 rounded-full px-4 py-2 mt-2">
               <Stars n={5} size="sm" />
               <span className="font-rubik font-bold text-pierre text-sm">
-                4,9/5
+                Adoré
               </span>
               <span className="text-pierre/50 font-inter text-xs">
-                — avis vérifiés
+                — premiers avis clients
               </span>
             </div>
           </div>
@@ -1773,7 +1773,7 @@ export function ProductUI({
                 Ce que disent les familles
               </h2>
               <p className="text-pierre/50 font-inter text-sm">
-                2 847 avis · 4,9 / 5 étoiles
+                Adoré de nos premiers clients
               </p>
             </div>
             <div className="flex items-center gap-5 bg-creeper-light/20 border border-creeper/10 rounded-2xl px-5 py-4 flex-shrink-0">

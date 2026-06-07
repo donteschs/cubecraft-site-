@@ -62,7 +62,7 @@ export function Hero() {
                 {STARS}
               </span>
               <span className="text-white/70 text-sm font-inter">
-                <strong className="text-white">2 847</strong> parents satisfaits
+                <strong className="text-white">Des parents</strong> conquis
               </span>
             </div>
             <span className="text-white/20 hidden sm:inline">|</span>

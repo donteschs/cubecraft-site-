@@ -61,7 +61,7 @@ export function FinalCTA() {
             ))}
           </div>
           <span>
-            <strong className="text-white">2 847 parents</strong> ont déjà fait le bon choix
+            <strong className="text-white">De nombreux parents</strong> ont déjà fait le bon choix
           </span>
         </div>
       </div>

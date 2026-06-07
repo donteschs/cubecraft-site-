@@ -136,7 +136,7 @@ export default function AProposPage() {
               Parlons-en
             </h2>
             <p className="mx-auto mt-2 max-w-xl text-creeper-dark/70">
-              CubeCraft — Issa Kanouté · Paris, France
+              CubeCraft — Issa Kanouté · 14 rue de la Santé, France
             </p>
             <a
               href="mailto:snuggiesservices@gmail.com"

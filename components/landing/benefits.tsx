@@ -85,7 +85,7 @@ export function Benefits() {
           </span>
           <h2 className="font-rubik font-black text-pierre text-3xl sm:text-4xl lg:text-5xl leading-tight mb-4">
             Pourquoi{" "}
-            <span className="text-gradient-green">2 847 parents</span>
+            <span className="text-gradient-green">De nombreux parents</span>
             <br className="hidden sm:block" />
             ont choisi CubeCraft
           </h2>

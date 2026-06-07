@@ -35,7 +35,7 @@ export function ProductDescription({ product }: { product: Product }) {
           {STARS}
         </span>
         <span className="font-inter text-sm text-pierre/60">
-          <strong className="text-pierre">4,9/5</strong> · familles conquises
+          <strong className="text-pierre">Recommandé</strong> par des parents
         </span>
       </div>
 

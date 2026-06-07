@@ -58,11 +58,6 @@ export default async function ProductPage(props: {
     description: product.description,
     image: product.featuredImage.url,
     brand: { "@type": "Brand", name: "CubeCraft" },
-    aggregateRating: {
-      "@type": "AggregateRating",
-      ratingValue: "4.9",
-      reviewCount: "214",
-    },
     offers: {
       "@type": "AggregateOffer",
       availability: product.availableForSale

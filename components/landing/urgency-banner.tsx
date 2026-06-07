@@ -4,11 +4,11 @@ const ITEMS = [
   { icon: "🔥", text: "Offre de lancement : -30% sur tout le catalogue" },
   { icon: "📦", text: "127 unités restantes — offre limitée" },
   { icon: "🚚", text: "Livraison gratuite en France" },
-  { icon: "⭐", text: "4,9/5 · +200 familles conquises" },
+  { icon: "⭐", text: "Adoré des familles" },
   { icon: "🔥", text: "Offre de lancement : -30% sur tout le catalogue" },
   { icon: "📦", text: "127 unités restantes — offre limitée" },
   { icon: "🚚", text: "Livraison gratuite en France" },
-  { icon: "⭐", text: "4,9/5 · +200 familles conquises" },
+  { icon: "⭐", text: "Adoré des familles" },
 ];
 
 export function UrgencyBanner() {

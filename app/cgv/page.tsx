@@ -19,7 +19,7 @@ export default function CGVPage() {
             <h2 className="font-rubik font-bold text-pierre text-xl mb-3">Article 1 — Vendeur</h2>
             <p>
               <strong>CubeCraft</strong><br />
-              54 rue de Bezons, 92400 Courbevoie, France<br />
+              14 rue de la Santé, France<br />
               Email : snuggiesservices@gmail.com
             </p>
           </section>

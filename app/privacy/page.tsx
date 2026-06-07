@@ -18,7 +18,7 @@ export default function PrivacyPage() {
           <section>
             <h2 className="font-rubik font-bold text-pierre text-xl mb-3">1. Responsable du traitement</h2>
             <p>
-              CubeCraft — 54 rue de Bezons, 92400 Courbevoie, France<br />
+              CubeCraft — 14 rue de la Santé, France<br />
               Email : snuggiesservices@gmail.com
             </p>
           </section>

@@ -19,7 +19,7 @@ export default function LegalPage() {
             <h2 className="font-rubik font-bold text-pierre text-xl mb-3">Éditeur du site</h2>
             <p>
               <strong>CubeCraft</strong><br />
-              54 rue de Bezons, 92400 Courbevoie<br />
+              14 rue de la Santé<br />
               France<br />
               Email : <a href="mailto:snuggiesservices@gmail.com" className="text-creeper hover:underline">snuggiesservices@gmail.com</a>
             </p>
