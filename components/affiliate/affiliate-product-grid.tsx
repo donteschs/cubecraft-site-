@@ -46,18 +46,18 @@ export function AffiliateProductGrid({
   if (list.length === 0) return null;
 
   return (
-    <section className="not-prose my-10">
+    <section className="not-prose my-8 sm:my-10">
       {title ? (
-        <div className="mb-5">
-          <h3 className="font-rubik font-black text-pierre text-xl sm:text-2xl">
+        <div className="mb-4 sm:mb-5">
+          <h3 className="font-rubik text-xl font-black leading-tight text-pierre sm:text-2xl">
             {title}
           </h3>
         </div>
       ) : null}
 
-      {disclosure ? <AffiliateDisclosure className="mb-5" /> : null}
+      {disclosure ? <AffiliateDisclosure className="mb-4 sm:mb-5" /> : null}
 
-      <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3">
+      <div className="grid grid-cols-1 gap-3 sm:grid-cols-2 sm:gap-4 lg:grid-cols-3">
         {list.map((product) => (
           <AffiliateProductCard key={product.id} product={product} />
         ))}
