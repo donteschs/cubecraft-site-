@@ -52,7 +52,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
       priority: 0.8,
       images: [absoluteImageUrl(BLOG_DEFAULT_IMAGE)],
     },
-    ...["/contact", "/livraison", "/retours"].map((route) => ({
+    ...["/a-propos", "/contact", "/livraison", "/retours"].map((route) => ({
       url: `${baseUrl}${route}`,
       lastModified: "2026-01-01",
       changeFrequency: "yearly" as const,

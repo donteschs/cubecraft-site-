@@ -10,7 +10,7 @@ const footerLinks = {
     { label: "Jeux & Famille", href: "/search/jeux-famille" },
   ],
   "À propos": [
-    { label: "Notre mission", href: "/#benefits" },
+    { label: "Qui sommes-nous", href: "/a-propos" },
     { label: "Guides d'achat", href: "/selection" },
     { label: "Blog", href: "/blog" },
     { label: "Collaborations", href: "/collaborations" },

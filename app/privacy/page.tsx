@@ -72,7 +72,36 @@ export default function PrivacyPage() {
           <section>
             <h2 className="font-rubik font-bold text-pierre text-xl mb-3">7. Cookies</h2>
             <p>
-              Notre site utilise des cookies techniques (nécessaires au fonctionnement) et analytiques (mesure d'audience). Vous pouvez gérer vos préférences via les paramètres de votre navigateur.
+              Notre site utilise des cookies techniques (nécessaires au fonctionnement), analytiques (mesure d'audience, via Google Analytics) et publicitaires (voir section 8). Vous pouvez gérer vos préférences via les paramètres de votre navigateur.
+            </p>
+          </section>
+
+          <section>
+            <h2 className="font-rubik font-bold text-pierre text-xl mb-3">8. Publicité et fournisseurs tiers (Google AdSense)</h2>
+            <p>
+              Ce site affiche des annonces publicitaires diffusées par <strong>Google AdSense</strong> et ses partenaires.
+            </p>
+            <ul className="list-disc pl-5 mt-2 space-y-1">
+              <li>Google, en tant que fournisseur tiers, utilise des cookies pour diffuser des annonces sur notre site.</li>
+              <li>Le cookie publicitaire de Google (cookie « DoubleClick / AdSense ») permet à Google et à ses partenaires de diffuser des annonces en fonction de vos visites sur ce site et sur d'autres sites.</li>
+              <li>Des annonceurs tiers peuvent également déposer des cookies lorsque vous interagissez avec leurs annonces.</li>
+            </ul>
+            <p className="mt-2">
+              Vous pouvez désactiver la publicité personnalisée dans les{" "}
+              <a href="https://adssettings.google.com" target="_blank" rel="noopener noreferrer" className="text-creeper hover:underline">Paramètres des annonces Google</a>, ou refuser les cookies de fournisseurs tiers via{" "}
+              <a href="https://www.aboutads.info" target="_blank" rel="noopener noreferrer" className="text-creeper hover:underline">www.aboutads.info</a> et{" "}
+              <a href="https://www.youronlinechoices.com" target="_blank" rel="noopener noreferrer" className="text-creeper hover:underline">youronlinechoices.com</a>.
+            </p>
+            <p className="mt-2">
+              Pour en savoir plus sur l'utilisation des données par Google, consultez la{" "}
+              <a href="https://policies.google.com/technologies/partner-sites" target="_blank" rel="noopener noreferrer" className="text-creeper hover:underline">page de Google relative aux sites partenaires</a>.
+            </p>
+          </section>
+
+          <section>
+            <h2 className="font-rubik font-bold text-pierre text-xl mb-3">9. Liens affiliés</h2>
+            <p>
+              Certains liens présents sur ce site (notamment vers Amazon) sont des liens affiliés. Si vous effectuez un achat via ces liens, nous pouvons percevoir une commission, sans surcoût pour vous. Cela n'influence pas notre sélection éditoriale.
             </p>
           </section>
 
