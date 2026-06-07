@@ -1,7 +1,7 @@
 import { getAllSelections } from "lib/affiliate/selections";
 import { getAllPosts } from "lib/blog";
 import { getCollections, getPages, getProducts } from "lib/shopify";
-import { baseUrl, validateEnvironmentVariables } from "lib/utils";
+import { baseUrl } from "lib/utils";
 import {
   BLOG_DEFAULT_IMAGE,
   COMMANDER_SEO_IMAGES,
@@ -30,8 +30,6 @@ function getBlogRoutes() {
 }
 
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
-  validateEnvironmentVariables();
-
   const routesMap = [
     {
       url: `${baseUrl}`,
