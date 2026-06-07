@@ -160,11 +160,10 @@ export default async function RootLayout({
             gtag('config', '${GOOGLE_ADS_ID}');
           `}
         </Script>
-        <Script
+        <script
           async
           src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-6696113876200898"
           crossOrigin="anonymous"
-          strategy="afterInteractive"
         />
         <Script id="tiktok-pixel" strategy="lazyOnload">
           {`
