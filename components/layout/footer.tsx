@@ -2,11 +2,12 @@ import LogoIcon from "components/icons/logo";
 import Link from "next/link";
 
 const footerLinks = {
-  Produit: [
-    { label: "Pack 100 pièces", href: "/#pricing" },
-    { label: "Pack 200 pièces", href: "/#pricing" },
-    { label: "Pack Famille 400", href: "/#pricing" },
-    { label: "Comment ça marche", href: "/#how-it-works" },
+  Boutique: [
+    { label: "Tous les jouets", href: "/search" },
+    { label: "Cubes & Construction", href: "/search/cubes-construction-magnetique" },
+    { label: "STEM & Sciences", href: "/search/stem-sciences" },
+    { label: "Éveil & Montessori", href: "/search/eveil-montessori" },
+    { label: "Jeux & Famille", href: "/search/jeux-famille" },
   ],
   "À propos": [
     { label: "Notre mission", href: "/#benefits" },
@@ -25,8 +26,8 @@ const footerLinks = {
 const certifications = [
   { label: "CE Certifié", icon: "🔐" },
   { label: "EN 71 Conforme", icon: "✅" },
-  { label: "Aimants N52", icon: "🧲" },
-  { label: "ABS Premium", icon: "🏆" },
+  { label: "Sans écran", icon: "📵" },
+  { label: "Livraison 4-5 j", icon: "🚚" },
 ];
 
 export default function Footer() {
@@ -48,8 +49,8 @@ export default function Footer() {
               « Construis ton monde. Pour de vrai. »
             </p>
             <p className="text-white/40 text-xs font-inter leading-relaxed">
-              Le Minecraft que vos enfants peuvent toucher.
-              Certifié CE & EN 71.
+              Des jouets créatifs et éducatifs qui remplacent les écrans.
+              Certifiés CE &amp; EN 71.
             </p>
           </div>
 

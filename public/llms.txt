@@ -1,44 +1,41 @@
 # CubeCraft
 
-> CubeCraft fabrique des cubes magnétiques premium pour enfants de 6 à 14 ans. Alternative créative et éducative aux écrans, inspirée de l'univers Minecraft. Certifiés CE & EN 71, aimants néodyme N52. Marque française, livraison en France et en Europe.
+> CubeCraft est une boutique française de jouets créatifs et éducatifs pour enfants de 2 à 14 ans. Une alternative aux écrans : construction magnétique, STEM & sciences, créatif, éveil Montessori et jeux en famille. Tous les jouets sont certifiés CE & EN 71. Livraison en France (4-5 jours) et en Europe.
 
-## Produits
+## Univers de la boutique
 
-- [Pack 64 pièces — 39,90€](https://cubecrafte.com/commander): Pack de démarrage. 64 cubes magnétiques colorés. Idéal pour les 6-9 ans. Prix lancement -30%.
-- [Pack 128 pièces — 69,90€](https://cubecrafte.com/commander): Le best-seller. Suffisant pour des constructions ambitieuses. Pour les 8-12 ans.
-- [Pack Famille 256 pièces — 119,90€](https://cubecrafte.com/commander): Pour jouer en famille ou en fratrie. Constructions illimitées. Pour les 6-14 ans.
+- [Cubes & Construction Magnétique](https://cubecrafte.com/search/cubes-construction-magnetique) : cubes et tuiles aimantés pour construire en 3D.
+- [STEM & Sciences](https://cubecrafte.com/search/stem-sciences) : robots, circuits, expériences, logique.
+- [Créatif & Dessin](https://cubecrafte.com/search/creatif-dessin) : dessiner, créer, modeler sans écran.
+- [Éveil & Montessori](https://cubecrafte.com/search/eveil-montessori) : jouets d'éveil en bois pour les tout-petits.
+- [Jeux & Famille](https://cubecrafte.com/search/jeux-famille) : jeux de société et audio à partager, sans écran.
+
+## Produits phares
+
+- [CubeCraft 100 — Cubes Magnétiques (39,90€)](https://cubecrafte.com/product/cubecraft-100-pieces) : 100 cubes aimantés style Minecraft. Dès 6 ans.
+- [CubeCraft 200 — Best-seller (69,90€)](https://cubecrafte.com/product/cubecraft-200-pieces) : 200 cubes pour constructions ambitieuses.
+- [CubeCraft Pack Famille 256 (119,90€)](https://cubecrafte.com/product/cubecraft-pack-famille-256-pieces) : pour jouer à plusieurs.
+- [Tuiles Magnétiques 100 pièces (49,90€)](https://cubecrafte.com/product/tuiles-magnetiques-100) : construction 3D, dès 3 ans.
+- [Circuit de Billes STEM (39,90€)](https://cubecrafte.com/product/circuit-billes-stem) : parcours à construire, logique et gravité.
+- [Robot Programmable — Codage (49,90€)](https://cubecrafte.com/product/robot-codage-enfant) : initiation au codage sans écran.
 
 ## Caractéristiques clés
 
-- Aimants néodyme N52 (les plus puissants du marché)
-- Certifications : CE, EN 71 (normes européennes de sécurité jouets)
-- Matériau : plastique ABS alimentaire, sans BPA
-- Compatible avec : lui-même (les cubes se connectent entre eux magnétiquement)
-- Âge recommandé : 6 à 14 ans
-- Garantie : 30 jours "Créativité ou Remboursé"
-- Livraison : France métropolitaine 4-5 jours (Colissimo), Europe 7-10 jours
+- Certifications : CE, EN 71 (normes européennes de sécurité des jouets).
+- Tranche d'âge : de 2 à 14 ans selon les produits (indiqué sur chaque fiche).
+- Positionnement : alternative aux écrans, jouets éducatifs et créatifs (STEM, Montessori).
+- Garantie : 30 jours « Satisfait ou Remboursé ».
+- Livraison : France métropolitaine 4-5 jours, Europe 7-10 jours.
+- Paiement sécurisé via Shopify.
 
 ## Pourquoi CubeCraft ?
 
-CubeCraft est la réponse physique à Minecraft. Les cubes aimantés permettent à l'enfant de construire les mêmes structures 3D qu'en jeu vidéo, mais avec ses mains. C'est un jouet STEM qui développe la créativité, la géométrie, la motricité fine et l'architecture spatiale. C'est aussi une alternative validée par des milliers de parents pour réduire le temps d'écran sans conflit.
+CubeCraft sélectionne des jouets qui développent la créativité, la logique, la motricité fine et la curiosité, tout en éloignant les enfants des écrans. Chaque univers (construction, sciences, créatif, éveil, famille) répond à un âge et un besoin, avec une exigence commune : la sécurité (CE & EN 71) et le plaisir de jouer « pour de vrai ».
 
 ## FAQ
 
-- Q: À partir de quel âge ? A: 6 ans et plus. Certifié CE. Sous surveillance parentale pour les 3-5 ans.
-- Q: Les aimants sont-ils dangereux ? A: Non. Certifiés EN 71. Aimants encapsulés dans coque ABS — impossible à extraire.
-- Q: Est-ce que ça tient bien ? A: Oui. Aimants N52, les plus puissants du marché. Constructions stables même en hauteur.
-- Q: Mon enfant aime Minecraft, il va aimer ? A: C'est exactement pour ça que c'est conçu. 95% des enfants fans de Minecraft adorent CubeCraft.
-- Q: Délai de livraison ? A: 4-5 jours ouvrés en France (Colissimo). 7-10 jours en Europe.
-- Q: Retours ? A: Garantie 30 jours remboursement intégral, sans question.
-
-## Blog et ressources
-
-- [Blog CubeCraft](https://cubecrafte.com/blog): Conseils parents, alternatives aux écrans, jouets éducatifs, idées cadeaux
-- [Toutes les FAQ](https://cubecrafte.com/#faq): Questions fréquentes sur le produit
-
-## Pages légales
-
-- [CGV](https://cubecrafte.com/cgv)
-- [Livraison](https://cubecrafte.com/livraison)
-- [Retours](https://cubecrafte.com/retours)
-- [Contact](https://cubecrafte.com/contact)
+- Q: Quels types de jouets vend CubeCraft ? A: Des jouets créatifs et éducatifs : construction magnétique, STEM & sciences, créatif, Montessori et jeux en famille.
+- Q: À partir de quel âge ? A: De 2 à 14 ans selon les produits. L'âge recommandé est indiqué sur chaque fiche.
+- Q: Les jouets sont-ils sûrs ? A: Oui, tous certifiés CE et conformes à la norme EN 71.
+- Q: Quel est le délai de livraison ? A: 4-5 jours en France métropolitaine, 7-10 jours en Europe.
+- Q: Quelle est la politique de retour ? A: Garantie 30 jours, satisfait ou remboursé.

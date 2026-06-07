@@ -1,86 +1,69 @@
 import { NextResponse } from "next/server";
-import { SITE_IMAGES } from "lib/site-images";
+import { getProducts } from "lib/shopify";
+import type { Product } from "lib/shopify/types";
+
+export const revalidate = 3600;
 
 const SITE = "https://cubecrafte.com";
-const IMAGE = `${SITE}${SITE_IMAGES.heroPack.src}`;
 
-const products = [
-  {
-    id: "cubecraft-100",
-    title: "CubeCraft — Cubes Magnétiques 100 pièces",
-    description:
-      "100 cubes magnétiques avec aimants néodyme N52, 3x plus puissants. Textures Minecraft. Construction 3D libre. Certifié CE & EN 71. Pour les enfants de 6 à 14 ans.",
-    price: "39.90",
-    originalPrice: "59.90",
-    mpn: "CC-100",
-  },
-  {
-    id: "cubecraft-200",
-    title: "CubeCraft — Cubes Magnétiques 200 pièces",
-    description:
-      "200 cubes magnétiques avec aimants néodyme N52. Constructions ambitieuses, châteaux, robots, villes entières. Certifié CE & EN 71. Pour les enfants de 6 à 14 ans.",
-    price: "69.90",
-    originalPrice: "99.90",
-    mpn: "CC-200",
-  },
-  {
-    id: "cubecraft-400",
-    title: "CubeCraft — Pack Famille 400 pièces",
-    description:
-      "400 cubes magnétiques pour jouer à plusieurs. Le pack idéal pour toute la famille. Aimants néodyme N52. Certifié CE & EN 71. Pour les enfants de 6 à 14 ans.",
-    price: "119.90",
-    originalPrice: "179.90",
-    mpn: "CC-400",
-  },
-];
+function esc(s: string): string {
+  return s.replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;");
+}
 
-function buildFeed(): string {
-  const items = products
-    .map(
-      (p) => `
+function buildItems(products: Product[]): string {
+  return products
+    .filter((p) => p.featuredImage?.url)
+    .map((p) => {
+      const price = Number(p.priceRange.maxVariantPrice.amount).toFixed(2);
+      const currency = p.priceRange.maxVariantPrice.currencyCode || "EUR";
+      const desc = (p.description || p.title).replace(/\s+/g, " ").trim().slice(0, 4000);
+      const category = p.tags?.[0] || "Jouets éducatifs";
+      return `
     <item>
-      <g:id>${p.id}</g:id>
+      <g:id>${esc(p.handle)}</g:id>
       <g:title><![CDATA[${p.title}]]></g:title>
-      <g:description><![CDATA[${p.description}]]></g:description>
-      <g:link>${SITE}/commander</g:link>
-      <g:image_link>${IMAGE}</g:image_link>
-      <g:availability>in_stock</g:availability>
-      <g:price>${p.price} EUR</g:price>
-      <g:sale_price>${p.price} EUR</g:sale_price>
+      <g:description><![CDATA[${desc}]]></g:description>
+      <g:link>${SITE}/product/${esc(p.handle)}</g:link>
+      <g:image_link>${esc(p.featuredImage.url)}</g:image_link>
+      <g:availability>${p.availableForSale ? "in_stock" : "out_of_stock"}</g:availability>
+      <g:price>${price} ${currency}</g:price>
       <g:brand>CubeCraft</g:brand>
       <g:condition>new</g:condition>
-      <g:mpn>${p.mpn}</g:mpn>
-      <g:product_type>Jouets &gt; Jeux de construction &gt; Cubes magnétiques</g:product_type>
       <g:google_product_category>Jouets et jeux &gt; Jouets pour enfants</g:google_product_category>
+      <g:product_type><![CDATA[${category}]]></g:product_type>
+      <g:age_group>kids</g:age_group>
+      <g:identifier_exists>false</g:identifier_exists>
       <g:shipping>
         <g:country>FR</g:country>
         <g:service>Livraison standard</g:service>
         <g:price>0.00 EUR</g:price>
       </g:shipping>
-      <g:return_policy_label>free-returns</g:return_policy_label>
-      <g:age_group>kids</g:age_group>
-      <g:target_country>FR</g:target_country>
-      <g:identifier_exists>false</g:identifier_exists>
-    </item>`
-    )
+    </item>`;
+    })
     .join("\n");
-
-  return `<?xml version="1.0" encoding="UTF-8"?>
-<rss version="2.0" xmlns:g="http://base.google.com/ns/1.0">
-  <channel>
-    <title>CubeCraft — Cubes Magnétiques</title>
-    <link>${SITE}</link>
-    <description>Cubes magnétiques inspirés de Minecraft. Aimants N52. Certifié CE &amp; EN 71.</description>
-    ${items}
-  </channel>
-</rss>`;
 }
 
 export async function GET() {
-  return new NextResponse(buildFeed(), {
+  let products: Product[] = [];
+  try {
+    products = await getProducts({});
+  } catch {
+    products = [];
+  }
+
+  const xml = `<?xml version="1.0" encoding="UTF-8"?>
+<rss version="2.0" xmlns:g="http://base.google.com/ns/1.0">
+  <channel>
+    <title>CubeCraft — Jouets créatifs &amp; éducatifs</title>
+    <link>${SITE}</link>
+    <description>Jouets créatifs et éducatifs anti-écran pour enfants. Certifiés CE &amp; EN 71. Livraison 4-5 jours.</description>${buildItems(products)}
+  </channel>
+</rss>`;
+
+  return new NextResponse(xml, {
     headers: {
       "Content-Type": "application/xml; charset=utf-8",
-      "Cache-Control": "public, max-age=86400",
+      "Cache-Control": "public, max-age=3600",
     },
   });
 }
