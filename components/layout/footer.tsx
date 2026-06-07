@@ -98,14 +98,23 @@ export default function Footer() {
         </div>
 
         {/* Bottom */}
-        <div className="border-t border-dark-border pt-6 flex flex-col sm:flex-row items-center justify-between gap-3 text-xs text-white/30 font-inter">
-          <p>
-            © {currentYear} CubeCraft. Tous droits réservés.
+        <div className="border-t border-dark-border pt-6">
+          <p className="mb-4 text-center text-xs text-white/25 font-inter">
+            Ce site utilise Google AdSense pour la diffusion d&apos;annonces et
+            contient des liens affiliés. En savoir plus dans notre{" "}
+            <Link href="/privacy" className="underline hover:text-white/50">
+              politique de confidentialité
+            </Link>
+            .
           </p>
-          <div className="flex gap-4">
-            <Link href="/legal" className="hover:text-white/60 transition-colors">Mentions légales</Link>
-            <Link href="/privacy" className="hover:text-white/60 transition-colors">Confidentialité</Link>
-            <Link href="/cgv" className="hover:text-white/60 transition-colors">CGV</Link>
+          <div className="flex flex-col sm:flex-row items-center justify-between gap-3 text-xs text-white/30 font-inter">
+            <p>© {currentYear} CubeCraft. Tous droits réservés.</p>
+            <div className="flex gap-4">
+              <Link href="/a-propos" className="hover:text-white/60 transition-colors">À propos</Link>
+              <Link href="/legal" className="hover:text-white/60 transition-colors">Mentions légales</Link>
+              <Link href="/privacy" className="hover:text-white/60 transition-colors">Confidentialité</Link>
+              <Link href="/cgv" className="hover:text-white/60 transition-colors">CGV</Link>
+            </div>
           </div>
         </div>
       </div>

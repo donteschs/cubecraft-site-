@@ -28,8 +28,8 @@ export default function ContactPage() {
             {
               icon: "✉️",
               title: "Email",
-              lines: ["contact@cubecraft.fr"],
-              href: "mailto:contact@cubecraft.fr",
+              lines: ["snuggiesservices@gmail.com"],
+              href: "mailto:snuggiesservices@gmail.com",
             },
           ].map((item) => (
             <div key={item.title} className="bg-white border border-gray-100 shadow-sm rounded-2xl p-6 text-center hover:shadow-md transition-shadow duration-200">

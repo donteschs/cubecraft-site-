@@ -3,7 +3,7 @@ export const revalidate = 86400;
 import Footer from "components/layout/footer";
 import type { Metadata } from "next";
 
-const CONTACT_EMAIL = "partenariats@cubecrafte.com";
+const CONTACT_EMAIL = "snuggiesservices@gmail.com";
 
 export const metadata: Metadata = {
   title: "Collaborations & partenariats",

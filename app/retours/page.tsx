@@ -26,7 +26,7 @@ export default function RetoursPage() {
           <section>
             <h2 className="font-rubik font-bold text-pierre text-xl mb-3">Comment initier un retour</h2>
             <ol className="list-decimal pl-5 space-y-2">
-              <li>Contactez-nous sous 30 jours après réception à <a href="mailto:contact@cubecraft.fr" className="text-creeper hover:underline">contact@cubecraft.fr</a> ou au <a href="tel:00755532648" className="text-creeper hover:underline">00755532648</a>.</li>
+              <li>Contactez-nous sous 30 jours après réception à <a href="mailto:snuggiesservices@gmail.com" className="text-creeper hover:underline">snuggiesservices@gmail.com</a> ou au <a href="tel:00755532648" className="text-creeper hover:underline">00755532648</a>.</li>
               <li>Indiquez votre numéro de commande et la raison du retour.</li>
               <li>Nous vous enverrons les instructions d'expédition.</li>
               <li>Renvoyez le produit dans son emballage d'origine.</li>

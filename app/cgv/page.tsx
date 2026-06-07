@@ -20,7 +20,7 @@ export default function CGVPage() {
             <p>
               <strong>CubeCraft</strong><br />
               54 rue de Bezons, 92400 Courbevoie, France<br />
-              Email : contact@cubecrafte.com
+              Email : snuggiesservices@gmail.com
             </p>
           </section>
 

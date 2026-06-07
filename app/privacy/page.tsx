@@ -19,7 +19,7 @@ export default function PrivacyPage() {
             <h2 className="font-rubik font-bold text-pierre text-xl mb-3">1. Responsable du traitement</h2>
             <p>
               CubeCraft — 54 rue de Bezons, 92400 Courbevoie, France<br />
-              Email : contact@cubecrafte.com
+              Email : snuggiesservices@gmail.com
             </p>
           </section>
 
@@ -62,7 +62,7 @@ export default function PrivacyPage() {
           <section>
             <h2 className="font-rubik font-bold text-pierre text-xl mb-3">6. Vos droits</h2>
             <p>
-              Conformément au RGPD, vous disposez des droits suivants : accès, rectification, suppression, portabilité, limitation et opposition. Pour les exercer, contactez-nous à <a href="mailto:contact@cubecrafte.com" className="text-creeper hover:underline">contact@cubecrafte.com</a>.
+              Conformément au RGPD, vous disposez des droits suivants : accès, rectification, suppression, portabilité, limitation et opposition. Pour les exercer, contactez-nous à <a href="mailto:snuggiesservices@gmail.com" className="text-creeper hover:underline">snuggiesservices@gmail.com</a>.
             </p>
             <p className="mt-2">
               Vous pouvez également introduire une réclamation auprès de la CNIL (www.cnil.fr).

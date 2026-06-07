@@ -32,7 +32,7 @@ export default function LivraisonPage() {
           <section>
             <h2 className="font-rubik font-bold text-pierre text-xl mb-3">Zones de livraison</h2>
             <p>
-              Nous livrons actuellement en <strong>France métropolitaine</strong>. Pour les DOM-TOM et l'international, veuillez nous contacter au <a href="tel:00755532648" className="text-creeper hover:underline">00755532648</a> ou par email à <a href="mailto:contact@cubecraft.fr" className="text-creeper hover:underline">contact@cubecraft.fr</a>.
+              Nous livrons actuellement en <strong>France métropolitaine</strong>. Pour les DOM-TOM et l'international, veuillez nous contacter au <a href="tel:00755532648" className="text-creeper hover:underline">00755532648</a> ou par email à <a href="mailto:snuggiesservices@gmail.com" className="text-creeper hover:underline">snuggiesservices@gmail.com</a>.
             </p>
           </section>
 
@@ -50,7 +50,7 @@ export default function LivraisonPage() {
             </p>
             <ul className="list-disc pl-5 mt-2 space-y-1">
               <li>Tél. : <a href="tel:00755532648" className="text-creeper hover:underline">00755532648</a></li>
-              <li>Email : <a href="mailto:contact@cubecraft.fr" className="text-creeper hover:underline">contact@cubecraft.fr</a></li>
+              <li>Email : <a href="mailto:snuggiesservices@gmail.com" className="text-creeper hover:underline">snuggiesservices@gmail.com</a></li>
             </ul>
           </section>
 

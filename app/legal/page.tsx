@@ -21,7 +21,7 @@ export default function LegalPage() {
               <strong>CubeCraft</strong><br />
               54 rue de Bezons, 92400 Courbevoie<br />
               France<br />
-              Email : <a href="mailto:contact@cubecrafte.com" className="text-creeper hover:underline">contact@cubecrafte.com</a>
+              Email : <a href="mailto:snuggiesservices@gmail.com" className="text-creeper hover:underline">snuggiesservices@gmail.com</a>
             </p>
           </section>
 
