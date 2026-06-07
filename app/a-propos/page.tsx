@@ -122,11 +122,11 @@ export default function AProposPage() {
               Qui est derrière CubeCraft ?
             </h2>
             <p className="mt-4 leading-relaxed">
-              CubeCraft est édité par une petite équipe française passionnée de
-              jeux éducatifs, basée en région parisienne. Nous testons, nous
-              écrivons, et nous répondons nous-mêmes à vos questions. Une
-              remarque, une suggestion de jouet, une demande de partenariat ?
-              Écrivez-nous, un humain vous répondra.
+              CubeCraft est édité par <strong className="text-pierre">Issa Kanouté</strong>,
+              passionné de jeux éducatifs, basé à Paris. Derrière le site, une
+              personne réelle qui teste, écrit et répond elle-même à vos
+              questions. Une remarque, une suggestion de jouet, une demande de
+              partenariat ? Écrivez-nous, un humain vous répondra.
             </p>
           </section>
 
@@ -136,13 +136,13 @@ export default function AProposPage() {
               Parlons-en
             </h2>
             <p className="mx-auto mt-2 max-w-xl text-creeper-dark/70">
-              CubeCraft — 54 rue de Bezons, 92400 Courbevoie, France
+              CubeCraft — Issa Kanouté · Paris, France
             </p>
             <a
-              href="mailto:contact@cubecrafte.com"
+              href="mailto:snuggiesservices@gmail.com"
               className="mt-5 inline-flex items-center gap-2 rounded-xl bg-creeper px-7 py-4 font-rubik font-bold text-white shadow-md transition-transform duration-200 hover:scale-105"
             >
-              contact@cubecrafte.com
+              snuggiesservices@gmail.com
             </a>
           </section>
         </div>
