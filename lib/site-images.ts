@@ -2,8 +2,8 @@ import { baseUrl } from "lib/utils";
 
 export const SITE_IMAGES = {
   heroPack: {
-    src: "/images/cubecraft-cubes-magnetiques-pack-principal.png",
-    alt: "CubeCraft pack principal de cubes magnetiques pour enfant",
+    src: "/images/cubecraft-hero-new.png",
+    alt: "CubeCraft pack principal de cubes magnetiques pour enfant style Minecraft",
   },
   detailColors: {
     src: "/images/cubecraft-cubes-magnetiques-detail-couleurs.png",
@@ -36,6 +36,26 @@ export const SITE_IMAGES = {
   tower: {
     src: "/images/cubecraft-tour-cubes-magnetiques.png",
     alt: "Tour construite avec les cubes magnetiques CubeCraft",
+  },
+  universeConstruction: {
+    src: "/images/cubecraft-universe-construction.png",
+    alt: "Univers Blocs de Construction magnetiques CubeCraft",
+  },
+  universeStem: {
+    src: "/images/cubecraft-universe-stem.png",
+    alt: "Univers STEM et Sciences Robotique CubeCraft",
+  },
+  universeCreatif: {
+    src: "/images/cubecraft-universe-creatif.png",
+    alt: "Univers Creatif et Dessin Pixel Art CubeCraft",
+  },
+  universeMontessori: {
+    src: "/images/cubecraft-universe-montessori.png",
+    alt: "Univers Eveil et Montessori cubes en bois CubeCraft",
+  },
+  universeFamille: {
+    src: "/images/cubecraft-universe-famille.png",
+    alt: "Univers Jeux en Famille sans ecran CubeCraft",
   },
 } as const;
 
