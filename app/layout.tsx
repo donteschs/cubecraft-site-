@@ -6,6 +6,7 @@ import { UrgencyBanner } from "components/landing/urgency-banner";
 import { ChatWidgetLoader } from "components/ui/chat-widget-loader";
 import { PromoPopupLoader } from "components/ui/promo-popup-loader";
 import { ExitIntentPopupLoader } from "components/ui/exit-intent-popup-loader";
+import { CookieConsent } from "components/ui/cookie-consent";
 import { getCart, getProduct } from "lib/shopify";
 import { ReactNode } from "react";
 import { Toaster } from "sonner";
@@ -136,6 +137,20 @@ export default async function RootLayout({
       suppressHydrationWarning
     >
       <body className="bg-blanc font-inter text-pierre antialiased selection:bg-creeper-light selection:text-creeper-dark">
+        {/* Google Consent Mode v2 — défaut « refusé » (RGPD / AdSense EEE) */}
+        <Script id="consent-default" strategy="beforeInteractive">
+          {`
+            window.dataLayer = window.dataLayer || [];
+            window.gtag = window.gtag || function(){ window.dataLayer.push(arguments); };
+            gtag('consent', 'default', {
+              ad_storage: 'denied',
+              ad_user_data: 'denied',
+              ad_personalization: 'denied',
+              analytics_storage: 'denied',
+              wait_for_update: 500
+            });
+          `}
+        </Script>
         <Script
           src={`https://www.googletagmanager.com/gtag/js?id=${GA_MEASUREMENT_ID}`}
           strategy="afterInteractive"
@@ -226,6 +241,7 @@ export default async function RootLayout({
           <ChatWidgetLoader />
           <PromoPopupLoader variantIds={variantIds} />
           <ExitIntentPopupLoader />
+          <CookieConsent />
         </CartProvider>
       </body>
     </html>
