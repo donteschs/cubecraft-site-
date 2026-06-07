@@ -1,3 +1,4 @@
+import { getAllSelections } from "lib/affiliate/selections";
 import { getCollections, getPages, getProducts } from "lib/shopify";
 import { baseUrl, validateEnvironmentVariables } from "lib/utils";
 import { BLOG_DEFAULT_IMAGE, COMMANDER_SEO_IMAGES, HOME_SEO_IMAGES, absoluteImageUrl, absoluteImageUrls } from "lib/site-images";
@@ -93,7 +94,17 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
 
   const blogRoutes = getBlogRoutes();
 
-  const all = [...routesMap, ...fetchedRoutes, ...blogRoutes];
+  const selectionRoutes = [
+    { url: `${baseUrl}/selection`, changeFrequency: "weekly" as const, priority: 0.6 },
+    { url: `${baseUrl}/collaborations`, changeFrequency: "yearly" as const, priority: 0.3 },
+    ...getAllSelections().map((s) => ({
+      url: `${baseUrl}/selection/${s.slug}`,
+      changeFrequency: "monthly" as const,
+      priority: 0.7,
+    })),
+  ];
+
+  const all = [...routesMap, ...selectionRoutes, ...fetchedRoutes, ...blogRoutes];
   const seen = new Set<string>();
   return all.filter((r) => {
     if (seen.has(r.url)) return false;

@@ -11,9 +11,9 @@ const footerLinks = {
   ],
   "À propos": [
     { label: "Notre mission", href: "/#benefits" },
-    { label: "Témoignages", href: "/#testimonials" },
-    { label: "FAQ", href: "/#faq" },
+    { label: "Guides d'achat", href: "/selection" },
     { label: "Blog", href: "/blog" },
+    { label: "Collaborations", href: "/collaborations" },
   ],
   "Service client": [
     { label: "Contact", href: "/contact" },

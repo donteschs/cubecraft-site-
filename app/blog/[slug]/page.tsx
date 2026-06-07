@@ -7,6 +7,8 @@ import remarkGfm from "remark-gfm";
 import { notFound } from "next/navigation";
 import type { Metadata } from "next";
 import { JsonLd } from "components/json-ld";
+import { mdxComponents } from "components/mdx/mdx-components";
+import { NewsletterBlock } from "components/newsletter/newsletter-block";
 import { BLOG_DEFAULT_IMAGE, absoluteImageUrl } from "lib/site-images";
 
 export async function generateStaticParams() {
@@ -130,22 +132,29 @@ export default async function BlogPostPage({
           </p>
 
           <div className="prose prose-lg max-w-none prose-headings:font-rubik prose-headings:font-bold prose-headings:text-pierre prose-p:text-pierre/70 prose-p:leading-relaxed prose-a:text-creeper prose-a:no-underline hover:prose-a:underline prose-strong:text-pierre prose-li:text-pierre/70 prose-table:w-full prose-th:bg-creeper-light prose-th:text-creeper-dark prose-th:font-bold prose-th:p-3 prose-th:text-sm prose-td:p-3 prose-td:border prose-td:border-pierre/20 prose-td:text-pierre/70 prose-td:text-sm prose-tr:even:bg-pierre/5">
-            <MDXRemote source={post.content} options={{ mdxOptions: { remarkPlugins: [remarkGfm] } }} />
+            <MDXRemote
+              source={post.content}
+              components={mdxComponents}
+              options={{ mdxOptions: { remarkPlugins: [remarkGfm] } }}
+            />
           </div>
         </article>
 
-        <div className="mt-16 bg-creeper-light rounded-2xl p-8 text-center">
+        {/* Newsletter — automatique en bas de chaque article */}
+        <NewsletterBlock className="mt-16" />
+
+        <div className="mt-10 bg-creeper-light rounded-2xl p-8 text-center">
           <p className="font-rubik font-black text-creeper-dark text-2xl mb-2">
-            Prêt à essayer CubeCraft ?
+            Envie de jouets qui remplacent les écrans ?
           </p>
           <p className="text-creeper-dark/70 mb-6">
-            Offre de lancement -30% · Certifié CE · Livraison rapide
+            Construction, STEM, créatif, Montessori · Certifié CE · Livraison 4-5 j
           </p>
           <Link
-            href="/commander"
+            href="/search"
             className="inline-flex btn-shimmer items-center gap-2 rounded-xl px-6 py-3 font-rubik font-bold text-white shadow-md"
           >
-            Commander maintenant →
+            Découvrir la boutique →
           </Link>
         </div>
       </div>
